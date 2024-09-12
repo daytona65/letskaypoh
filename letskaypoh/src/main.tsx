@@ -8,6 +8,7 @@ import {
 import "./index.css";
 import Entry from './pages/Entry/index.tsx';
 import Home from './pages/Home/index.tsx';
+import Register from './pages/Register/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

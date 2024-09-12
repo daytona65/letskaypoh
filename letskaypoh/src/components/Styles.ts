@@ -60,7 +60,7 @@ export const StyledInputSearch = styled(Input)<
         display: flex;
         flex-direction: row;
         padding: 0.9vw;
-        margin: 0 0,5rem;
+        margin: 0rem 0.5rem 1rem 0.5rem;
         font-family: Poppins-Medium, sans-serif;
         font-size: calc(10px + 0.4vw);
         width: 90%;
