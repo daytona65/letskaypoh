@@ -70,3 +70,45 @@ export const StyledInputSearch = styled(Input)<
         }
     }
 `;
+
+export const StyledInput = styled(Input)`
+    {
+        .ant-input {
+          background: none;
+          color: #fff;
+          margin-left: 0.5rem;
+          border: none;
+        }
+        .anticon {
+          color: #fff;
+        }
+        border: none;
+        background: none;
+        width: 100%;
+        height: calc(22px + 2vw);
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        margin-left: 0;
+        font-family: Poppins-Medium, sans-serif;
+        font-size: calc(10px + 0.4vw);
+        border-radius: 60px;
+
+      input {
+        background: none;
+        border: none;
+      }
+
+      select {
+        background: none;
+        border: none;
+      }
+
+      textarea:focus,
+      input:focus,
+      select:focus {
+        outline: none;
+      }
+    }
+`;

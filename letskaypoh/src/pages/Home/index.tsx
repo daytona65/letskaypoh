@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './styles.css'
+import '../../App.css'
 import { StyledInputSearch } from '../../components/Styles'
 import { SearchOutlined } from '@ant-design/icons'
 import Map, { SeniorInterface } from '../../components/Map'
