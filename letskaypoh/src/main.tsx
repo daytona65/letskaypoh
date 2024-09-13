@@ -10,15 +10,22 @@ import Entry from './pages/Entry/index.tsx';
 import Home from './pages/Home/index.tsx';
 import Register from './pages/Register/index.tsx';
 import RegistrationSuccess from './pages/RegistrationSuccess/index.tsx';
+import { NavBarWrapper } from './components/NavBar.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Entry />,
+    element: <NavBarWrapper />,
+    children: [
+      {
+        path: "/home",
+        element: <Home />,
+      },
+    ]
   },
   {
-    path: "/home",
-    element: <Home />,
+    path: "/entry",
+    element: <Entry />,
   },
   {
     path: "/register",
@@ -30,9 +37,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router}/>
   </StrictMode>,
 )

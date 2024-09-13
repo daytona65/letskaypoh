@@ -1,0 +1,14 @@
+.header {
+    width: 90%;
+    text-align: start;
+    margin: 1rem 2rem;
+
+    h1 {
+        font-size: 40px;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        margin: 0;
+    }
+}

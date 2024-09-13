@@ -11,21 +11,6 @@ export const StyledInputSearch = styled(Input)<
 >`
     && {
         ${({ col }) =>
-            col === "white" &&
-            `
-        color: #fff;
-        border: 1.2px solid #fff;
-        .ant-input {
-            background: none;
-            color: #fff;
-            margin-left: 0.5rem;
-        }
-        .anticon {
-            color: #fff;
-            margin-right: 0.5rem;
-        }
-        `}
-        ${({ col }) =>
             col === "black" &&
             `
         color: #bfbfbf;
@@ -56,7 +41,7 @@ export const StyledInputSearch = styled(Input)<
         `}
         background: none;
         border-radius: 60px;
-        height: 36px;
+        height: 50px;
         display: flex;
         flex-direction: row;
         padding: 0.9vw;
@@ -73,19 +58,20 @@ export const StyledInputSearch = styled(Input)<
 
 export const StyledInput = styled(Input)`
     {
+        color: #bfbfbf;
+        border: 1.5px solid #bfbfbf;
         .ant-input {
-          background: none;
-          color: #fff;
-          margin-left: 0.5rem;
-          border: none;
+            background: none;
+            color: #000;
+            margin-left: 0.5rem;
         }
         .anticon {
-          color: #fff;
+            color: #000;
+            margin-right: 0.5rem;
         }
-        border: none;
         background: none;
-        width: 100%;
-        height: calc(22px + 2vw);
+        width: 90%;
+        height: 36px;
         display: flex;
         flex-direction: row;
         margin-top: 1rem;

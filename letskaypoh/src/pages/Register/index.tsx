@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../App.css'
+import '../commonStyles.css'
 import { Button, Form, Input, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 

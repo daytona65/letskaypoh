@@ -90,8 +90,9 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 	return (
 		<GoogleMap
 			mapContainerStyle={{
-				width: mapWidth ? mapWidth : '400px',
-				height: '700px'
+				width: mapWidth ? mapWidth : '100%',
+				height: '100%',
+				borderRadius: '30px',
 			}}
 			center={center}
 			zoom={11}
