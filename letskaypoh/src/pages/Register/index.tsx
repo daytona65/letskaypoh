@@ -16,7 +16,7 @@ const Register = () => {
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
-          <Select style={{ width: 70 }} defaultValue={'+65'}>
+          <Select style={{ width: 70 }} >
             <Option value="65">+65</Option>
           </Select>
         </Form.Item>
@@ -33,6 +33,9 @@ const Register = () => {
 
             <div className={'form'}>
                 <Form
+                    initialValues={{
+                        prefix: '+65'
+                    }}
                     name="register"
                     layout="horizontal"
                     labelCol={{span: 10}}

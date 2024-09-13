@@ -1,22 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { GoogleMap, InfoWindow, Marker, useJsApiLoader } from '@react-google-maps/api';
 import mapStyles from './mapStyles';
+import { SeniorInterface } from '../../models/interfaces';
 
 export const options = {
 	disableDefaultUI: true,
 	zoomControl: true,
 	styles: mapStyles
-}
-
-export interface SeniorInterface {
-	Name: string,
-	Gender: string,
-	Languages: string[],
-	LastVisitedDate: string,
-	PostalCode: string,
-	ImageUrl: string,
-	Lat: number,
-	Lon: number
 }
 
 interface centerInterface {
@@ -60,11 +50,11 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
-		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!
+		googleMapsApiKey: import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY!
 	})
 
 	useEffect(() => {
-		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}`)
+		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${import.meta.env.REACT_APP_GOOGLE_MAPS_API_KEY!}`)
 			.then((response) => {
 				return response.json();
 			}).then(jsonData => {
@@ -102,9 +92,9 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 		>
 			{locations?.map(marker => (
 				<CustomMarker
-					info={marker.Name}
-					lat={Number(marker.Lat)}
-					lng={Number(marker.Lon)}
+					info={marker.name}
+					lat={Number(marker.lat)}
+					lng={Number(marker.lon)}
 				/>
 			))}
 		</GoogleMap>
