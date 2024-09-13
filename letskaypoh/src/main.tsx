@@ -11,6 +11,7 @@ import Home from './pages/Home/index.tsx';
 import Register from './pages/Register/index.tsx';
 import RegistrationSuccess from './pages/RegistrationSuccess/index.tsx';
 import { NavBarWrapper } from './components/NavBar.tsx';
+import Profile from './pages/Profile/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ]
   },

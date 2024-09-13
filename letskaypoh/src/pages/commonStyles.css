@@ -1,7 +1,7 @@
 .header {
     width: 90%;
     text-align: start;
-    margin: 1rem 2rem;
+    margin: 1rem 0;
 
     h1 {
         font-size: 40px;
@@ -10,5 +10,9 @@
 
     p {
         margin: 0;
+    }
+
+    @media (min-width: var(--screen-size-md)) {
+        width: 50%;
     }
 }

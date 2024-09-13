@@ -3,7 +3,6 @@ import { Input } from "antd";
 
 interface StyledInputSearchProps {
     col: string | undefined;
-    nohover: boolean | undefined;
 }
 
 export const StyledInputSearch = styled(Input)<
@@ -25,30 +24,16 @@ export const StyledInputSearch = styled(Input)<
             margin-right: 0.5rem;
         }
         `}
-
-        ${({ nohover }) =>
-            !nohover &&
-            `
-            img {
-            -webkit-filter: opacity(60%);
-        }
-
-          img:hover {
-            transform: scale(1.01);
-            -webkit-filter: opacity(100%);
-          }
-        
-        `}
         background: none;
         border-radius: 60px;
         height: 50px;
         display: flex;
         flex-direction: row;
         padding: 0.9vw;
-        margin: 0rem 0.5rem 1rem 0.5rem;
+        margin: 1rem 0rem;
         font-family: Poppins-Medium, sans-serif;
-        font-size: calc(10px + 0.4vw);
-        width: 90%;
+        font-size: 14px;
+        width: 100%;
 
         &:hover {
             border: 2px solid #46c7c7;

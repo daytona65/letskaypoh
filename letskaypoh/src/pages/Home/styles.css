@@ -1,0 +1,16 @@
+.header-container {
+    width: 100%;
+
+    @media (min-width: 1000px) {
+        margin-top: 5rem;
+    }
+}
+
+.explore {
+    width: 90%;
+
+    @media (min-width: 1000px) {
+        height: 100%;
+        margin-right: 4rem;
+    }
+}

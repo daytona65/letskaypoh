@@ -11,6 +11,10 @@
   --color-gray-7: #8c8c8c;
   --color-gray-8: #595959;
 
+  --screen-size-sm: 300px;
+  --screen-size-md: 700px;
+  --screen-size-lg: 1000px;
+
   --color-hover: #535bf2;
 
   color-scheme: light dark;

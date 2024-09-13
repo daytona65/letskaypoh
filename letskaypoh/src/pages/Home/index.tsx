@@ -24,21 +24,25 @@ const Home = () => {
 
     return (
         <div className={'container'}>
-            <div className={'header'}>
-                <h1>let's kaypoh!</h1>
-                <p>Show some love to our elderly seniors nearby!</p>
+            <div className={'explore'}>
+                <div className={'header-container'}>
+                    <div className={'header'}>
+                        <h1>let's kaypoh!</h1>
+                        <p>Show some love to our seniors nearby!</p>
+                    </div>
+                    
+                    <StyledInputSearch
+                        col={'black'}
+                        suffix={<SearchOutlined />}
+                        placeholder="Search area"
+                        value={destination === "" ? undefined : destination}
+                        onChange={(e: { target: { value: string } }) =>
+                            setDestination(e.target.value)
+                        }
+                        allowClear
+                    />
+                </div>
             </div>
-
-            <StyledInputSearch
-                col={'black'}
-                suffix={<SearchOutlined />}
-                placeholder="Search Destinations"
-                value={destination === "" ? undefined : destination}
-                onChange={(e: { target: { value: string } }) =>
-                    setDestination(e.target.value)
-                }
-                allowClear
-            />
 
             <Map
                 destinationName={destination}

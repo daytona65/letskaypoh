@@ -1,0 +1,17 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+
+    @media (min-width: 700px) {
+        width: 600px;
+    }
+}
+
+.formInput {
+    @media (min-width: 700px) {
+        width: 600px;
+    }
+
+}
