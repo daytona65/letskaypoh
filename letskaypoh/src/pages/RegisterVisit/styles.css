@@ -1,0 +1,8 @@
+.register-visit {
+    width: 90%;
+    padding: 1rem;
+
+    .ant-form-item {
+        width: 100%;
+    }
+}

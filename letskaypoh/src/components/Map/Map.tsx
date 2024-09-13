@@ -56,19 +56,19 @@ const CustomMarker: React.FC<MarkerProps> = ({ info, lat, lng }) => {
 
 
 const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
-	const [center, setCenter] = useState<centerInterface>({ lat: 48.864716, lng: 2.349014 })
+	const [center, setCenter] = useState<centerInterface>({ lat: 1.37625, lng: 103.93609 })
 
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
-		googleMapsApiKey: "AIzaSyCyw8hO-FFyULEhmMSFEw9t28MGv8PxLho"
+		googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!
 	})
 
 	useEffect(() => {
-		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=AIzaSyB1rc1kUjUCkOXTzjodOzvIy81dQXL044s`)
+		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}`)
 			.then((response) => {
 				return response.json();
 			}).then(jsonData => {
-				console.log(jsonData.results[0].geometry.location);
+				console.log('aaa', jsonData.results[0]);
 				setCenter(jsonData.results[0].geometry.location)
 			})
 			.catch(error => {
@@ -95,7 +95,7 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 				borderRadius: '30px 30px 0 0',
 			}}
 			center={center}
-			zoom={11}
+			zoom={13}
 			onLoad={onLoad}
 			onUnmount={onUnmount}
 			options={options as google.maps.MapOptions}

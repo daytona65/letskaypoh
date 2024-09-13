@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import './styles.css'
 
 interface navItem {
+    key: React.Key
     title: string
     icon: JSX.Element
     path: string
@@ -17,16 +18,19 @@ export const NavBar = () => {
     
     const navItems: navItem[] = [
         {
+            key: 1,
             title: 'Explore',
             icon: <SearchOutlined onClick={() => routeChange('/home')}/>,
             path: '/home'
         },
         {
+            key: 2,
             title: 'Visits',
             icon: <CalendarOutlined onClick={() => routeChange('/visits')}/>,
             path: '/visits'
         },
         {
+            key: 3,
             title: 'Profile',
             icon: <UserOutlined onClick={() => routeChange('/register')}/>,
             path: '/profile'
@@ -35,7 +39,7 @@ export const NavBar = () => {
 
     const menu = navItems.map((navItem) => {
         return (
-            <div className={'nav-btn'}>
+            <div key={navItem.key} className={'nav-btn'}>
                 {navItem.icon}
                 {navItem.title}
             </div>

@@ -33,7 +33,7 @@ const Home = () => {
                     
                     <StyledInputSearch
                         col={'black'}
-                        suffix={<SearchOutlined />}
+                        suffix={<SearchOutlined onClick={() => console.log(destination)}/>}
                         placeholder="Search area"
                         value={destination === "" ? undefined : destination}
                         onChange={(e: { target: { value: string } }) =>

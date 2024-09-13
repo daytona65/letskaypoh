@@ -12,6 +12,9 @@ import Register from './pages/Register/index.tsx';
 import RegistrationSuccess from './pages/RegistrationSuccess/index.tsx';
 import { NavBarWrapper } from './components/NavBar.tsx';
 import Profile from './pages/Profile/index.tsx';
+import RegisterVisit from './pages/RegisterVisit/index.tsx';
+import Visits from './pages/Visits/index.tsx';
+import CompleteVisit from './pages/CompleteVisit/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/register-visit",
+        element: <RegisterVisit />,
+      },
+      {
+        path: "/visits",
+        element: <Visits />,
+      },
+      {
+        path: "/complete",
+        element: <CompleteVisit />,
       },
     ]
   },
