@@ -47,14 +47,15 @@ const CustomMarker: React.FC<MarkerProps> = ({ info, lat, lng }) => {
 
 const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 	const [center, setCenter] = useState<centerInterface>({ lat: 1.37625, lng: 103.93609 })
-	const API_KEY = 'AIzaSyCyw8hO-FFyULEhmMSFEw9t28MGv8PxLho'
 	const { isLoaded } = useJsApiLoader({
 		id: 'google-map-script',
-		googleMapsApiKey: 'AIzaSyCyw8hO-FFyULEhmMSFEw9t28MGv8PxLho'
+		googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 	})
 
+	console.log(import.meta.env.VITE_TEST_KEY)
+
 	useEffect(() => {
-		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${API_KEY}`)
+		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`)
 			.then((response) => {
 				return response.json();
 			}).then(jsonData => {
