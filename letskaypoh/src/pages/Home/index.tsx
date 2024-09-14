@@ -18,8 +18,7 @@ const Home = () => {
         <div className={'container'}>
             <div className={'explore'}>
                 <div className={'header-container'}>
-                    <div className={'header'}>
-                        <div>Explore</div>
+                    <div className={'header'} style={{width: '100%'}}>
                         <h1>let's kaypoh!</h1>
                         <p>Show some love to our seniors nearby!</p>
                     </div>

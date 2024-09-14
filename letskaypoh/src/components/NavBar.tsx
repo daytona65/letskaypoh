@@ -10,7 +10,11 @@ interface navItem {
     path: string
 }
 
-export const NavBar = () => {
+interface Props {
+    isLoggedIn: boolean
+}
+
+export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     const navigate = useNavigate(); 
     const routeChange = (path: string) =>{ 
       navigate(path);
@@ -32,7 +36,7 @@ export const NavBar = () => {
         {
             key: 3,
             title: 'Profile',
-            icon: <UserOutlined onClick={() => routeChange('/register')}/>,
+            icon: <UserOutlined onClick={() => routeChange(isLoggedIn ? 'profile' : '/register')}/>,
             path: '/profile'
         }
     ]
@@ -53,11 +57,11 @@ export const NavBar = () => {
     )
 }
 
-export const NavBarWrapper = () => {
+export const NavBarWrapper: React.FC<Props> = ({isLoggedIn}) => {
     return (
       <div>
         <Outlet/>
-        <NavBar/>
+        <NavBar isLoggedIn={isLoggedIn}/>
       </div>
     )
 }

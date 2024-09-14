@@ -1,0 +1,59 @@
+.profileDetail {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    word-break: break-all;
+
+    @media (max-width: 400px) {
+        width: 95%;
+        
+    }
+
+    div {
+        margin: 0rem 0.5rem;
+    }
+
+    .anticon {
+        font-size: 20px;
+        margin-right: 2rem;
+    }
+}
+
+.profileImg {
+    border-radius: 100px;
+    border-color: transparent;
+    box-shadow: 0 2px 10px var(--color-gray-6);
+    padding: 2re;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0 0 0;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.column {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.name {
+    margin: 0.5rem 0 1rem 0;
+}
+
+.logOut {
+    margin-bottom: 3rem;
+}

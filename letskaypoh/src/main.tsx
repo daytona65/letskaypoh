@@ -15,11 +15,12 @@ import Profile from './pages/Profile/index.tsx';
 import RegisterVisit from './pages/RegisterVisit/index.tsx';
 import Visits from './pages/Visits/index.tsx';
 import CompleteVisit from './pages/CompleteVisit/index.tsx';
+import { userData } from './models/dummyData.ts';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBarWrapper />,
+    element: <NavBarWrapper isLoggedIn={true} />,
     children: [
       {
         path: "/home",
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: <Profile user={userData[0]} />,
       },
       {
         path: "/register-visit",

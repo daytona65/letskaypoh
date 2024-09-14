@@ -1,4 +1,4 @@
-import { SeniorInterface } from "./interfaces";
+import { SeniorInterface, UserInterface } from "./interfaces";
 
 export const data: SeniorInterface[] = [
     {   
@@ -26,5 +26,23 @@ export const data: SeniorInterface[] = [
         imageUrl: 'https://lh5.googleusercontent.com/p/AF1QipPbk2FP1r3FWXTKbEtB6H6jAjJN9ZZuUhts9BqL=w524-h208-p-k-no',
         lat: 1.37625,
         lon: 103.93609
+    }
+]
+
+
+export const userData: UserInterface[] = [
+    {
+        id: '1',
+        name: 'Josephine',
+        age: 24,
+        gender: 'F',
+        languages: ['English', 'Indonesian'],
+        area: 'Pasir Ris',
+        totalVisits: 2,
+        postalCode: '510773',
+        lat: 1.37625,
+        lon: 103.93609,
+        email: 'josephine.hemingway@gmail.com',
+        mobile: '+65 8611 9550'
     }
 ]

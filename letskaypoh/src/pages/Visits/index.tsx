@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './styles.css'
 import { data } from '../../models/dummyData';
-import { SeniorCard } from '../../components/Card/Card';
+import { SeniorCard } from '../../components/Card/SeniorCard';
 
 const Visits = () => {
   const navigate = useNavigate();
@@ -13,14 +13,7 @@ const Visits = () => {
 
   const seniorCards = data.map((senior) => {
     return <SeniorCard 
-      title={senior.title}
-      surname={senior.name}
-      gender={senior.gender}
-      age={senior.age}
-      languages={senior.languages}
-      lastVisited={senior.lastVisitedDate}
-      postal={senior.postalCode}
-      key={senior.id}
+      senior={senior}
     />
   })
 
