@@ -13,7 +13,6 @@ export const StyledInputSearch = styled(Input)<
             col === "black" &&
             `
         color: #bfbfbf;
-        border: 1.5px solid #bfbfbf;
         .ant-input {
             background: none;
             color: #000;
@@ -30,10 +29,12 @@ export const StyledInputSearch = styled(Input)<
         display: flex;
         flex-direction: row;
         padding: 0.9vw;
-        margin: 1rem 0rem;
+        margin: 0.5rem 0rem;
         font-family: Poppins-Medium, sans-serif;
         font-size: 14px;
         width: 100%;
+        border-color: transparent;
+        box-shadow: 0 2px 10px var(--color-gray-6);
 
         &:hover {
             border: 2px solid #46c7c7;

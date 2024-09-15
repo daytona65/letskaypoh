@@ -6,3 +6,10 @@
         margin-right: 4rem;
     }
 }
+
+.filterBtn {
+    margin-left: 0.5rem;
+    border-radius: 30px;
+    height: 42px;
+    width: 42px;
+}

@@ -83,7 +83,6 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 			mapContainerStyle={{
 				width: mapWidth ? mapWidth : '100%',
 				height: '100%',
-				borderRadius: '30px 30px 0 0',
 			}}
 			center={center}
 			zoom={13}

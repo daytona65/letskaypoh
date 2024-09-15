@@ -2,6 +2,8 @@ import { CalendarOutlined, SearchOutlined, UserOutlined } from '@ant-design/icon
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './styles.css'
+import { useScrollDirection } from './utils'
+import { Avatar } from 'antd'
 
 interface navItem {
     key: React.Key
@@ -19,6 +21,9 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     const routeChange = (path: string) =>{ 
       navigate(path);
     }
+
+    const scrollDirection = useScrollDirection();
+
     
     const navItems: navItem[] = [
         {
@@ -41,7 +46,18 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         }
     ]
 
-    const menu = navItems.map((navItem) => {
+    const bottomMenu = navItems.map((navItem) => {
+        if (isLoggedIn && navItem.title === 'Profile') {
+            return (
+                <div key={navItem.key} className={'nav-btn'}>
+                    <div onClick={() => routeChange(navItem.path)}>
+                        <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
+                    </div>
+                    {navItem.title}
+                </div>
+            )
+        }
+
         return (
             <div key={navItem.key} className={'nav-btn'}>
                 {navItem.icon}
@@ -50,18 +66,42 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         )
     })
 
+    const topMenu = navItems.map((navItem) => {
+        if (isLoggedIn && navItem.title === 'Profile') {
+            return (
+                <div key={navItem.key} className={'nav-btn'} onClick={() => routeChange(navItem.path)}>
+                    <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
+                </div>
+            )
+        }
+
+        return (
+            <a key={navItem.key} onClick={() => routeChange(navItem.path)}>
+                {navItem.title}
+            </a>
+        )
+    })
+
     return (
-        <div className={'bottom-nav'}>
-            {menu}
-        </div>
+        <>
+            <div className={'bottom-nav'}>
+                {bottomMenu}
+            </div>
+            <div className={`topAppNav ${scrollDirection === "down" ? "hide" : "show"}`}>
+                <h1>let's kaypoh!</h1>
+                <div className={'appNavRow'}>
+                    {topMenu}
+                </div>
+            </div>
+        </>
     )
 }
 
 export const NavBarWrapper: React.FC<Props> = ({isLoggedIn}) => {
     return (
       <div>
-        <Outlet/>
         <NavBar isLoggedIn={isLoggedIn}/>
+        <Outlet/>
       </div>
     )
 }

@@ -20,8 +20,7 @@
     justify-content: center;
     padding: 2rem 0rem 0rem 4rem;
     width: calc(100vw - 8rem);
-    height: calc(100vh - 4rem);
-    
+    height: calc(100vh - 2rem - 72px);
   }
 
   @media (min-width: 1200px) {
@@ -29,8 +28,7 @@
     justify-content: center;
     padding: 2rem 8rem;
     width: calc(100vw - 16rem);
-    height: calc(100vh - 4rem);
-    
+    height: calc(100vh - 4rem - 72px);
   }
 }
 
