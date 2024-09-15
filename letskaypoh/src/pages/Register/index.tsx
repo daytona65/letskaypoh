@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../App.css'
 import './styles.css'
 import '../commonStyles.css'
-import { Button, Form, Input, Radio, Select } from 'antd'
+import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
+import { UserInterface } from '../../models/interfaces'
+
+type FieldType = {
+    name: string;
+    nric: string;
+    email: string;
+    mobile: string;
+    age: number;
+    gender: string;
+    languages: string[];
+    address: string;
+    postalCode: string;
+  };
 
 const Register = () => {
     const { Option } = Select;
+
+    const [userDetails, setUserDetails] = useState<UserInterface>()
+    const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate(); 
     const routeChange = () =>{ 
@@ -21,7 +37,40 @@ const Register = () => {
           </Select>
         </Form.Item>
       );
-    
+
+    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+        console.log('Received values of form: ', values);
+        setLoading(true)
+
+        setUserDetails(
+            {
+                name: values.name,
+                nric: values.nric,
+                email: values.email,
+                mobile: values.mobile,
+                age: values.age,
+                gender: values.gender,
+                languages: values.languages,
+                address: values.address,
+                postalCode: values.postalCode,
+            }
+        )
+
+        // add api endpoint 
+        // when api successful then route change
+
+        setLoading(false)
+        console.log('loading', loading)
+
+        message.success('Registration success')
+
+        routeChange()
+    };
+
+    useEffect(() => {
+        console.log('userDetails', userDetails)
+    }, [userDetails])
+
     return (
         <div className={'container'}>
             <div className={'header'}>
@@ -33,6 +82,8 @@ const Register = () => {
 
             <div className={'form'}>
                 <Form
+                    scrollToFirstError
+                    onFinish={onFinish}
                     initialValues={{
                         prefix: '+65'
                     }}
@@ -42,41 +93,41 @@ const Register = () => {
                     wrapperCol={{ span: 14}}
                     className='formInput'
                 >
-                    <Form.Item label="Name" name="name" rules={[{ required: true }]}>
+                    <Form.Item label="Full Name" name="name" rules={[{ required: true, message: 'Please input your full name!' }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        label="NRIC/FIN"
+                        label="Last 4 digits of NRIC/FIN"
                         name="nric"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please input the last 4 digits of NRIC' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Email"
                         name="email"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please input your email' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Mobile No."
                         name="mobile"
-                        rules={[{ required: true, message: 'Please input your phone number!' }]}
+                        rules={[{ required: true, message: 'Please input your mobile number' }]}
                     >
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     </Form.Item>
                     <Form.Item
                         label="Age"
                         name="age"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please input your age' }]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Gender"
                         name="gender"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please input your gender' }]}
                     >
                         <Radio.Group>
                             <Radio value="a">Male</Radio>
@@ -87,12 +138,13 @@ const Register = () => {
                     <Form.Item
                         label="Spoken Languages"
                         name="languages"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please select your spoken languages' }]}
                     >
                         <Select mode="multiple" placeholder="Please select spoken languages">
                             <Option value="english">English</Option>
                             <Option value="mandarin">Mandarin</Option>
-                            <Option value="malay">Bahasa Melayu</Option>
+                            <Option value="malay">Malay</Option>
+                            <Option value="indonesian">Indonesian</Option>
                             <Option value="tamil">Tamil</Option>
                             <Option value="Hindi">Hindi</Option>
                             <Option value="hokkien">Hokkien</Option>
@@ -103,21 +155,21 @@ const Register = () => {
                     <Form.Item
                         label="Address"
                         name="address"
-                        rules={[{ required: true }]}
+                        rules={[{ required: true, message: 'Please input your area'}]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Postal Code"
-                        name="postal"
-                        rules={[{ required: true }]}
+                        name="postalCode"
+                        rules={[{ required: true, message: 'Please input your postal code' }]}
                     >
                         <Input />
                     </Form.Item>
+                    <Button htmlType='submit'>
+                        Register
+                    </Button>
                 </Form>
-                <Button onClick={routeChange}>
-                    Register
-                </Button>
             </div>
         </div>
     )

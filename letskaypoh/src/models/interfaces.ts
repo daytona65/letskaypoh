@@ -13,18 +13,20 @@ export interface SeniorInterface {
 }
 
 export interface UserInterface {
-	id: string
+	id?: string
 	name: string
+	nric: string
+	email: string
+	mobile: string
 	age: number
 	gender: string
 	languages: string[]
-	area: string
 	postalCode: string
-	lat: number
-	lon: number
-	totalVisits: number
-	email: string
-	mobile: string
+	address: string
+	area?: string
+	lat?: number
+	lon?: number
+	totalVisits?: number
 }
 
 export interface Visits {
