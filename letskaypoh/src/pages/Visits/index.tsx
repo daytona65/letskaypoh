@@ -4,12 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css'
 import { data } from '../../models/dummyData';
 import { SeniorCard } from '../../components/Card/SeniorCard';
+import { navigateToRoute } from '../../components/utils';
 
 const Visits = () => {
   const navigate = useNavigate();
-  const routeChange = (path: string) => {
-    navigate(path);
-  }
 
   const seniorCards = data.map((senior) => {
     return <SeniorCard 
@@ -29,10 +27,10 @@ const Visits = () => {
           You have no upcoming visits.
         </p>
         <div className={'buttons'}>
-          <Button onClick={() => routeChange('/home')}>
+          <Button onClick={() => navigateToRoute('/home', navigate)}>
             Explore
           </Button>
-          <Button onClick={() => routeChange('/register-visit')}>
+          <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
             Register Visit
           </Button>
         </div>

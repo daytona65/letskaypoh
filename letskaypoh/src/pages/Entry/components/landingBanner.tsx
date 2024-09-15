@@ -22,7 +22,9 @@ const LandingBanner: React.FC<Props> = ({onClickRegister, onClickAbout}) => {
             <a>
                 Redefining volunteering with the seniors.
             </a>
-            <Button onClick={onClickRegister}>Start Volunteering</Button>
+            <Button className={'joinButton'} onClick={onClickRegister}>
+                Start Volunteering
+            </Button>
             <a onClick={onClickAbout}><ArrowDownOutlined /> Read About Us</a>
         </div>
         <div>

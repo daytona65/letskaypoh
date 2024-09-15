@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../../App.css'
 import './styles.css'
 import '../commonStyles.css'
 import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { UserInterface } from '../../models/interfaces'
+import { navigateToRoute } from '../../components/utils'
 
 type FieldType = {
     name: string;
@@ -21,14 +22,9 @@ type FieldType = {
 const Register = () => {
     const { Option } = Select;
 
-    const [userDetails, setUserDetails] = useState<UserInterface>()
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate(); 
-    const routeChange = () =>{ 
-      const path = `/register-success`; 
-      navigate(path);
-    }
 
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
@@ -42,7 +38,7 @@ const Register = () => {
         console.log('Received values of form: ', values);
         setLoading(true)
 
-        setUserDetails(
+        const newUserDetails: UserInterface = (
             {
                 name: values.name,
                 nric: values.nric,
@@ -56,6 +52,8 @@ const Register = () => {
             }
         )
 
+        console.log('newUserDetails:', newUserDetails)
+
         // add api endpoint 
         // when api successful then route change
 
@@ -64,12 +62,8 @@ const Register = () => {
 
         message.success('Registration success')
 
-        routeChange()
+        navigateToRoute('/register-success', navigate)
     };
-
-    useEffect(() => {
-        console.log('userDetails', userDetails)
-    }, [userDetails])
 
     return (
         <div className={'container'}>

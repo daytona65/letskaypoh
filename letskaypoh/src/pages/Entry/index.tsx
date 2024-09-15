@@ -7,12 +7,10 @@ import Team from './components/team';
 import TopNav from '../../components/TopNav';
 import About from './components/about';
 import LoginModal from '../../components/LoginModal';
+import { navigateToRoute } from '../../components/utils';
 
 const Entry = () => {
 	const navigate = useNavigate();
-	const routeChange = (path: string) => {
-		navigate(path);
-	}
 
 	const aboutRef = useRef<HTMLDivElement>(null);
 	const teamRef = useRef<HTMLDivElement>(null);
@@ -38,7 +36,11 @@ const Entry = () => {
 	};
 
 	const onClickRegister = () => {
-		routeChange('/register')
+		navigateToRoute('/register', navigate)
+	}
+
+	const onClickLogin = () => {
+		navigateToRoute('/home', navigate)
 	}
 
 	return (
@@ -58,7 +60,8 @@ const Entry = () => {
 			<LoginModal 
 				open={isRegisterModalOpen} 
 				handleClose={onCloseModal} 
-				onClickRegister={onClickRegister} 
+				onClickRegister={onClickRegister}
+				onClickLogin={onClickLogin} 
 			/>
 		</>
 	)

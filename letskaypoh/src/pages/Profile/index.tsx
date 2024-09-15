@@ -1,9 +1,9 @@
 import React from 'react'
-import { EditOutlined, HomeOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
+import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { UserInterface } from '../../models/interfaces'
-import { separatedArray } from '../../components/utils'
+import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
-import { Button, Divider, Image } from 'antd'
+import { Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { data } from '../../models/dummyData'
 import { SeniorCard } from '../../components/Card/SeniorCard'
@@ -23,9 +23,6 @@ const Profile: React.FC<Props> = (props) => {
 	const { user } = props
 
 	const navigate = useNavigate();
-	const routeChange = (path: string) => {
-		navigate(path);
-	}
 
 	const seniorCards = data.map((senior) => {
 		return <SeniorCard
@@ -87,7 +84,7 @@ const Profile: React.FC<Props> = (props) => {
 			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Profile</h3>
-					<a> <EditOutlined /> Edit</a>
+					<a onClick={() => navigateToRoute('/entry', navigate)}> <LogoutOutlined /> Sign Out</a>
 				</div>
 				<Image
 					className={'profileImg'}
@@ -103,17 +100,16 @@ const Profile: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className={'section'}>
+			<div className={'section'} style={{marginBottom: '5rem'}}>
 				<div className={'row'}>
 					<h3>Visit History</h3>
-					<a> <EditOutlined /> Edit</a>
 				</div>
 				{seniorCards}
 			</div>
 			
-			<Button className={'logOut'} onClick={() => routeChange('/entry')}>
-				Log Out
-			</Button>
+			{/* <Button className={'logOut'} onClick={() => navigateToRoute('/entry', navigate)}>
+				<LogoutOutlined /> Log Out
+			</Button> */}
 		</div>
 	)
 }

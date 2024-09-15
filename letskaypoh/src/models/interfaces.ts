@@ -29,7 +29,7 @@ export interface UserInterface {
 	totalVisits?: number
 }
 
-export interface Visits {
+export interface VisitInterface {
 	userId: string
 	seniorId: string
 	visitDate: string

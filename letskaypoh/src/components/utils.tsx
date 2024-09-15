@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './styles.css'
+import { NavigateFunction } from 'react-router-dom'
 
 export const separatedArray = (arr: (string | JSX.Element)[] | undefined, separator?: JSX.Element | string) => {
     if (!arr || arr.length === 0) return
@@ -36,3 +37,7 @@ export function useScrollDirection() {
   
     return scrollDirection;
   };
+
+export const navigateToRoute = (path: string, navigate: NavigateFunction) => {
+  navigate(path)
+}

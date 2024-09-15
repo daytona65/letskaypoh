@@ -16,6 +16,7 @@
   --screen-size-lg: 1000px;
 
   --color-hover: #535bf2;
+  --color-link: #8187f3;
 
   color-scheme: light dark;
   color: var(--color-light);
@@ -44,7 +45,7 @@
 
 a {
   font-weight: 500;
-  color: #8187f3;
+  color: var(--color-link);
   text-decoration: inherit;
 }
 a:hover {

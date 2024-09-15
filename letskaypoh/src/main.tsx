@@ -15,7 +15,8 @@ import Profile from './pages/Profile/index.tsx';
 import RegisterVisit from './pages/RegisterVisit/index.tsx';
 import Visits from './pages/Visits/index.tsx';
 import CompleteVisit from './pages/CompleteVisit/index.tsx';
-import { userData } from './models/dummyData.ts';
+import { data, userData } from './models/dummyData.ts';
+import VisitConfirmed from './pages/VisitConfirmed/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/register-visit",
-        element: <RegisterVisit />,
+        element: <RegisterVisit user={userData[0]} senior={data[0]}/>,
       },
       {
         path: "/visits",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/complete",
         element: <CompleteVisit />,
+      },
+      {
+        path: "/visit-confirmed",
+        element: <VisitConfirmed user={userData[0]} senior={data[0]} />,
       },
     ]
   },
@@ -59,6 +64,7 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
+  // need to add userProvider, seniorProvider
   <StrictMode>
     <RouterProvider router={router}/>
   </StrictMode>,

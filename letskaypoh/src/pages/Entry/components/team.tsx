@@ -29,13 +29,13 @@ const Team: React.FC<Props> = (props) => {
     {
       key: 2,
       name: 'Nicholas Halim',
-      role: 'Software Engineer (Backend)',
+      role: 'Backend Engineer',
       icon: <ApiOutlined />,
       imgPath: 'https://avatar.iran.liara.run/public/21',
     },
     {
       key: 3,
-      name: 'Elaine Chua',
+      name: 'Eileen Chua',
       role: 'UI/UX Designer',
       icon: <FormatPainterOutlined />,
       imgPath: 'https://avatar.iran.liara.run/public/73',

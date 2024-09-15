@@ -7,6 +7,7 @@ interface Props {
     open: boolean
     handleClose: () => void
     onClickRegister: () => void
+    onClickLogin: () => void
 }
 
 const LoginModal: React.FC<Props> = (props) => {
@@ -33,7 +34,7 @@ const LoginModal: React.FC<Props> = (props) => {
 
             <p>
                 Already have an account? {' '}
-                <a>Log in</a>
+                <a onClick={props.onClickLogin}>Log in</a>
             </p>
         </div>
     </Modal>

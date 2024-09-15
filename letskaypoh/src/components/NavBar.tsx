@@ -2,7 +2,7 @@ import { CalendarOutlined, SearchOutlined, UserOutlined } from '@ant-design/icon
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './styles.css'
-import { useScrollDirection } from './utils'
+import { navigateToRoute, useScrollDirection } from './utils'
 import { Avatar } from 'antd'
 
 interface navItem {
@@ -18,9 +18,6 @@ interface Props {
 
 export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     const navigate = useNavigate(); 
-    const routeChange = (path: string) =>{ 
-      navigate(path);
-    }
 
     const scrollDirection = useScrollDirection();
 
@@ -29,19 +26,19 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         {
             key: 1,
             title: 'Explore',
-            icon: <SearchOutlined onClick={() => routeChange('/home')}/>,
+            icon: <SearchOutlined onClick={() => navigateToRoute('/home', navigate)}/>,
             path: '/home'
         },
         {
             key: 2,
             title: 'Visits',
-            icon: <CalendarOutlined onClick={() => routeChange('/visits')}/>,
+            icon: <CalendarOutlined onClick={() => navigateToRoute('/visits', navigate)}/>,
             path: '/visits'
         },
         {
             key: 3,
             title: 'Profile',
-            icon: <UserOutlined onClick={() => routeChange(isLoggedIn ? 'profile' : '/register')}/>,
+            icon: <UserOutlined onClick={() => navigateToRoute(isLoggedIn ? 'profile' : '/register', navigate)}/>,
             path: '/profile'
         }
     ]
@@ -50,7 +47,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         if (isLoggedIn && navItem.title === 'Profile') {
             return (
                 <div key={navItem.key} className={'nav-btn'}>
-                    <div onClick={() => routeChange(navItem.path)}>
+                    <div onClick={() => navigateToRoute(navItem.path, navigate)}>
                         <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
                     </div>
                     {navItem.title}

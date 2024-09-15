@@ -20,7 +20,7 @@ const TopNav: React.FC<Props> = (props) => {
                 <a onClick={props.onClickFeatures}>Features</a>
                 <a onClick={props.onClickAbout}>About Us</a>
                 <a onClick={props.onClickTeam}>Our Team</a>
-                <Button onClick={props.onClickJoin}>Join Us</Button>
+                <Button className={'joinButton'} onClick={props.onClickJoin}>Join Us</Button>
             </div>
         </div>
     )
