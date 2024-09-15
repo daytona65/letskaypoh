@@ -80,3 +80,27 @@
     align-items: center;
     margin: 1rem 2rem;
 }
+
+.registerModal {
+    .ant-modal-content {
+        border-radius: 16px;
+    }
+}
+
+.modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.registerButton {
+    border-radius: 60px;
+    background-color: none;
+    border: 1.5px solid var(--color-gray-6);
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    margin: 0.25rem 0;
+}

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const RegistrationSuccess = () => {
     const navigate = useNavigate();
     const routeChange = () => {
-        const path = `/entry`;
+        const path = `/home`;
         navigate(path);
     }
 

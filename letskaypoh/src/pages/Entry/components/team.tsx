@@ -15,7 +15,6 @@ interface memberItem {
 
 interface Props {
   teamRef: React.RefObject<HTMLDivElement>
-
 }
 
 const Team: React.FC<Props> = (props) => {
