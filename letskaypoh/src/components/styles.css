@@ -42,3 +42,41 @@
 .commaArrayElement {
     margin-right: 0.05rem;
 }
+
+.topNav {
+    @media (max-width: 1000px) {
+        display: none;
+    }
+    width: 100vw;
+    height: 40px;
+    background-color: var(--color-bg);
+    padding: 1rem 0;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 30px;
+        margin-left: 2rem;
+    }
+
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    transition: top 0.3s;
+}
+
+.topNav.hide {
+    top: -72px;
+}
+
+.navRow {
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 2rem;
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.css'
 import { Avatar, Descriptions, DescriptionsProps, Tooltip } from 'antd'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-import { commaSeparatedArray } from '../utils'
+import { separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
 
 interface Props {
@@ -21,7 +21,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
         {
             key: 'language',
             label: 'Languages',
-            children: commaSeparatedArray(senior.languages)
+            children: separatedArray(senior.languages)
         },
         {
             key: 'postal',

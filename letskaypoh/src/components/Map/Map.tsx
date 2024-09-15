@@ -52,19 +52,19 @@ const Map: React.FC<Props> = ({ destinationName, locations, mapWidth }) => {
 		googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY
 	})
 
-	console.log(import.meta.env.VITE_TEST_KEY)
-
 	useEffect(() => {
-		fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`)
-			.then((response) => {
-				return response.json();
-			}).then(jsonData => {
-				console.log('aaa', jsonData.results[0]);
-				setCenter(jsonData.results[0].geometry.location)
-			})
-			.catch(error => {
-				console.log(error);
-			})
+		console.log('aaa', destinationName)
+		setCenter({ lat: 1.37625, lng: 103.93609 })
+		// fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${destinationName}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`)
+		// 	.then((response) => {
+		// 		return response.json();
+		// 	}).then(jsonData => {
+		// 		console.log('aaa', jsonData.results[0]);
+		// 		setCenter(jsonData.results[0].geometry.location)
+		// 	})
+		// 	.catch(error => {
+		// 		console.log(error);
+		// 	})
 	}, [destinationName])
 
 	const mapRef = useRef<google.maps.Map | null>(null)

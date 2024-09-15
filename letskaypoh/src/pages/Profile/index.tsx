@@ -1,7 +1,7 @@
 import React from 'react'
 import { EditOutlined, HomeOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { UserInterface } from '../../models/interfaces'
-import { commaSeparatedArray } from '../../components/utils'
+import { separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -41,7 +41,7 @@ const Profile: React.FC<Props> = (props) => {
 				<span>
 					Speaks {' '}
 					<span>
-						{commaSeparatedArray(user.languages)}
+						{separatedArray(user.languages)}
 					</span>
 				</span>
 			)
@@ -84,33 +84,33 @@ const Profile: React.FC<Props> = (props) => {
 
 	return (
 		<div className={'container'}>
-			<div className={'header'}>
-				<h1>Welcome back, kaypoh!</h1>
+			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Profile</h3>
 					<a> <EditOutlined /> Edit</a>
 				</div>
-			</div>
-			<Image
-				className={'profileImg'}
-				width={200}
-				src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}
-			/>
-			<div className={'column'}>
-				<h2 className={'name'}>
-					{user.name}, {user.age}{user.gender}
-				</h2>
+				<Image
+					className={'profileImg'}
+					width={150}
+					src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}
+				/>
+				<div className={'column'}>
+					<h2 className={'name'}>
+						{user.name}, {user.age}{user.gender}
+					</h2>
 
-				{profileAttributes}
+					{profileAttributes}
+				</div>
 			</div>
-			<div className={'header'}>
+
+			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Visit History</h3>
 					<a> <EditOutlined /> Edit</a>
 				</div>
+				{seniorCards}
 			</div>
-			{seniorCards}
-
+			
 			<Button className={'logOut'} onClick={() => routeChange('/entry')}>
 				Log Out
 			</Button>
