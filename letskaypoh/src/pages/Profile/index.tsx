@@ -24,6 +24,8 @@ const Profile: React.FC<Props> = (props) => {
 
 	const navigate = useNavigate();
 
+	// add api endpoint - get user - but i think should be done in main.tsx
+
 	const seniorCards = data.map((senior) => {
 		return <SeniorCard
 			senior={senior}

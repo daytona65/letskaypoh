@@ -54,7 +54,7 @@ const Register = () => {
 
         console.log('newUserDetails:', newUserDetails)
 
-        // add api endpoint 
+        // add api endpoint - register user
         // when api successful then route change
 
         setLoading(false)
