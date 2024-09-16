@@ -29,9 +29,11 @@ const RegisterVisit: React.FC<Props> = (props) => {
         setLoading(true)
 
         const visitDetails: VisitInterface = {
+                id: "1",
                 visitDate: values.visitDate,
                 seniorId: props.senior.id,
-                userId: props.user.id!,
+                visitors: [props.user.id!],
+                status: "Upcoming"
             }
         
         console.log('visitDetails: ', visitDetails)
