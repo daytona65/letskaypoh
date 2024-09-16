@@ -24,8 +24,8 @@ export const data: SeniorInterface[] = [
         lastVisitedDate: '13 Sep 2024',
         postalCode: '520123',
         imageUrl: 'https://lh5.googleusercontent.com/p/AF1QipPbk2FP1r3FWXTKbEtB6H6jAjJN9ZZuUhts9BqL=w524-h208-p-k-no',
-        lat: 1.37625,
-        lon: 103.93609
+        lat: 1.3766264708024798,
+        lon: 103.93051796826676
     }
 ]
 
@@ -37,7 +37,8 @@ export const userData: UserInterface[] = [
         age: 24,
         gender: 'F',
         languages: ['English', 'Indonesian'],
-        area: 'Pasir Ris',
+        nric: '696i',
+        address: 'Pasir Ris',
         totalVisits: 2,
         postalCode: '510773',
         lat: 1.37625,

@@ -4,7 +4,7 @@ import '../commonStyles.css'
 import '../../App.css'
 import { StyledInputSearch } from '../../components/Styles'
 import { FilterOutlined, SearchOutlined } from '@ant-design/icons'
-import Map from '../../components/Map/Map'
+import CustomMap from '../../components/Map/Map'
 import { data } from '../../models/dummyData'
 import { Button } from 'antd'
 
@@ -42,7 +42,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <Map
+            <CustomMap
                 destinationName={destination}
                 locations={data}
             />
