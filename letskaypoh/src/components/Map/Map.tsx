@@ -75,14 +75,28 @@ const CustomMap: React.FC<Props> = ({ destinationName, locations }) => {
 		);
 	}
 
-	const blueDot = {
-		path: google.maps.SymbolPath.CIRCLE,
-		fillColor: '#4285F4',
-		fillOpacity: 1,
-		scale: 8,
-		strokeColor: 'rgb(255,255,255)',
-		strokeWeight: 2,
-	};
+	// const getMarkerIcon = () => {
+	// 	if (typeof google !== 'undefined') {
+	// 	  return {
+	// 		path: google.maps.SymbolPath.CIRCLE,
+	// 		fillColor: '#FF0000',
+	// 		fillOpacity: 1,
+	// 		scale: 10,
+	// 		strokeColor: '#000000',
+	// 		strokeWeight: 2,
+	// 	  };
+	// 	}
+	// 	return {};
+	//   };
+
+	// const blueDot = {
+	// 	path: google.maps.SymbolPath.CIRCLE,
+	// 	fillColor: '#4285F4',
+	// 	fillOpacity: 1,
+	// 	scale: 8,
+	// 	strokeColor: 'rgb(255,255,255)',
+	// 	strokeWeight: 2,
+	// };
 
 	const handleCameraChange = useCallback((ev: MapCameraChangedEvent) => {
 		console.log('camera changed: ', ev.detail);
@@ -111,12 +125,10 @@ const CustomMap: React.FC<Props> = ({ destinationName, locations }) => {
 						))}
 
 						<Marker
-							icon={blueDot}
+							// icon={getMarkerIcon()}
 							position={currentLocation}
 						>
 						</Marker>
-
-
 				</Map>
 		</APIProvider>
 	)

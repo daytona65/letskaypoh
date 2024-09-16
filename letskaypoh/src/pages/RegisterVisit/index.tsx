@@ -38,7 +38,7 @@ const RegisterVisit: React.FC<Props> = (props) => {
         
         console.log('visitDetails: ', visitDetails)
 
-        //add register visit api
+        //add api endpoint - register visit
 
         setLoading(false)
         console.log('loading', loading)
