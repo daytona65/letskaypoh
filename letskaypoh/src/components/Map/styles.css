@@ -11,3 +11,20 @@
     /* border: none; */
     /* box-shadow: 0 2px 10px var(--color-gray-6); */
 }
+
+.userMarker {
+    background-color: '#4285F4';
+    width: 8px;
+    height: 8px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+/* const blueDot = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: '#4285F4',
+    fillOpacity: 1,
+    scale: 8,
+    strokeColor: 'rgb(255,255,255)',
+    strokeWeight: 2,
+}; */

@@ -99,7 +99,7 @@ const CustomMap: React.FC<Props> = ({ destinationName, locations }) => {
 					defaultZoom={13}
 					defaultCenter={center}
 					// zoom={currentZoom}
-					// center={center}
+					center={center}
 					// styles={mapStyles}
 					>
 						{locations?.map(marker => (
