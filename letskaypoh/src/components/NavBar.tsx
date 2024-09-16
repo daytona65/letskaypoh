@@ -66,14 +66,14 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     const topMenu = navItems.map((navItem) => {
         if (isLoggedIn && navItem.title === 'Profile') {
             return (
-                <div key={navItem.key} className={'nav-btn'} onClick={() => routeChange(navItem.path)}>
+                <div key={navItem.key} className={'nav-btn'} onClick={() => navigateToRoute(navItem.path, navigate)}>
                     <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
                 </div>
             )
         }
 
         return (
-            <a key={navItem.key} onClick={() => routeChange(navItem.path)}>
+            <a key={navItem.key} onClick={() => navigateToRoute(navItem.path, navigate)}>
                 {navItem.title}
             </a>
         )
