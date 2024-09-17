@@ -6,11 +6,8 @@ import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { data } from '../../models/dummyData'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-<<<<<<< HEAD
 import { SeniorCard } from './SeniorCard'
 import { getSeniorByIdData } from '../../api'
-=======
->>>>>>> 778db152a509d0866a8882aced17c64654b484c5
 
 interface Props {
     visit: VisitInterface
