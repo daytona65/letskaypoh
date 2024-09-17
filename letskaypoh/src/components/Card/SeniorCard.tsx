@@ -4,9 +4,12 @@ import { Button, Descriptions, DescriptionsProps } from 'antd'
 import { navigateToRoute, separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
+import { CloseOutlined } from '@ant-design/icons'
 
 interface Props {
     senior: SeniorInterface
+    closable: boolean
+    onClose: () => void
 }
 
 export const SeniorCard: React.FC<Props> = (props) => {
@@ -31,6 +34,10 @@ export const SeniorCard: React.FC<Props> = (props) => {
         }
     ]
 
+    const closeBtn = <Button onClick={() => props.onClose()}>
+    <CloseOutlined/>
+</Button>
+
     return (
         <div className={'card'}>
             <div className={'seniorProfile'}>
@@ -47,6 +54,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
                 <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
                     Visit
                 </Button>
+                {closeBtn}
             </div>
         </div>
     )

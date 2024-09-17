@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react'
-// import mapStyles from './mapStyles';
 import { AdvancedMarker, Map, MapCameraChangedEvent} from '@vis.gl/react-google-maps';
 import './styles.css'
 import { SeniorInterface } from '../../../../models/interfaces';
@@ -46,14 +45,14 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 		return (
 			<AdvancedMarker
 				position={position}
-				onClick={() => setShowInfoWindow(!showInfoWindow)}
+				onClick={() => setShowInfoWindow(true)}
 			>
 				<div
 					// onMouseEnter={() => setShowInfoWindow(true)}
 					// onMouseLeave={() => setShowInfoWindow(false)}
 				>
 					{(showInfoWindow) ?
-							<SeniorCard senior={info} /> :
+							<SeniorCard senior={info} closable={true} onClose={() => setShowInfoWindow(false)}/> :
 						<div className={'seniorMarker'} >
 							{info.name}
 						</div>

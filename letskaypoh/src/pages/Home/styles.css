@@ -21,7 +21,7 @@
 }
 
 .styledInput {
-    color: #bfbfbf;
+    color: var(--color-gray-8);
     background: none;
     margin-left: 0.5rem;
     background: none;
