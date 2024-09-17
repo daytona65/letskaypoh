@@ -30,7 +30,7 @@ const RegisterVisit: React.FC = () => {
 
         //latest id to get from api..
         const visitDetails: VisitInterface = {
-                id: 1,
+                id: 1, // replace with latest visit id
                 visitDate: values.visitDate,
                 seniorId: seniorId,
                 visitors: [Number(userId)],
@@ -50,6 +50,7 @@ const RegisterVisit: React.FC = () => {
     }
 
     //add api endpoing get senior details
+    // const senior = getSeniorById(seniorId) //to sub in seniorcard
 
     return (
         <div className={'container'}>
@@ -59,7 +60,7 @@ const RegisterVisit: React.FC = () => {
             </div>
 
             <div className={'register-visit'}>
-                <SeniorCard senior={data[seniorId-1]}/>
+                <SeniorCard senior={data[seniorId-1]}/> 
 
                 <Form
                     scrollToFirstError
