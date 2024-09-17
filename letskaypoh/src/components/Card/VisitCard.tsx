@@ -4,9 +4,7 @@ import { Avatar, Button, Descriptions, DescriptionsProps, Tooltip } from 'antd'
 import { navigateToRoute, separatedArray } from '../utils'
 import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
-import { data } from '../../models/dummyData'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-import { SeniorCard } from './SeniorCard'
 import { getSeniorByIdData } from '../../api'
 
 interface Props {
@@ -16,15 +14,14 @@ interface Props {
 export const VisitCard: React.FC<Props> = (props) => {
     const {visit} = props
     const navigate = useNavigate()
-    
-    // add api endpoint to getSenior details from visit.seniorId
 
+    // add api endpoint
     const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorData = await getSeniorByIdData(visit.seniorId);
+                const seniorData = await getSeniorByIdData(visit.senior_id);
                 setSenior(seniorData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);
@@ -32,19 +29,19 @@ export const VisitCard: React.FC<Props> = (props) => {
         };
 
         fetchData();
-    })
+    }, [visit.senior_id])
     let infoItems: DescriptionsProps['items']
     if (senior) {
         infoItems = [
             {
                 key: 'upcoming',
                 label: 'Scheduled',
-                children: visit.visitDate
+                children: visit.datetime
             },
             {
                 key: 'postal',
                 label: 'Postal',
-                children: senior.postalCode
+                children: senior.postal_code
             },
             {
                 key: 'volunteers',

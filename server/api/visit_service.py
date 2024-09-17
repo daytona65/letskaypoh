@@ -36,7 +36,7 @@ def create_new_visit(data):
     
     if not data or not senior_id or not visitor_ids or not datetime or not isinstance(visitor_ids, list):
         return jsonify({"error": "Request body error. senior_id, visitor_ids, datetime are required fields."}), 400
-    
+
     try:
         visit_id = counter_collection.find_one_and_update(
             {"id": "visit_count"},
@@ -44,12 +44,14 @@ def create_new_visit(data):
             return_document=True,
             upsert=True
         )["count"]
+
         new_visit = {
                 "visit_id": visit_id,
                 "senior_id": senior_id,
-                "visitor_ids": visitor_id,
+                "visitor_ids": visitor_ids,
                 "datetime": datetime
         }
+
         visit_collection.insert_one(new_visit)
     except Exception as e:
         return jsonify({"message": str(e)}), 500

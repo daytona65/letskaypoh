@@ -16,7 +16,7 @@ type FieldType = {
     gender: string;
     languages: string[];
     address: string;
-    postalCode: string;
+    postalCode: number;
   };
 
 const Register = () => {
@@ -48,7 +48,7 @@ const Register = () => {
                 gender: values.gender,
                 languages: values.languages,
                 address: values.address,
-                postalCode: values.postalCode,
+                postal_code: values.postalCode,
             }
         )
 

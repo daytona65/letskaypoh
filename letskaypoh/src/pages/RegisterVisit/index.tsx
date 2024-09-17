@@ -29,10 +29,10 @@ const RegisterVisit: React.FC<Props> = (props) => {
         setLoading(true)
 
         const visitDetails: VisitInterface = {
-                id: "1",
-                visitDate: values.visitDate,
-                seniorId: props.senior.id,
-                visitors: [props.user.id!],
+                visit_id: 1,
+                datetime: values.visitDate,
+                senior_id: props.senior.senior_id,
+                visitor_ids: [props.user.user_id!],
                 status: "Upcoming"
             }
         
@@ -56,7 +56,9 @@ const RegisterVisit: React.FC<Props> = (props) => {
             </div>
 
             <div className={'register-visit'}>
-                <SeniorCard senior={props.senior}/>
+                <SeniorCard senior={props.senior} closable={false} onClose={function (): void {
+                    throw new Error('Function not implemented.')
+                } }/>
 
                 <Form
                     scrollToFirstError

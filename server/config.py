@@ -7,7 +7,7 @@ from dotenv import dotenv_values
 
 app = Flask(__name__)
 
-# CORS(app)
+CORS(app)
 
 config = dotenv_values(".env")
 # app.config['MONGO_URI'] = config['ATLAS_URI']

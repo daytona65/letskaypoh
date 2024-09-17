@@ -1,18 +1,18 @@
 export interface SeniorInterface {
-    id: string,
+    senior_id: number,
 	name: string,
 	gender: string,
     age: number,
 	languages: string[],
-	postalCode: string,
+	postal_code: number,
 	address: string,
-	lastVisitedDate: string,
+	last_visited_date: string,
 	lat: number,
 	lon: number
 }
 
 export interface UserInterface {
-	id?: string
+	user_id?: number
 	nric: string
 	name: string
 	email: string
@@ -20,7 +20,7 @@ export interface UserInterface {
 	gender: string
 	age: number
 	languages: string[]
-	postalCode: string
+	postal_code: number
 	address: string
 	area?: string
 	lat?: number
@@ -29,9 +29,9 @@ export interface UserInterface {
 }
 
 export interface VisitInterface {
-	id: string
-	seniorId: string
-	visitors: string[]
-	visitDate: string
+	visit_id: number
+	senior_id: number
+	visitor_ids: number[]
+	datetime: string
 	status: string
 }

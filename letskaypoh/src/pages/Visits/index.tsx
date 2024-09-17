@@ -1,21 +1,39 @@
 import { Button } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './styles.css'
-import { visitsData } from '../../models/dummyData';
 import { navigateToRoute } from '../../components/utils';
 import { VisitCard } from '../../components/Card/VisitCard';
+import { getAllVisitsData } from '../../api';
+import { VisitInterface } from '../../models/interfaces';
 
 const Visits = () => {
   const navigate = useNavigate();
 
-  const visitCards = visitsData.map((visit) => {
+   // add api endpoint - get upcoming visits
+   const [visits, setVisits] = useState<VisitInterface[] | []>([]);
+
+   useEffect(() => {
+       const fetchData = async () => {
+           try {
+               const visitsData = await getAllVisitsData();
+               console.log(visitsData)
+               setVisits(visitsData);
+           } catch (error) {
+               console.error("Error fetching visit data:", error);
+           }
+       };
+
+       fetchData();
+   }, [])
+
+  const visitCards = visits.map((visit) => {
     return <VisitCard 
       visit={visit}
     />
   })
 
-  // add api endpoint - get upcoming visits
+ 
 
   return (
     <div className={'container'}>

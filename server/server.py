@@ -39,6 +39,10 @@ def senior():
     senior_id = int(request.args.get('id'))
     return get_senior(senior_id)
 
+@app.route("/create_senior", methods=["POST"])
+def create_senior():
+    return create_new_senior()
+
 @app.route("/visits", methods=["GET"])
 def visits():
     return get_all_visits()

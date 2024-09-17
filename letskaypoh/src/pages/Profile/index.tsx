@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
-import { UserInterface } from '../../models/interfaces'
+import { SeniorInterface, UserInterface } from '../../models/interfaces'
 import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { data } from '../../models/dummyData'
 import { SeniorCard } from '../../components/Card/SeniorCard'
+import { getAllSeniorsData, getSeniorByIdData, getUserByIdData } from '../../api'
 
 interface Props {
 	user: UserInterface
@@ -25,11 +25,25 @@ const Profile: React.FC<Props> = (props) => {
 	const navigate = useNavigate();
 
 	// add api endpoint - get user - but i think should be done in main.tsx
+	const [seniors, setSeniors] = useState<SeniorInterface[] | []>([]);
 
-	const seniorCards = data.map((senior) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const seniorData = await getAllSeniorsData();
+                setSeniors(seniorData);
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        fetchData();
+    }, [user])
+	const seniorCards = seniors.map((senior) => {
 		return <SeniorCard
-			senior={senior}
-		/>
+			senior={senior} closable={false} onClose={function (): void {
+				throw new Error('Function not implemented.')
+			} }		/>
 	})
 
 	const profileItems: profileItem[] = [

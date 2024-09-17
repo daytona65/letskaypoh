@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SeniorInterface, UserInterface, VisitInterface } from './models/interfaces';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'http://localhost:5000/',
 });
 export const getAllUsersData = async () => {
     try {
@@ -16,7 +16,7 @@ export const getAllUsersData = async () => {
 
 export const getUserByIdData = async (userId: string) => {
     try {
-        const response = await api.get(`/user`, { params: { id: userId } });
+        const response = await api.get(`/user?id=${userId}` );
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -26,7 +26,7 @@ export const getUserByIdData = async (userId: string) => {
 
 export const createUser = async (userData: UserInterface) => {
     try {
-        const response = await axios.post('/create_user', userData);
+        const response = await api.post('/create_user', userData);
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -36,7 +36,7 @@ export const createUser = async (userData: UserInterface) => {
 
 export const getAllSeniorsData = async () => {
     try {
-        const response = await axios.get('/seniors');
+        const response = await api.get('/seniors');
         return response.data;
     } catch (error) {
         console.error('Error fetching seniors:', error);
@@ -44,9 +44,10 @@ export const getAllSeniorsData = async () => {
     }
 };
 
-export const getSeniorByIdData = async (seniorId: String): Promise<SeniorInterface> => {
+export const getSeniorByIdData = async (seniorId: Number): Promise<SeniorInterface> => {
     try {
-        const response = await axios.get(`/senior`, { params: { id: seniorId } });
+        const response = await api.get(`/senior?id=${seniorId}`);
+        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error(`Error fetching senior with ID ${seniorId}:`, error);
@@ -56,7 +57,7 @@ export const getSeniorByIdData = async (seniorId: String): Promise<SeniorInterfa
 
 export const getAllVisitsData = async () => {
     try {
-        const response = await axios.get('/visits');
+        const response = await api.get('/visits');
         return response.data;
     } catch (error) {
         console.error('Error fetching visits:', error);
@@ -66,7 +67,7 @@ export const getAllVisitsData = async () => {
 
 export const getVisitByIdData = async (visitId: string) => {
     try {
-        const response = await axios.get(`/visit`, { params: { id: visitId } });
+        const response = await api.get(`/visit?is=${visitId}` );
         return response.data;
     } catch (error) {
         console.error(`Error fetching visit with ID ${visitId}:`, error);
@@ -76,7 +77,7 @@ export const getVisitByIdData = async (visitId: string) => {
 
 export const generateVisitId = async () => {
     try {
-        const response = await axios.get('/visit_id');
+        const response = await api.get('/visit_id');
         return response.data;
     } catch (error) {
         console.error('Error generating visit ID:', error);
@@ -86,7 +87,7 @@ export const generateVisitId = async () => {
 
 export const createVisit = async (visitData: VisitInterface) => {
     try {
-        const response = await axios.post('/create_visit', visitData);
+        const response = await api.post('/create_visit', visitData);
         return response.data;
     } catch (error) {
         console.error('Error creating visit:', error);
@@ -96,7 +97,7 @@ export const createVisit = async (visitData: VisitInterface) => {
 
 export const updateVisitorInVisit = async (visitData: VisitInterface) => {
     try {
-        const response = await axios.patch('/update_visit', visitData);
+        const response = await api.patch('/update_visit', visitData);
         return response.data;
     } catch (error) {
         console.error('Error updating visit:', error);
@@ -106,7 +107,7 @@ export const updateVisitorInVisit = async (visitData: VisitInterface) => {
 
 export const updateVisitStatus = async (statusData: string) => {
     try {
-        const response = await axios.patch('/update_visit_status', statusData);
+        const response = await api.patch('/update_visit_status', statusData);
         return response.data;
     } catch (error) {
         console.error('Error updating visit status:', error);

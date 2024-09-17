@@ -20,7 +20,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
         {
             key: 'lastVisited',
             label: 'Last Visited',
-            children: senior.lastVisitedDate
+            children: senior.last_visited_date
         },
         {
             key: 'language',
@@ -30,7 +30,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
         {
             key: 'postal',
             label: 'Postal',
-            children: senior.postalCode
+            children: senior.postal_code
         }
     ]
 
