@@ -61,4 +61,18 @@ export const visitsData: VisitInterface[] = [
         visitDate: '12 Sep 2024',
         status: 'Upcoming'
     },
+    {   
+        id: 1,
+        seniorId: 1,
+        visitors: [1, 2],
+        visitDate: '10 Sep 2024',
+        status: 'Upcoming'
+    },
+    {   
+        id: 2,
+        seniorId: 1,
+        visitors: [3, 2],
+        visitDate: '12 Sep 2024',
+        status: 'Upcoming'
+    },
 ]

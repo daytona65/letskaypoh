@@ -26,13 +26,6 @@
     transition: ease-in-out 0.3s;
 }
 
-.profileCard {
-    border-color: transparent;
-    box-shadow: 0 2px 10px var(--color-gray-6);
-    width: 70%;
-    padding: 2rem;
-}
-
 .visitInfo {
     width: 80%;
     align-items: center;
@@ -73,9 +66,10 @@
 
 .seniorProfile {
     width: 35%;
+    margin-bottom: 1rem;
+    
     @media (max-width: 400px) {
         width: 80%;
-        margin-bottom: 1rem;
     }
 
     h3 {

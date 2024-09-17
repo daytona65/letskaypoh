@@ -56,6 +56,7 @@ const Register = () => {
 
         localStorage.clear()
 
+        localStorage.setItem('userId', '1')
         localStorage.setItem('name', values.name)
         localStorage.setItem('nric', values.nric)
         localStorage.setItem('email', values.email)

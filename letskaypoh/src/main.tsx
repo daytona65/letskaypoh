@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/register-visit/:seniorId",
-        element: <RegisterVisit user={userData[0]}/>,
+        element: <RegisterVisit/>,
       },
       {
         path: "/visits",
@@ -44,8 +44,8 @@ const router = createBrowserRouter([
         element: <CompleteVisit />,
       },
       {
-        path: "/visit-confirmed",
-        element: <VisitConfirmed user={userData[0]} senior={data[0]} />,
+        path: "/visit-confirmed/:visitId",
+        element: <VisitConfirmed/>,
       },
     ]
   },

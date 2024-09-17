@@ -5,7 +5,7 @@ import './styles.css'
 import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { UserInterface, VisitInterface } from '../../models/interfaces'
+import { VisitInterface } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { data } from '../../models/dummyData'
@@ -15,12 +15,10 @@ type FieldType = {
     visitDate: string
 };
 
-interface Props {
-    user: UserInterface
-}
-
-const RegisterVisit: React.FC<Props> = (props) => {
+const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
+
+    const userId = localStorage.getItem('userId')
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -30,11 +28,12 @@ const RegisterVisit: React.FC<Props> = (props) => {
         console.log('Received values of form: ', values);
         setLoading(true)
 
+        //latest id to get from api..
         const visitDetails: VisitInterface = {
                 id: 1,
                 visitDate: values.visitDate,
                 seniorId: seniorId,
-                visitors: [Number(props.user.id!)],
+                visitors: [Number(userId)],
                 status: "Upcoming"
             }
         
@@ -47,7 +46,7 @@ const RegisterVisit: React.FC<Props> = (props) => {
 
         message.success('Visit confirmed')
 
-        navigateToRoute('/visit-confirmed', navigate)
+        navigateToRoute(`/visit-confirmed/${visitDetails.id}`, navigate)
     }
 
     //add api endpoing get senior details

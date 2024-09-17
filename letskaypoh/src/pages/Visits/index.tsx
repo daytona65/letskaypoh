@@ -11,11 +11,12 @@ const Visits = () => {
 
   const visitCards = visitsData.map((visit) => {
     return <VisitCard 
+      key={visit.id}
       visit={visit}
     />
   })
 
-  // add api endpoint - get upcoming visits
+  // add api endpoint - get upcoming  - filter by upcoming
 
   return (
     <div className={'container'}>
