@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { SeniorInterface, UserInterface } from '../../models/interfaces'
 import { navigateToRoute, separatedArray } from '../../components/utils'
@@ -17,7 +17,7 @@ interface profileItem {
 
 const Profile: React.FC = () => {
 
-	const user: UserInterface = {
+	const user: UserInterface = useMemo(() => ({
 		user_id: 1,
 		nric: localStorage.getItem('nric')!,
 		name: localStorage.getItem('name')!,
@@ -28,7 +28,7 @@ const Profile: React.FC = () => {
 		languages: JSON.parse(localStorage.getItem('languages')!),
 		postal_code: Number(localStorage.getItem('postalCode'))!,
 		address: localStorage.getItem('address')!,
-	}
+	}), [])
 
 	const navigate = useNavigate();
 
@@ -49,9 +49,7 @@ const Profile: React.FC = () => {
     }, [user])
 	const seniorCards = seniors.map((senior) => {
 		return <SeniorCard
-			senior={senior} closable={false} onClose={function (): void {
-				throw new Error('Function not implemented.')
-			} }		/>
+			senior={senior} closable={false} />
 	})
 
 	const profileItems: profileItem[] = [
