@@ -15,7 +15,8 @@
     @media (max-width: 400px) {
         flex-direction: column;
         justify-content: space-between;
-        padding: 0.5rem;
+        padding: 1rem;
+        width: 75%;
     }
 }
 
@@ -38,6 +39,7 @@
 
     @media (max-width: 400px) {
         width: 90%;
+        align-items: center;
     }
 
     display: flex;

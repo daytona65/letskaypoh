@@ -22,9 +22,9 @@ export const data: SeniorInterface[] = [
         lastVisitedDate: '13 Sep 2024',
         postalCode: '520123',
         address: 'Blk 15 Tampines Ave 3',
-        lat: 1.37625,
-        lon: 103.93609
-    }
+        lat: 1.3731146061720458,
+        lon: 103.94956609530045
+    }, 
 ]
 
 
