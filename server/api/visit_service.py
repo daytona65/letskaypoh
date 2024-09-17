@@ -49,7 +49,8 @@ def create_new_visit(data):
                 "visit_id": visit_id,
                 "senior_id": senior_id,
                 "visitor_ids": visitor_ids,
-                "datetime": datetime
+                "datetime": datetime,
+                "status": "Upcoming"
         }
 
         visit_collection.insert_one(new_visit)
