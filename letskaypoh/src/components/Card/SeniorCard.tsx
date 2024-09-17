@@ -35,7 +35,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
         <div className={'card'}>
             <div className={'seniorProfile'}>
                 <h3>
-                    {senior.title} {senior.name}, {senior.age}{senior.gender}
+                    {senior.name}, {senior.age}{senior.gender}
                 </h3>
             </div>
             <div className={'visitInfo'}>
