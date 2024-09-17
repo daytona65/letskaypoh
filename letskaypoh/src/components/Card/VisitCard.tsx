@@ -6,7 +6,6 @@ import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { data } from '../../models/dummyData'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-import { SeniorCard } from './SeniorCard'
 
 interface Props {
     visit: VisitInterface
@@ -41,9 +40,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                       }}
                 >
                     <Avatar src="https://avatar.iran.liara.run/public" />
-                    <a href="https://ant.design">
-                        <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-                    </a>
+                    <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
                     <Tooltip title="Ant User" placement="top">
                         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                     </Tooltip>
