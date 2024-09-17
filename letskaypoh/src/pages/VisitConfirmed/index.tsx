@@ -36,7 +36,7 @@ const VisitConfirmed: React.FC<Props> = (props) => {
                 <Alert 
                     className='alert'
                     // message={<h3 >Visit confirmed!</h3>}
-                    description={`Drop ${props.senior.title} ${props.senior.name} a call to notify ${props.senior.gender.toLowerCase() === "m" ? 'him' : 'her'} that you're visiting!`} 
+                    description={`Drop ${props.senior.name} a call to notify ${props.senior.gender.toLowerCase() === "m" ? 'him' : 'her'} that you're visiting!`} 
                     type="info"
                     showIcon 
                 />
