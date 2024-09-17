@@ -16,7 +16,6 @@ interface profileItem {
 
 
 const Profile: React.FC = () => {
-	// const { user } = props
 
 	const user: UserInterface = {
 		user_id: 1,

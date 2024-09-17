@@ -65,7 +65,7 @@ export const getAllVisitsData = async () => {
     }
 };
 
-export const getVisitByIdData = async (visitId: string) => {
+export const getVisitByIdData = async (visitId: Number) => {
     try {
         const response = await api.get(`/visit?is=${visitId}` );
         return response.data;

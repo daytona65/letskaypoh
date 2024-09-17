@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { data, visitsData } from '../../models/dummyData'
 import { VisitCard } from '../../components/Card/VisitCard'
+import { getAllSeniorsData, getVisitByIdData } from '../../api'
 
 const VisitConfirmed: React.FC = () => {
     const visitId = Number(useLocation().pathname.split("/")[2]);
@@ -18,11 +19,23 @@ const VisitConfirmed: React.FC = () => {
 
     const userName = localStorage.getItem('name')
 
-    // api: get visit by id
-    const visit: VisitInterface = visitsData[visitId + 1]
+    const [visit, setVisit] = useState<VisitInterface | null>(null)
+    const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
-    // api: get senior details by seniorid
-    const senior: SeniorInterface = data[0]
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const visitData = await getVisitByIdData(visitId);
+                const seniorData = await getAllSeniorsData();
+                setVisit(visitData);
+                setSenior(seniorData);
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        fetchData();
+    }, [visitId])
 
     return (
         <div className={'container'}>
@@ -50,8 +63,10 @@ const VisitConfirmed: React.FC = () => {
                 
                 <h3 className={'visitDetails'}>Visit Details</h3>
 
-                <SeniorCard senior={senior}/>
-                <VisitCard visit={visit}/>
+                {senior && 
+                <SeniorCard senior={senior}/> }
+                {visit &&
+                <VisitCard visit={visit}/> }
                 <Button 
                     className={'regularBtn'} 
                     onClick={() => navigateToRoute('/home', navigate)}>
