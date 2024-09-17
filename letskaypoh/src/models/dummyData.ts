@@ -1,4 +1,4 @@
-import { SeniorInterface, UserInterface } from "./interfaces";
+import { SeniorInterface, UserInterface, VisitInterface } from "./interfaces";
 
 export const data: SeniorInterface[] = [
     {   
@@ -46,4 +46,17 @@ export const userData: UserInterface[] = [
         email: 'josephine.hemingway@gmail.com',
         mobile: '+65 8611 9550'
     }
+]
+
+export const visitsData: VisitInterface[] = [
+    {   
+        seniorId: '1',
+        userId: '1',
+        visitDate: '10 Sep 2024',
+    },
+    {   
+        seniorId: '2',
+        userId: '1',
+        visitDate: '13 Sep 2024',
+    },
 ]

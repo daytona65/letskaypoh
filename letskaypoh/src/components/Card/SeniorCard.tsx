@@ -1,9 +1,9 @@
 import React from 'react'
 import './styles.css'
-import { Avatar, Descriptions, DescriptionsProps, Tooltip } from 'antd'
-import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-import { separatedArray } from '../utils'
+import { Button, Descriptions, DescriptionsProps } from 'antd'
+import { navigateToRoute, separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
     senior: SeniorInterface
@@ -11,6 +11,7 @@ interface Props {
 
 export const SeniorCard: React.FC<Props> = (props) => {
     const {senior} = props
+    const navigate = useNavigate()
 
     const infoItems: DescriptionsProps['items'] = [
         {
@@ -43,7 +44,10 @@ export const SeniorCard: React.FC<Props> = (props) => {
                     layout={'horizontal'}
                     column={1}
                 />
-                <Avatar.Group
+                <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
+                    Visit
+                </Button>
+                {/* <Avatar.Group
                     max={{
                         count: 2,
                         style: { color: '#f56a00', backgroundColor: '#fde3cf' },
@@ -57,7 +61,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
                         <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                     </Tooltip>
                     <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} />
-                    </Avatar.Group>
+                    </Avatar.Group> */}
             </div>
         </div>
     )

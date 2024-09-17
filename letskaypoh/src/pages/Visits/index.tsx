@@ -2,16 +2,16 @@ import { Button } from 'antd'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './styles.css'
-import { data } from '../../models/dummyData';
-import { SeniorCard } from '../../components/Card/SeniorCard';
+import { visitsData } from '../../models/dummyData';
 import { navigateToRoute } from '../../components/utils';
+import { VisitCard } from '../../components/Card/VisitCard';
 
 const Visits = () => {
   const navigate = useNavigate();
 
-  const seniorCards = data.map((senior) => {
-    return <SeniorCard 
-      senior={senior}
+  const visitCards = visitsData.map((visit) => {
+    return <VisitCard 
+      visit={visit}
     />
   })
 
@@ -24,7 +24,7 @@ const Visits = () => {
         <h3>Upcoming Visits</h3>
       </div>
       <div className={'visits'}>
-        {seniorCards}
+        {visitCards}
         <p>
           You have no upcoming visits.
         </p>
