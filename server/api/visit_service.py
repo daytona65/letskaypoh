@@ -30,12 +30,6 @@ def generate_visit_id():
     return Response(json.dumps(counter_collection.find({"id": "visit_count"})["count"] + 1), mimetype="application/json")
 
 def create_new_visit(data):
-    visit_id = counter_collection.find_one_and_update(
-        {"id": "visit_count"},
-        {"$inc": {"count": 1}},
-        return_document=True,
-        upsert=True
-    )["count"]
     senior_id = data.get("senior_id")
     visitor_ids = data.get("visitor_ids")
     datetime = data.get("datetime")
@@ -44,6 +38,12 @@ def create_new_visit(data):
         return jsonify({"error": "Request body error. senior_id, visitor_ids, datetime are required fields."}), 400
     
     try:
+        visit_id = counter_collection.find_one_and_update(
+            {"id": "visit_count"},
+            {"$inc": {"count": 1}},
+            return_document=True,
+            upsert=True
+        )["count"]
         new_visit = {
                 "visit_id": visit_id,
                 "senior_id": senior_id,

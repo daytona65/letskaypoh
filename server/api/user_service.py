@@ -26,12 +26,6 @@ def get_user(user_id):
     return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
 
 def create_new_user():
-    user_id = counter_collection.find_one_and_update(
-        {"id": "user_count"},
-        {"$inc": {"count": 1}},
-        return_document=True,
-        upsert=True
-    )["count"]
     data = request.json
     nric = data.get("nric")
     name = data.get("name")
@@ -45,9 +39,15 @@ def create_new_user():
     password = data.get("password")
     
     if not data or not nric or not name or not gender or not age or not postal_code or not address or not languages or not profile_img or not email or not password or not isinstance(languages, list):
-        return Response({"error": "Request body error. All fields are required. Languages is a list."}, mimetype='application/json', status=400)
+        return Response(json.dumps({"error": "Request body error. All fields are required. Languages is a list."}), mimetype='application/json', status=400)
     
     try:
+        user_id = counter_collection.find_one_and_update(
+            {"id": "user_count"},
+            {"$inc": {"count": 1}},
+            return_document=True,
+            upsert=True
+        )["count"]
         new_user = {
                 "user_id": user_id,
                 "nric": nric,
@@ -63,6 +63,6 @@ def create_new_user():
         }
         user_collection.insert_one(new_user)
     except Exception as e:
-        return jsonify({"message": str(e)}), 400
+        return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
     return jsonify({"message": "User created!", "new_user": str(new_user)}), 201

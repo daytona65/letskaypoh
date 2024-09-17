@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserInterface, VisitInterface } from './models/interfaces';
+import { SeniorInterface, UserInterface, VisitInterface } from './models/interfaces';
 
 const api = axios.create({
     baseURL: 'http://localhost:5000',
@@ -44,7 +44,7 @@ export const getAllSeniorsData = async () => {
     }
 };
 
-export const getSeniorByIdData = async (seniorId: String) => {
+export const getSeniorByIdData = async (seniorId: String): Promise<SeniorInterface> => {
     try {
         const response = await axios.get(`/senior`, { params: { id: seniorId } });
         return response.data;

@@ -48,7 +48,7 @@ def visit():
     visit_id = int(request.args.get('id'))
     return get_visit(visit_id)
 
-@app.route("/visit_id", methods["GET"]):
+@app.route("/visit_id", methods=["GET"])
 def visit_id():
     return generate_visit_id()
 
