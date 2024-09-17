@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile user={userData[0]} />,
+        element: <Profile/>,
       },
       {
         path: "/register-visit/:seniorId",

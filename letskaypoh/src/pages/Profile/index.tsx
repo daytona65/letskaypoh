@@ -8,10 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { data } from '../../models/dummyData'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 
-interface Props {
-	user: UserInterface
-}
-
 interface profileItem {
 	key: React.Key
 	icon: JSX.Element
@@ -19,8 +15,21 @@ interface profileItem {
 }
 
 
-const Profile: React.FC<Props> = (props) => {
-	const { user } = props
+const Profile: React.FC = () => {
+	// const { user } = props
+
+	const user: UserInterface = {
+		id: 1,
+		nric: localStorage.getItem('nric')!,
+		name: localStorage.getItem('name')!,
+		email: localStorage.getItem('email')!,
+		mobile: localStorage.getItem('mobile')!,
+		gender: localStorage.getItem('gender')!,
+		age: Number(localStorage.getItem('age'))!,
+		languages: JSON.parse(localStorage.getItem('languages')!),
+		postalCode: localStorage.getItem('postalCode')!,
+		address: localStorage.getItem('address')!,
+	}
 
 	const navigate = useNavigate();
 
@@ -52,7 +61,7 @@ const Profile: React.FC<Props> = (props) => {
 				<span>
 					Lives in {' '}
 					<span>
-						{user.area}
+						{user.address}
 					</span>
 				</span>
 			)

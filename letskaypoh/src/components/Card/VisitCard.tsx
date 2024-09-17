@@ -13,7 +13,6 @@ interface Props {
 
 export const VisitCard: React.FC<Props> = (props) => {
     const {visit} = props
-    const navigate = useNavigate()
     
     // add api endpoint to getSenior details from visit.seniorId
 
@@ -22,7 +21,7 @@ export const VisitCard: React.FC<Props> = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorData = await getSeniorByIdData(visit.seniorId);
+                const seniorData = await getSeniorByIdData(visit.seniorId.toString());
                 setSenior(seniorData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);
@@ -83,8 +82,6 @@ export const VisitCard: React.FC<Props> = (props) => {
                     column={1}
                 />
                 
-                
-
                 <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
                     Cancel
                 </Button>

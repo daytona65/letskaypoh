@@ -2,7 +2,7 @@ import { SeniorInterface, UserInterface, VisitInterface } from "./interfaces";
 
 export const data: SeniorInterface[] = [
     {   
-        id: '1',
+        id: 1,
         name: 'Mr Lim',
         gender: 'M',
         age: 78,
@@ -14,7 +14,7 @@ export const data: SeniorInterface[] = [
         lon: 103.93609
     },
     {   
-        id: '2',
+        id: 2,
         name: 'Ms Soh',
         gender: 'F',
         age: 85,
@@ -30,7 +30,7 @@ export const data: SeniorInterface[] = [
 
 export const userData: UserInterface[] = [
     {
-        id: '1',
+        id: 1,
         nric: "T123123A",
         name: 'Josephine',
         age: 24,

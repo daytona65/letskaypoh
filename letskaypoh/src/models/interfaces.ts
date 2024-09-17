@@ -1,5 +1,5 @@
 export interface SeniorInterface {
-    id: string,
+    id: number,
 	name: string,
 	gender: string,
     age: number,
@@ -12,7 +12,7 @@ export interface SeniorInterface {
 }
 
 export interface UserInterface {
-	id?: string
+	id?: number
 	nric: string
 	name: string
 	email: string
