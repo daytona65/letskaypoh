@@ -36,11 +36,9 @@ export const userData: UserInterface[] = [
         age: 24,
         gender: 'F',
         languages: ['English', 'Indonesian'],
-        nric: '696i',
         address: 'Pasir Ris',
         totalVisits: 2,
         postalCode: '510773',
-        address: "HelloAvenue",
         lat: 1.37625,
         lon: 103.93609,
         email: 'josephine.hemingway@gmail.com',
@@ -50,13 +48,17 @@ export const userData: UserInterface[] = [
 
 export const visitsData: VisitInterface[] = [
     {   
+        id: '1',
         seniorId: '1',
-        userId: '1',
+        visitors: ['1', '2'],
         visitDate: '10 Sep 2024',
+        status: 'Upcoming'
     },
     {   
-        seniorId: '2',
-        userId: '1',
-        visitDate: '13 Sep 2024',
+        id: '2',
+        seniorId: '1',
+        visitors: ['3', '2'],
+        visitDate: '10 Sep 2024',
+        status: 'Upcoming'
     },
 ]
