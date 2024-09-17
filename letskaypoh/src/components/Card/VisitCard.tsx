@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
 import { Avatar, Button, Descriptions, DescriptionsProps, Tooltip } from 'antd'
-import { navigateToRoute, separatedArray } from '../utils'
+import { navigateToRoute } from '../utils'
 import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
-import { data } from '../../models/dummyData'
 import { AntDesignOutlined, UserOutlined } from '@ant-design/icons'
-import { SeniorCard } from './SeniorCard'
 import { getSeniorByIdData } from '../../api'
 
 interface Props {
@@ -34,6 +32,8 @@ export const VisitCard: React.FC<Props> = (props) => {
         fetchData();
     })
     let infoItems: DescriptionsProps['items']
+
+    console.log('senior', senior)
     if (senior) {
         infoItems = [
             {
@@ -85,7 +85,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                 
                 
 
-                <Button className={'cancelBtn'} onClick={() => navigateToRoute('/register-visit', navigate)}>
+                <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
                     Cancel
                 </Button>
             </div>

@@ -5,9 +5,10 @@ import './styles.css'
 import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { SeniorInterface, UserInterface, VisitInterface } from '../../models/interfaces'
-import { useNavigate } from 'react-router-dom'
+import { UserInterface, VisitInterface } from '../../models/interfaces'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
+import { data } from '../../models/dummyData'
 // import cn from 'classnames'
 
 type FieldType = {
@@ -15,11 +16,12 @@ type FieldType = {
 };
 
 interface Props {
-    senior: SeniorInterface
     user: UserInterface
 }
 
 const RegisterVisit: React.FC<Props> = (props) => {
+    const seniorId = Number(useLocation().pathname.split("/")[2]);
+
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate(); 
@@ -29,10 +31,10 @@ const RegisterVisit: React.FC<Props> = (props) => {
         setLoading(true)
 
         const visitDetails: VisitInterface = {
-                id: "1",
+                id: 1,
                 visitDate: values.visitDate,
-                seniorId: props.senior.id,
-                visitors: [props.user.id!],
+                seniorId: seniorId,
+                visitors: [Number(props.user.id!)],
                 status: "Upcoming"
             }
         
@@ -48,6 +50,8 @@ const RegisterVisit: React.FC<Props> = (props) => {
         navigateToRoute('/visit-confirmed', navigate)
     }
 
+    //add api endpoing get senior details
+
     return (
         <div className={'container'}>
             <div className={'header'}>
@@ -56,7 +60,7 @@ const RegisterVisit: React.FC<Props> = (props) => {
             </div>
 
             <div className={'register-visit'}>
-                <SeniorCard senior={props.senior}/>
+                <SeniorCard senior={data[seniorId-1]}/>
 
                 <Form
                     scrollToFirstError

@@ -102,13 +102,13 @@ const Profile: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className={'section'} style={{marginBottom: '5rem'}}>
+			<div className={'section'} style={{ marginBottom: '5rem' }}>
 				<div className={'row'}>
 					<h3>Visit History</h3>
 				</div>
 				{seniorCards}
 			</div>
-			
+
 			{/* <Button className={'logOut'} onClick={() => navigateToRoute('/entry', navigate)}>
 				<LogoutOutlined /> Log Out
 			</Button> */}

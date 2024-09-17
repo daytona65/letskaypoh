@@ -8,8 +8,9 @@ import { CloseOutlined } from '@ant-design/icons'
 
 interface Props {
     senior: SeniorInterface
-    closable: boolean
-    onClose: () => void
+    closable?: boolean
+    onClose?: () => void
+    showVisitBtn?: boolean
 }
 
 export const SeniorCard: React.FC<Props> = (props) => {
@@ -34,12 +35,14 @@ export const SeniorCard: React.FC<Props> = (props) => {
         }
     ]
 
-    const closeBtn = <Button onClick={() => props.onClose()}>
-    <CloseOutlined/>
-</Button>
+    const closeBtn = props.onClose && <CloseOutlined className='closeBtn' onClick={props.onClose}/>
 
     return (
         <div className={'card'}>
+            <div className={'closeBtnDiv'}>
+                {closeBtn}
+            </div>
+
             <div className={'seniorProfile'}>
                 <h3>
                     {senior.name}, {senior.age}{senior.gender}
@@ -51,10 +54,9 @@ export const SeniorCard: React.FC<Props> = (props) => {
                     layout={'horizontal'}
                     column={1}
                 />
-                <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
+                {props.showVisitBtn && <Button onClick={() => navigateToRoute(`/register-visit/${senior.id}`, navigate)}>
                     Visit
-                </Button>
-                {closeBtn}
+                </Button>}
             </div>
         </div>
     )

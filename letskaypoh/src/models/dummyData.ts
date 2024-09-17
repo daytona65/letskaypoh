@@ -48,17 +48,17 @@ export const userData: UserInterface[] = [
 
 export const visitsData: VisitInterface[] = [
     {   
-        id: '1',
-        seniorId: '1',
-        visitors: ['1', '2'],
+        id: 1,
+        seniorId: 1,
+        visitors: [1, 2],
         visitDate: '10 Sep 2024',
         status: 'Upcoming'
     },
     {   
-        id: '2',
-        seniorId: '1',
-        visitors: ['3', '2'],
-        visitDate: '10 Sep 2024',
+        id: 2,
+        seniorId: 1,
+        visitors: [3, 2],
+        visitDate: '12 Sep 2024',
         status: 'Upcoming'
     },
 ]

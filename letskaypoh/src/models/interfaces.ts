@@ -29,9 +29,9 @@ export interface UserInterface {
 }
 
 export interface VisitInterface {
-	id: string
-	seniorId: string
-	visitors: string[]
+	id: number
+	seniorId: number
+	visitors: number[]
 	visitDate: string
 	status: string
 }

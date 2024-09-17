@@ -32,8 +32,8 @@ const router = createBrowserRouter([
         element: <Profile user={userData[0]} />,
       },
       {
-        path: "/register-visit",
-        element: <RegisterVisit user={userData[0]} senior={data[0]}/>,
+        path: "/register-visit/:seniorId",
+        element: <RegisterVisit user={userData[0]}/>,
       },
       {
         path: "/visits",
