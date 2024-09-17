@@ -54,7 +54,7 @@ def visit():
 
 @app.route("/visit_id", methods=["GET"])
 def visit_id():
-    return generate_visit_id()
+    return latest_visit_id()
 
 @app.route("/create_visit", methods=["POST"])
 def create_visit():

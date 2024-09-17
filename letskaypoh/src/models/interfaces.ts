@@ -29,7 +29,7 @@ export interface UserInterface {
 }
 
 export interface VisitInterface {
-	visit_id: number
+	visit_id?: number
 	senior_id: number
 	visitor_ids: number[]
 	datetime: string

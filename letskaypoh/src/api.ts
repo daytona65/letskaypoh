@@ -75,7 +75,7 @@ export const getVisitByIdData = async (visitId: Number) => {
     }
 };
 
-export const generateVisitId = async () => {
+export const getLatestVisitId = async () => {
     try {
         const response = await api.get('/visit_id');
         return response.data;

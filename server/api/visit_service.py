@@ -26,8 +26,8 @@ def get_visit(visit_id):
         return jsonify({"error": "Visit not found"}), 404
     return Response(json.dumps(visit[0], default=json_util.default), mimetype="application/json")
 
-def generate_visit_id():
-    return Response(json.dumps(counter_collection.find({"id": "visit_count"})["count"] + 1), mimetype="application/json")
+def latest_visit_id():
+    return Response(json.dumps(counter_collection.find({"id": "visit_count"})["count"]), mimetype="application/json")
 
 def create_new_visit(data):
     senior_id = data.get("senior_id")

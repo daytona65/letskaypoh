@@ -8,7 +8,7 @@ import { InfoCircleTwoTone } from '@ant-design/icons'
 import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
-import { getSeniorByIdData } from '../../api'
+import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
 // import cn from 'classnames'
 
 type FieldType = {
@@ -30,27 +30,37 @@ const RegisterVisit: React.FC = () => {
 
         //latest id to get from api..
         const visitDetails: VisitInterface = {
-                visit_id: 1, // replace with latest visit id
                 datetime: values.visitDate,
                 senior_id: seniorId,
                 visitor_ids: [Number(userId)],
                 status: "Upcoming"
-            }
+        }
+        const [visitId, setVisitId] = useState<Number>(0)
+
+        useEffect(() => {
+            const postData = async () => {
+                try {
+                    await createVisit(visitDetails);
+                    const visitId = await getLatestVisitId();
+                    setVisitId(visitId)
+                } catch (error) {
+                    console.error("Error fetching senior data:", error);
+                }
+            };
+
+            postData();
+        })
         
         console.log('visitDetails: ', visitDetails)
-
-        //add api endpoint - register visit
 
         setLoading(false)
         console.log('loading', loading)
 
         message.success('Visit confirmed')
 
-        navigateToRoute(`/visit-confirmed/${visitDetails.visit_id}`, navigate)
+        navigateToRoute(`/visit-confirmed/${visitId}`, navigate)
     }
 
-    //add api endpoing get senior details
-    // const senior = getSeniorById(seniorId) //to sub in seniorcard
     const [senior, setSenior] = useState<SeniorInterface | null>(null)
 
     useEffect(() => {
