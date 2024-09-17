@@ -8,8 +8,8 @@ export const separatedArray = (arr: (string | JSX.Element)[] | undefined, separa
     const items = arr.map((elem, index) => {
         return (
             (arr.length === index+1) ? 
-            <span>{elem}</span> : 
-            <span className={'commaArrayElement'}>{elem}{separator ?? ', '} </span>
+            <span key={index}>{elem}</span> : 
+            <span  key={index} className={'commaArrayElement'}>{elem}{separator ?? ', '} </span>
         )
     })
     return items

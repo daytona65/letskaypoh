@@ -60,5 +60,5 @@ export const visitsData: VisitInterface[] = [
         visitor_ids: [3, 2],
         datetime: '10 Sep 2024',
         status: 'Upcoming'
-    },
+    }
 ]

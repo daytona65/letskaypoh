@@ -8,10 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { getAllSeniorsData, getSeniorByIdData, getUserByIdData } from '../../api'
 
-interface Props {
-	user: UserInterface
-}
-
 interface profileItem {
 	key: React.Key
 	icon: JSX.Element
@@ -19,8 +15,21 @@ interface profileItem {
 }
 
 
-const Profile: React.FC<Props> = (props) => {
-	const { user } = props
+const Profile: React.FC = () => {
+	// const { user } = props
+
+	const user: UserInterface = {
+		user_id: 1,
+		nric: localStorage.getItem('nric')!,
+		name: localStorage.getItem('name')!,
+		email: localStorage.getItem('email')!,
+		mobile: localStorage.getItem('mobile')!,
+		gender: localStorage.getItem('gender')!,
+		age: Number(localStorage.getItem('age'))!,
+		languages: JSON.parse(localStorage.getItem('languages')!),
+		postal_code: Number(localStorage.getItem('postalCode'))!,
+		address: localStorage.getItem('address')!,
+	}
 
 	const navigate = useNavigate();
 
@@ -66,7 +75,7 @@ const Profile: React.FC<Props> = (props) => {
 				<span>
 					Lives in {' '}
 					<span>
-						{user.area}
+						{user.address}
 					</span>
 				</span>
 			)
@@ -116,13 +125,13 @@ const Profile: React.FC<Props> = (props) => {
 				</div>
 			</div>
 
-			<div className={'section'} style={{marginBottom: '5rem'}}>
+			<div className={'section'} style={{ marginBottom: '5rem' }}>
 				<div className={'row'}>
 					<h3>Visit History</h3>
 				</div>
 				{seniorCards}
 			</div>
-			
+
 			{/* <Button className={'logOut'} onClick={() => navigateToRoute('/entry', navigate)}>
 				<LogoutOutlined /> Log Out
 			</Button> */}

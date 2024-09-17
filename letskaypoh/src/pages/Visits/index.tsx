@@ -17,7 +17,6 @@ const Visits = () => {
        const fetchData = async () => {
            try {
                const visitsData = await getAllVisitsData();
-               console.log(visitsData)
                setVisits(visitsData);
            } catch (error) {
                console.error("Error fetching visit data:", error);
@@ -29,11 +28,26 @@ const Visits = () => {
 
   const visitCards = visits.map((visit) => {
     return <VisitCard 
+      key={visit.visit_id}
       visit={visit}
     />
   })
 
- 
+  // add api endpoint - get upcoming  - filter by upcoming
+  const [upcomingVisits, setUpcomingVisits] = useState<VisitInterface[] | []>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const visitsData = await getAllVisitsData();
+            setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status == "Upcoming"));
+        } catch (error) {
+            console.error("Error fetching visit data:", error);
+        }
+    };
+
+    fetchData();
+}, [])
 
   return (
     <div className={'container'}>
@@ -42,18 +56,17 @@ const Visits = () => {
         <h3>Upcoming Visits</h3>
       </div>
       <div className={'visits'}>
-        {visitCards}
-        <p>
-          You have no upcoming visits.
-        </p>
-        <div className={'buttons'}>
-          <Button onClick={() => navigateToRoute('/home', navigate)}>
-            Explore
-          </Button>
-          <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
-            Register Visit
-          </Button>
-        </div>
+        
+        {upcomingVisits.length === 0 ? <>
+          <p>
+            You have no upcoming visits.
+          </p>
+          <div className={'buttons'}>
+            <Button onClick={() => navigateToRoute('/home', navigate)}>
+              Explore
+            </Button>
+          </div>
+        </> : visitCards}
       </div>
     </div>
   )

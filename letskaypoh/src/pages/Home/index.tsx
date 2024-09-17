@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './styles.css'
 import '../commonStyles.css'
 import '../../App.css'
-import { APIProvider, Map } from '@vis.gl/react-google-maps'  
+import { APIProvider } from '@vis.gl/react-google-maps'  
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap from './components/Map/Map'
@@ -13,7 +13,7 @@ const Home = () => {
     useState<google.maps.places.PlaceResult | null>(null);
 
     return (
-        <div className={'container'}>
+        <div className={'container-home'}>
             <div className={'explore'}>
                 <div className={'header-container'}>
                     <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>

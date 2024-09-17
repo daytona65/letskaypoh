@@ -2,21 +2,21 @@
     border-radius: 14px;
     /* border: 1px solid var(--color-gray-6); */
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    max-width: 400px;
+    width: 85%;
+
+    max-width: 320px;
     padding: 0.75rem;
     margin-bottom: 1rem;
     background-color: #f9f9f9;
-    z-index: 999;
+    z-index: 0;
     box-shadow: 0 1px 5px var(--color-gray-6);
 
     @media (max-width: 400px) {
-        flex-direction: column;
-        justify-content: space-between;
         padding: 1rem;
-        width: 75%;
+        width: 85%;
     }
 }
 
@@ -26,16 +26,9 @@
     transition: ease-in-out 0.3s;
 }
 
-.profileCard {
-    border-color: transparent;
-    box-shadow: 0 2px 10px var(--color-gray-6);
-    width: 70%;
-    padding: 2rem;
-}
-
 .visitInfo {
-    width: 60%;
-    text-align: start;
+    width: 80%;
+    align-items: center;
 
     @media (max-width: 400px) {
         width: 90%;
@@ -73,9 +66,10 @@
 
 .seniorProfile {
     width: 35%;
+    margin-bottom: 1rem;
+    
     @media (max-width: 400px) {
         width: 80%;
-        margin-bottom: 1rem;
     }
 
     h3 {
@@ -89,3 +83,7 @@
     }
 }
 
+.closeBtnDiv {
+    width: 100%;
+    text-align: end;
+}

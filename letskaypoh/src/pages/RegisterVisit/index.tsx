@@ -1,25 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
 import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { SeniorInterface, UserInterface, VisitInterface } from '../../models/interfaces'
-import { useNavigate } from 'react-router-dom'
+import { SeniorInterface, VisitInterface } from '../../models/interfaces'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
+import { getSeniorByIdData } from '../../api'
 // import cn from 'classnames'
 
 type FieldType = {
     visitDate: string
 };
 
-interface Props {
-    senior: SeniorInterface
-    user: UserInterface
-}
+const RegisterVisit: React.FC = () => {
+    const seniorId = Number(useLocation().pathname.split("/")[2]);
 
-const RegisterVisit: React.FC<Props> = (props) => {
+    const userId = localStorage.getItem('userId')
+
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate(); 
@@ -28,11 +28,12 @@ const RegisterVisit: React.FC<Props> = (props) => {
         console.log('Received values of form: ', values);
         setLoading(true)
 
+        //latest id to get from api..
         const visitDetails: VisitInterface = {
-                visit_id: 1,
+                visit_id: 1, // replace with latest visit id
                 datetime: values.visitDate,
-                senior_id: props.senior.senior_id,
-                visitor_ids: [props.user.user_id!],
+                senior_id: seniorId,
+                visitor_ids: [Number(userId)],
                 status: "Upcoming"
             }
         
@@ -45,8 +46,25 @@ const RegisterVisit: React.FC<Props> = (props) => {
 
         message.success('Visit confirmed')
 
-        navigateToRoute('/visit-confirmed', navigate)
+        navigateToRoute(`/visit-confirmed/${visitDetails.visit_id}`, navigate)
     }
+
+    //add api endpoing get senior details
+    // const senior = getSeniorById(seniorId) //to sub in seniorcard
+    const [senior, setSenior] = useState<SeniorInterface | null>(null)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const seniorData = await getSeniorByIdData(seniorId);
+                setSenior(seniorData);
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+ 
+        fetchData();
+    }, [])
 
     return (
         <div className={'container'}>
@@ -56,9 +74,8 @@ const RegisterVisit: React.FC<Props> = (props) => {
             </div>
 
             <div className={'register-visit'}>
-                <SeniorCard senior={props.senior} closable={false} onClose={function (): void {
-                    throw new Error('Function not implemented.')
-                } }/>
+                {senior && 
+                <SeniorCard senior={senior}/> }
 
                 <Form
                     scrollToFirstError

@@ -52,7 +52,7 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 					// onMouseLeave={() => setShowInfoWindow(false)}
 				>
 					{(showInfoWindow) ?
-							<SeniorCard senior={info} closable={true} onClose={() => setShowInfoWindow(false)}/> :
+							<SeniorCard senior={info} closable={true} onClose={() => setShowInfoWindow(false)} showVisitBtn={true}/> :
 						<div className={'seniorMarker'} >
 							{info.name}
 						</div>

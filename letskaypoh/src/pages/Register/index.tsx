@@ -16,7 +16,7 @@ type FieldType = {
     gender: string;
     languages: string[];
     address: string;
-    postalCode: number;
+    postal_code: number;
   };
 
 const Register = () => {
@@ -48,11 +48,24 @@ const Register = () => {
                 gender: values.gender,
                 languages: values.languages,
                 address: values.address,
-                postal_code: values.postalCode,
+                postal_code: values.postal_code,
             }
         )
 
         console.log('newUserDetails:', newUserDetails)
+
+        localStorage.clear()
+
+        localStorage.setItem('userId', '1')
+        localStorage.setItem('name', values.name)
+        localStorage.setItem('nric', values.nric)
+        localStorage.setItem('email', values.email)
+        localStorage.setItem('age', values.age.toString())
+        localStorage.setItem('mobile', values.mobile)
+        localStorage.setItem('gender', values.gender)
+        localStorage.setItem('languages', JSON.stringify(values.languages))
+        localStorage.setItem('address', values.address)
+        localStorage.setItem('postal_code', values.postal_code.toString())
 
         // add api endpoint - register user
         // when api successful then route change
@@ -124,9 +137,9 @@ const Register = () => {
                         rules={[{ required: true, message: 'Please input your gender' }]}
                     >
                         <Radio.Group>
-                            <Radio value="a">Male</Radio>
-                            <Radio value="b">Female</Radio>
-                            <Radio value="c">Prefer not to say</Radio>
+                            <Radio value="M">Male</Radio>
+                            <Radio value="F">Female</Radio>
+                            <Radio value=" ">Prefer not to say</Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item
@@ -135,15 +148,15 @@ const Register = () => {
                         rules={[{ required: true, message: 'Please select your spoken languages' }]}
                     >
                         <Select mode="multiple" placeholder="Please select spoken languages">
-                            <Option value="english">English</Option>
-                            <Option value="mandarin">Mandarin</Option>
-                            <Option value="malay">Malay</Option>
-                            <Option value="indonesian">Indonesian</Option>
-                            <Option value="tamil">Tamil</Option>
+                            <Option value="English">English</Option>
+                            <Option value="Mandarin">Mandarin</Option>
+                            <Option value="Malay">Malay</Option>
+                            <Option value="Indonesian">Indonesian</Option>
+                            <Option value="Tamil">Tamil</Option>
                             <Option value="Hindi">Hindi</Option>
-                            <Option value="hokkien">Hokkien</Option>
-                            <Option value="cantonese">Cantonese</Option>
-                            <Option value="teochew">Teo Chew</Option>
+                            <Option value="Hokkien">Hokkien</Option>
+                            <Option value="Cantonese">Cantonese</Option>
+                            <Option value="Teochew">Teo Chew</Option>
                         </Select>
                     </Form.Item>
                     <Form.Item
