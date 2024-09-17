@@ -24,18 +24,17 @@ const Visits = () => {
         <h3>Upcoming Visits</h3>
       </div>
       <div className={'visits'}>
-        {visitCards}
-        <p>
-          You have no upcoming visits.
-        </p>
-        <div className={'buttons'}>
-          <Button onClick={() => navigateToRoute('/home', navigate)}>
-            Explore
-          </Button>
-          <Button onClick={() => navigateToRoute('/register-visit', navigate)}>
-            Register Visit
-          </Button>
-        </div>
+        
+        {visitsData.length === 0 ? <>
+          <p>
+            You have no upcoming visits.
+          </p>
+          <div className={'buttons'}>
+            <Button onClick={() => navigateToRoute('/home', navigate)}>
+              Explore
+            </Button>
+          </div>
+        </> : visitCards}
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ const Home = () => {
     useState<google.maps.places.PlaceResult | null>(null);
 
     return (
-        <div className={'container'}>
+        <div className={'container-home'}>
             <div className={'explore'}>
                 <div className={'header-container'}>
                     <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>
