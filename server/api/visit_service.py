@@ -20,14 +20,15 @@ def get_all_visits():
     return Response(json.dumps(visits, default=str), mimetype="application/json")
 
 def get_visit(visit_id):
-    visit = list(user_collection.find({"visit_id": visit_id}))
+    visit = list(visit_collection.find({"visit_id": visit_id}))
     if visit is None:
         print("Visit not found!")
         return jsonify({"error": "Visit not found"}), 404
     return Response(json.dumps(visit[0], default=json_util.default), mimetype="application/json")
 
 def latest_visit_id():
-    return Response(json.dumps(counter_collection.find({"id": "visit_count"})["count"]), mimetype="application/json")
+    latest_visit_id = counter_collection.find_one({"id": "visit_count"})["count"]
+    return Response(json.dumps(latest_visit_id), mimetype="application/json")
 
 def create_new_visit(data):
     senior_id = data.get("senior_id")
@@ -75,7 +76,7 @@ def update_visitor(data):
                 {"$addToSet": {"visitor_ids": visitor_id}}  
             )
         elif (action == "delete"):
-            result = user_collection.update_one(
+            result = visit_collection.update_one(
                 {"visit_id": visit_id},
                 {"$pull": {"visitor_ids": visitor_id}}
             )
@@ -92,7 +93,7 @@ def update_status(data):
     visit_id = int(visit_id)
     statis = str(status)
     try:
-        result = user_collection.update_one(
+        result = visit_collection.update_one(
             {"visit_id": visit_id},
             {"$set": {"status": status}}
         )

@@ -26,39 +26,35 @@ const RegisterVisit: React.FC = () => {
 
     const handleConfirmVisit: FormProps<FieldType>['onFinish'] = (values) => {
         console.log('Received values of form: ', values);
+        console.log('visitDate', values.visitDate)
         setLoading(true)
 
-        //latest id to get from api..
         const visitDetails: VisitInterface = {
                 datetime: values.visitDate,
                 senior_id: seniorId,
                 visitor_ids: [Number(userId)],
                 status: "Upcoming"
         }
-        const [visitId, setVisitId] = useState<Number>(0)
-
-        useEffect(() => {
-            const postData = async () => {
-                try {
-                    await createVisit(visitDetails);
-                    const visitId = await getLatestVisitId();
-                    setVisitId(visitId)
-                } catch (error) {
-                    console.error("Error fetching senior data:", error);
-                }
-            };
-
-            postData();
-        })
         
-        console.log('visitDetails: ', visitDetails)
+        const postData = async () => {
+            try {
+                await createVisit(visitDetails);
+                const visitId = await getLatestVisitId();
 
-        setLoading(false)
-        console.log('loading', loading)
+                console.log('visitDetails: ', visitDetails)
 
-        message.success('Visit confirmed')
+                setLoading(false)
+                console.log('loading', loading)
 
-        navigateToRoute(`/visit-confirmed/${visitId}`, navigate)
+                message.success('Visit confirmed')
+
+                navigateToRoute(`/visit-confirmed/${visitId}`, navigate)
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        postData();
     }
 
     const [senior, setSenior] = useState<SeniorInterface | null>(null)
@@ -97,7 +93,7 @@ const RegisterVisit: React.FC = () => {
                 >
                     <Form.Item
                         label="Date"
-                        name="date"
+                        name="visitDate"
                         rules={[{ required: true, message: 'Please input intended date of visit!' }]}
                     >
                         <DatePicker />
@@ -129,8 +125,7 @@ const RegisterVisit: React.FC = () => {
                         <Button 
                             type={'primary'}
                             className={'confirmButton'} 
-                            htmlType='submit'
-                            onClick={() => console.log('aaa')}>
+                            htmlType='submit'>
                             Confirm Visit
                         </Button>
                     </Form.Item>
