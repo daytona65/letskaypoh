@@ -73,44 +73,5 @@ def update_visit_status():
 # 11 Send SMS
 
 
-
-
-
-
-
-
-
-
-# Templates ================================================================
-# @app.route("/update_user/<int:user_id>", methods=["PATCH"])
-# def update_user(user_id):
-#     user = user.query.get(user_id)
-
-#     if not user:
-#         return jsonify({"message": "User not found"}), 404
-
-#     data = request.json
-#     user.first_name = data.get("firstName", user.first_name)
-#     user.last_name = data.get("lastName", user.last_name)
-#     user.email = data.get("email", user.email)
-
-#     db.session.commit()
-
-#     return jsonify({"message": "Usr updated."}), 200
-
-
-# @app.route("/delete_user/<int:user_id>", methods=["DELETE"])
-# def delete_user(user_id):
-#     user = user.query.get(user_id)
-
-#     if not user:
-#         return jsonify({"message": "User not found"}), 404
-
-#     db.session.delete(user)
-#     db.session.commit()
-
-#     return jsonify({"message": "User deleted!"}), 200
-
-
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
