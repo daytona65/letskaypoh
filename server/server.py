@@ -17,55 +17,55 @@ senior_collection = db['seniors']
 visit_collection = db['visits']
 counter_collection = db['counters']
 
-@app.route("/users", methods=["GET"])
+@app.route("/api/users", methods=["GET"])
 def users():
     return get_all_users()
 
-@app.route("/user", methods=["GET"])
+@app.route("/api/user", methods=["GET"])
 def user():
     user_id = int(request.args.get('id'))
     return get_user(user_id)
 
-@app.route("/create_user", methods=["POST"])
+@app.route("/api/create_user", methods=["POST"])
 def create_user():
     return create_new_user()
 
-@app.route("/seniors", methods=["GET"])
+@app.route("/api/seniors", methods=["GET"])
 def seniors():
     return get_all_seniors()
 
-@app.route("/senior", methods=["GET"])
+@app.route("/api/senior", methods=["GET"])
 def senior():
     senior_id = int(request.args.get('id'))
     return get_senior(senior_id)
 
-@app.route("/create_senior", methods=["POST"])
+@app.route("/api/create_senior", methods=["POST"])
 def create_senior():
     return create_new_senior()
 
-@app.route("/visits", methods=["GET"])
+@app.route("/api/visits", methods=["GET"])
 def visits():
     return get_all_visits()
 
-@app.route("/visit", methods=["GET"])
+@app.route("/api/visit", methods=["GET"])
 def visit():
     visit_id = int(request.args.get('id'))
     return get_visit(visit_id)
 
-@app.route("/visit_id", methods=["GET"])
+@app.route("/api/visit_id", methods=["GET"])
 def visit_id():
     return latest_visit_id()
 
-@app.route("/create_visit", methods=["POST"])
+@app.route("/api/create_visit", methods=["POST"])
 def create_visit():
     return create_new_visit(request.json)
 
-@app.route("/update_visit", methods=["PATCH"])
+@app.route("/api/update_visit", methods=["PATCH"])
 def update_visit():
     return update_visitor(request.json)
 
 
-@app.route("/update_visit_status", methods=["PATCH"])
+@app.route("/api/update_visit_status", methods=["PATCH"])
 def update_visit_status():
     return update_status(request.json)
     

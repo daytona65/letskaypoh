@@ -6,7 +6,7 @@ const api = axios.create({
 });
 export const getAllUsersData = async () => {
     try {
-        const response = await api.get(`/users`);
+        const response = await api.get(`/api/users`);
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -16,7 +16,7 @@ export const getAllUsersData = async () => {
 
 export const getUserByIdData = async (userId: string) => {
     try {
-        const response = await api.get(`/user?id=${userId}` );
+        const response = await api.get(`/api/user?id=${userId}` );
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -26,7 +26,7 @@ export const getUserByIdData = async (userId: string) => {
 
 export const createUser = async (userData: UserInterface) => {
     try {
-        const response = await api.post('/create_user', userData);
+        const response = await api.post('/api/create_user', userData);
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -36,7 +36,7 @@ export const createUser = async (userData: UserInterface) => {
 
 export const getAllSeniorsData = async () => {
     try {
-        const response = await api.get('/seniors');
+        const response = await api.get('/api/seniors');
         return response.data;
     } catch (error) {
         console.error('Error fetching seniors:', error);
@@ -46,7 +46,7 @@ export const getAllSeniorsData = async () => {
 
 export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterface> => {
     try {
-        const response = await api.get(`/senior?id=${seniorId}`);
+        const response = await api.get(`/api/senior?id=${seniorId}`);
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -57,7 +57,7 @@ export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterfa
 
 export const getAllVisitsData = async () => {
     try {
-        const response = await api.get('/visits');
+        const response = await api.get('/api/visits');
         return response.data;
     } catch (error) {
         console.error('Error fetching visits:', error);
@@ -67,7 +67,7 @@ export const getAllVisitsData = async () => {
 
 export const getVisitByIdData = async (visitId: number) => {
     try {
-        const response = await api.get(`/visit?id=${visitId}` );
+        const response = await api.get(`/api/visit?id=${visitId}` );
         return response.data;
     } catch (error) {
         console.error(`Error fetching visit with ID ${visitId}:`, error);
@@ -77,7 +77,7 @@ export const getVisitByIdData = async (visitId: number) => {
 
 export const getLatestVisitId = async () => {
     try {
-        const response = await api.get('/visit_id');
+        const response = await api.get('/api/visit_id');
         return response.data;
     } catch (error) {
         console.error('Error generating visit ID:', error);
@@ -87,7 +87,7 @@ export const getLatestVisitId = async () => {
 
 export const createVisit = async (visitData: VisitInterface) => {
     try {
-        const response = await api.post('/create_visit', visitData);
+        const response = await api.post('/api/create_visit', visitData);
         return response.data;
     } catch (error) {
         console.error('Error creating visit:', error);
@@ -97,7 +97,7 @@ export const createVisit = async (visitData: VisitInterface) => {
 
 export const updateVisitorInVisit = async (visitData: VisitInterface) => {
     try {
-        const response = await api.patch('/update_visit', visitData);
+        const response = await api.patch('/api/update_visit', visitData);
         return response.data;
     } catch (error) {
         console.error('Error updating visit:', error);
@@ -107,7 +107,7 @@ export const updateVisitorInVisit = async (visitData: VisitInterface) => {
 
 export const updateVisitStatus = async (statusData: string) => {
     try {
-        const response = await api.patch('/update_visit_status', statusData);
+        const response = await api.patch('/api/update_visit_status', statusData);
         return response.data;
     } catch (error) {
         console.error('Error updating visit status:', error);
