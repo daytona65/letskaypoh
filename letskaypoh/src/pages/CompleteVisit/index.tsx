@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Check from '../../assets/check.webp'
-import { Alert, Button, Form, FormProps } from 'antd';
+import { Alert, Button, Form, FormProps, Input, Rate } from 'antd';
 import { SeniorInterface, VisitInterface } from '../../models/interfaces';
 import { getVisitByIdData, getAllSeniorsData } from '../../api';
 import { SeniorCard } from '../../components/Card/SeniorCard';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { navigateToRoute } from '../../components/utils';
 import TextArea from 'antd/es/input/TextArea';
+import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 
 type FieldType = {
   visitNotes: string;
@@ -23,6 +24,14 @@ const CompleteVisit = () => {
 
   const [visit, setVisit] = useState<VisitInterface | null>(null)
   const [senior, setSenior] = useState<SeniorInterface | null>(null);
+
+  const customIcons: Record<number, React.ReactNode> = {
+    1: <FrownOutlined color={'red'}/>,
+    2: <FrownOutlined />,
+    3: <MehOutlined />,
+    4: <SmileOutlined />,
+    5: <SmileOutlined />,
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,11 +83,32 @@ const CompleteVisit = () => {
             onFinish={onFinish}
             name="completeVisit"
             layout="horizontal"
-            labelCol={{ span: 10 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             className='formInput'
           >
-            <Form.Item label="Visit Notes" name="visitNotes" rules={[{ required: true, message: 'Please input any notes / remarks!' }]}>
+            
+            <Form.Item label="Rate your visit" name="rate" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} />
+            </Form.Item>
+
+            <Form.Item label="Physical Health Condition" name="physical" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} />
+              {/* <Input /> */}
+            </Form.Item>
+            <Form.Item label="Mental Health Condition" name="mental" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} />
+              {/* <Input /> */}
+            </Form.Item>
+
+            <Form.Item label="Social Situation" name="social" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} />
+              {/* <Input /> */}
+            </Form.Item>
+            <Form.Item label="Visit Notes" name="visitNotes" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <TextArea />
+            </Form.Item>
+            <Form.Item label="Any follow up actions?" name="followUp" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
               <TextArea />
             </Form.Item>
 
