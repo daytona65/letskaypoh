@@ -112,5 +112,5 @@ def update_visit_status():
 #     return jsonify({"message": "User deleted!"}), 200
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True, port=5000)
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
