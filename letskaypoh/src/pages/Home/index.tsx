@@ -6,7 +6,6 @@ import { APIProvider } from '@vis.gl/react-google-maps'
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap from './components/Map/Map'
-import { data } from '../../models/dummyData'
 import { SeniorInterface } from '../../models/interfaces'
 import { getAllSeniorsData } from '../../api'
 

@@ -135,7 +135,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                             isActionsExpanded &&
                             <div >
                                 <Button className={'cancelBtn'} onClick={() => console.log('get directions')}>
-                                    View Map
+                                    View Details
                                 </Button>
                                 <Button className={'cancelBtn'} onClick={handleCompleteVisit}>
                                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
