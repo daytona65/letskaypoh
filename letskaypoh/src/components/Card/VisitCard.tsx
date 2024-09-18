@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Button, Tag } from 'antd'
+import { Button, message, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
-import { separatedArray } from '../utils'
-import { DownOutlined, UpOutlined } from '@ant-design/icons'
+import { navigateToRoute, separatedArray } from '../utils'
+import { CheckCircleTwoTone, DownOutlined, UpOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
     visit: VisitInterface
@@ -13,6 +14,7 @@ interface Props {
 
 export const VisitCard: React.FC<Props> = (props) => {
     const { visit } = props
+    const navigate = useNavigate(); 
 
     const [isActionsExpanded, setIsActionsExpanded] = useState<boolean>(false)
 
@@ -77,6 +79,19 @@ export const VisitCard: React.FC<Props> = (props) => {
         // ]
     // }
 
+    const handleCompleteVisit = () => {
+        // add api to mark visit as completed
+        message.success('Visit completed!')
+        navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
+    }
+
+    const handleCancelVisit = () => {
+        // add api to mark visit as cancelled
+        console.log('cancel visit')
+        message.success('Visit cancelled!')
+        // navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
+    }
+
     let visitDetails
     if (senior) {
         visitDetails = (
@@ -119,13 +134,13 @@ export const VisitCard: React.FC<Props> = (props) => {
                         {
                             isActionsExpanded &&
                             <div >
-                                <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
-                                    Get Directions
+                                <Button className={'cancelBtn'} onClick={() => console.log('get directions')}>
+                                    View Map
                                 </Button>
-                                <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
-                                    Mark as Completed
+                                <Button className={'cancelBtn'} onClick={handleCompleteVisit}>
+                                    Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
                                 </Button>
-                                <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
+                                <Button className={'cancelBtn'} onClick={handleCancelVisit}>
                                     Cancel Visit
                                 </Button>
                             </div>

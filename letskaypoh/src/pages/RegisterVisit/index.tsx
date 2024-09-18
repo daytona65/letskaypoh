@@ -60,9 +60,7 @@ const RegisterVisit: React.FC = () => {
         setLoading(false)
         console.log('loading', loading)
 
-        message.success('Visit confirmed')
-
-       
+        message.success('Visit confirmed!')
     }
 
     const [senior, setSenior] = useState<SeniorInterface | null>(null)
