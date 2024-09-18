@@ -48,7 +48,7 @@ const VisitConfirmed: React.FC = () => {
                 <div className={'thankYou'}>
                     <h2>Visit Confirmed</h2>
                     <h3>
-                        Thank you for volunteering, {userName}!
+                        Thank you for volunteering, {userName?.split(' ')[0]}!
                     </h3>
                 </div>
                 <img className={'checkImg'} src={Check} />
