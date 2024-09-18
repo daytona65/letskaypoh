@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SeniorInterface, UserInterface, VisitInterface } from './models/interfaces';
 
 const api = axios.create({
-    baseURL: 'https://letskaypoh-backend.vercel.app/',
+    baseURL: 'https://letskaypoh-backend.up.railway.app',
 });
 export const getAllUsersData = async () => {
     try {
