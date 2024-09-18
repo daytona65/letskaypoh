@@ -12,8 +12,10 @@ const Visits = () => {
 
    // add api endpoint - get upcoming visits
    const [visits, setVisits] = useState<VisitInterface[] | []>([]);
+   const [loading, setLoading] = useState<boolean>(false);
 
    useEffect(() => {
+      setLoading(true)
        const fetchData = async () => {
            try {
                const visitsData = await getAllVisitsData();
@@ -22,8 +24,8 @@ const Visits = () => {
                console.error("Error fetching visit data:", error);
            }
        };
-
        fetchData();
+       setLoading(false)
    }, [])
 
   const visitCards = visits.map((visit) => {
@@ -57,17 +59,20 @@ const Visits = () => {
         <h3>Upcoming Visits</h3>
       </div>
       <div className={'visits'}>
+        {
+          loading ? 'Loading...' :
+          upcomingVisits.length === 0 ? <>
+            <p>
+              You have no upcoming visits.
+            </p>
+            <div className={'buttons'}>
+              <Button onClick={() => navigateToRoute('/home', navigate)}>
+                Explore
+              </Button>
+            </div>
+          </> : visitCards.reverse()
+        }
         
-        {upcomingVisits.length === 0 ? <>
-          <p>
-            You have no upcoming visits.
-          </p>
-          <div className={'buttons'}>
-            <Button onClick={() => navigateToRoute('/home', navigate)}>
-              Explore
-            </Button>
-          </div>
-        </> : visitCards}
       </div>
     </div>
   )

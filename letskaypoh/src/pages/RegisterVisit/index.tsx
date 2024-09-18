@@ -9,12 +9,6 @@ import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/inter
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
-// import cn from 'classnames'
-
-type FieldType = {
-    visitDate: string
-    visitTime: string
-};
 
 interface TimeslotButtonProps {
     time: string
@@ -42,24 +36,19 @@ const RegisterVisit: React.FC = () => {
 
     const [selectedTimeslot, setSelectedTimeslot] = useState<string>()
 
-    const timeslots = ["8AM-11PM", "11PM-2PM", "2PM-5PM", "5PM-8PM"]
+    const timeslots = ["8AM-11AM", "11AM-2PM", "2PM-5PM", "5PM-8PM"]
 
     const handleConfirmVisit: FormProps['onFinish'] = (fieldValues) => {
         const dateValue = fieldValues['visitDate']
-        const timeValue = fieldValues['visitTime']
-
-        const values: FieldType = {
-            visitDate: dateValue.format('DD MMM YYYY'),
-            visitTime: timeValue
-        }
         
-        console.log('Received values of form: ', values);
-        console.log('visitDate', values.visitDate)
+        console.log('Received values of form: ', fieldValues);
+        console.log('selectedTimeslot ', selectedTimeslot);
+        console.log('visitDate', dateValue, dateValue.format('DD MMM YYYY'))
         setLoading(true)
 
         const visitDetails: VisitInterface = {
-            datetime: values.visitDate,
-            time: values.visitDate,
+            datetime: dateValue.format('DD MMM YYYY'),
+            time: selectedTimeslot,
             senior_id: seniorId,
             visitor_ids: [Number(userId)],
             status: VisitStatus.UPCOMING

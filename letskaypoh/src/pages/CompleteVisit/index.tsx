@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Check from '../../assets/check.webp'
-import { Alert, Button, Form, FormProps, Input } from 'antd';
+import { Alert, Button, Form, FormProps } from 'antd';
 import { SeniorInterface, VisitInterface } from '../../models/interfaces';
 import { getVisitByIdData, getAllSeniorsData } from '../../api';
 import { SeniorCard } from '../../components/Card/SeniorCard';
