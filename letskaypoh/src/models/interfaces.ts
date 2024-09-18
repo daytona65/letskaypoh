@@ -47,5 +47,6 @@ export interface VisitInterface {
 	senior_id: number
 	visitor_ids: number[]
 	datetime: string
+	time?: string
 	status: string
 }

@@ -7,6 +7,7 @@ import { getVisitByIdData, getAllSeniorsData } from '../../api';
 import { SeniorCard } from '../../components/Card/SeniorCard';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { navigateToRoute } from '../../components/utils';
+import TextArea from 'antd/es/input/TextArea';
 
 type FieldType = {
   visitNotes: string;
@@ -78,7 +79,7 @@ const CompleteVisit = () => {
             className='formInput'
           >
             <Form.Item label="Visit Notes" name="visitNotes" rules={[{ required: true, message: 'Please input any notes / remarks!' }]}>
-              <Input />
+              <TextArea />
             </Form.Item>
 
           </Form>

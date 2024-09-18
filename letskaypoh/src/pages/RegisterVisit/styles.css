@@ -33,3 +33,11 @@
     width: 95%;
     text-align: start;
 }
+
+.timeslotBtn {
+    width: 90px;
+    height: 30px;
+    border-radius: 16px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}

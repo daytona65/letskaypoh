@@ -62,8 +62,6 @@ const VisitConfirmed: React.FC = () => {
 
                 <h3 className={'visitDetails'}>Visit Details</h3>
 
-                {senior &&
-                    <SeniorCard senior={senior} />}
                 {visit &&
                     <VisitCard visit={visit} />}
                 <Button

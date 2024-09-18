@@ -13,7 +13,23 @@ import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
 
 type FieldType = {
     visitDate: string
+    visitTime: string
 };
+
+interface TimeslotButtonProps {
+    time: string
+    setSelectedTime: (time: string) => void
+    isSelected: boolean
+}
+
+export const TimeSlotButton: React.FC<TimeslotButtonProps> = (props) => {
+    return <Button className='timeslotBtn'
+        type={props.isSelected ? 'primary' : 'default'}
+        onClick={() => props.setSelectedTime(props.time)} 
+    >
+        {props.time}
+    </Button>
+}
 
 const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
@@ -24,13 +40,26 @@ const RegisterVisit: React.FC = () => {
 
     const navigate = useNavigate(); 
 
-    const handleConfirmVisit: FormProps<FieldType>['onFinish'] = (values) => {
+    const [selectedTimeslot, setSelectedTimeslot] = useState<string>()
+
+    const timeslots = ["8AM-11PM", "11PM-2PM", "2PM-5PM", "5PM-8PM"]
+
+    const handleConfirmVisit: FormProps['onFinish'] = (fieldValues) => {
+        const dateValue = fieldValues['visitDate']
+        const timeValue = fieldValues['visitTime']
+
+        const values: FieldType = {
+            visitDate: dateValue.format('DD MMM YYYY'),
+            visitTime: timeValue
+        }
+        
         console.log('Received values of form: ', values);
         console.log('visitDate', values.visitDate)
         setLoading(true)
 
         const visitDetails: VisitInterface = {
             datetime: values.visitDate,
+            time: values.visitDate,
             senior_id: seniorId,
             visitor_ids: [Number(userId)],
             status: VisitStatus.UPCOMING
@@ -70,7 +99,7 @@ const RegisterVisit: React.FC = () => {
         };
  
         fetchData();
-    }, [])
+    }, [seniorId])
 
     return (
         <div className={'container'}>
@@ -88,7 +117,7 @@ const RegisterVisit: React.FC = () => {
                     onFinish={handleConfirmVisit}
                     name="register"
                     layout="inline"
-                    labelCol={{ span: 10 }}
+                    labelCol={{ span: 6 }}
                     className='formInput'
                 >
                     <Form.Item
@@ -96,8 +125,19 @@ const RegisterVisit: React.FC = () => {
                         name="visitDate"
                         rules={[{ required: true, message: 'Please input intended date of visit!' }]}
                     >
-                        <DatePicker />
+                        <DatePicker style={{width:'200px'}} />
                     </Form.Item>
+
+                    <Form.Item name='visitTime' label="Timeslot"
+                    >{
+                        timeslots.map((time) => (
+                            <TimeSlotButton 
+                                time={time} 
+                                setSelectedTime={setSelectedTimeslot}
+                                isSelected={time === selectedTimeslot}
+                            />
+                        ))
+                    }</Form.Item> 
 
                     <div className={'note'}>
                         <h3>Important Notes <InfoCircleTwoTone style={{fontSize: 14}}/></h3>
@@ -120,6 +160,7 @@ const RegisterVisit: React.FC = () => {
                     >
                         <Checkbox>I have read the <a>Terms & Conditions</a></Checkbox>
                     </Form.Item>
+
 
                     <Form.Item>
                         <Button 
