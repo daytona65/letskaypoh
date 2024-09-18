@@ -17,8 +17,6 @@ type FieldType = {
 
 const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
-    const [visitId, setVisitId] = useState<number>(0)
-
 
     const userId = localStorage.getItem('userId')
 

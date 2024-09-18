@@ -1,4 +1,3 @@
-import React from 'react'
 import '../../App.css'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';

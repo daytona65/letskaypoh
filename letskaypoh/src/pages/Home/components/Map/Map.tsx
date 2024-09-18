@@ -82,7 +82,7 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 		>
 			{locations?.map(marker => (
 				<CustomMarker
-					key={marker.id}
+					key={marker.senior_id}
 					info={marker}
 					position={{ lat: marker.lat, lng: marker.lon }}
 				/>

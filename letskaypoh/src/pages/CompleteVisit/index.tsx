@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import Check from '../../assets/check.webp'
 import { Alert, Button, Form, FormProps, Input } from 'antd';
