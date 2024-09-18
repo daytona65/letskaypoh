@@ -56,7 +56,7 @@ const Entry = () => {
 				onClickAbout={onClickAbout} 
 			/>
 			<About aboutRef={aboutRef} onClickTeam={onClickTeam}/>
-			<Team teamRef={teamRef} />
+			<Team teamRef={teamRef} onClickRegister={onClickRegister} />
 			<LoginModal 
 				open={isRegisterModalOpen} 
 				handleClose={onCloseModal} 

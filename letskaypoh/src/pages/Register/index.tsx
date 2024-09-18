@@ -12,11 +12,11 @@ type FieldType = {
     nric: string;
     email: string;
     mobile: string;
-    age: number;
+    age: string;
     gender: string;
     languages: string[];
     address: string;
-    postal_code: number;
+    postal_code: string;
   };
 
 const Register = () => {
@@ -44,11 +44,11 @@ const Register = () => {
                 nric: values.nric,
                 email: values.email,
                 mobile: values.mobile,
-                age: values.age,
+                age: Number(values.age),
                 gender: values.gender,
                 languages: values.languages,
                 address: values.address,
-                postal_code: values.postal_code,
+                postal_code: Number(values.postal_code),
             }
         )
 
@@ -60,12 +60,12 @@ const Register = () => {
         localStorage.setItem('name', values.name)
         localStorage.setItem('nric', values.nric)
         localStorage.setItem('email', values.email)
-        localStorage.setItem('age', values.age.toString())
+        localStorage.setItem('age', values.age)
         localStorage.setItem('mobile', values.mobile)
         localStorage.setItem('gender', values.gender)
         localStorage.setItem('languages', JSON.stringify(values.languages))
         localStorage.setItem('address', values.address)
-        localStorage.setItem('postal_code', values.postal_code.toString())
+        localStorage.setItem('postal_code', values.postal_code)
 
         // add api endpoint - register user
         // when api successful then route change

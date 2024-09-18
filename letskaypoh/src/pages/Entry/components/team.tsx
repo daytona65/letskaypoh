@@ -3,7 +3,7 @@ import React from 'react'
 import '../../../App.css'
 import './../styles.css'
 import cn from 'classnames'
-import { Avatar } from 'antd';
+import { Avatar, Button } from 'antd';
 
 interface memberItem {
   key: number
@@ -15,6 +15,7 @@ interface memberItem {
 
 interface Props {
   teamRef: React.RefObject<HTMLDivElement>
+  onClickRegister: () => void
 }
 
 const Team: React.FC<Props> = (props) => {
@@ -80,12 +81,15 @@ const Team: React.FC<Props> = (props) => {
             </div>
 
             <p>
-              We are a team passionate about ....
+              We are a team passionate about helping the elderly around us! It's time to give back.
             </p>
         </div>
         <div className={cn('team')}>
           {teamMembers}
         </div>
+        <Button className={'joinButton'} onClick={props.onClickRegister} style={{marginBottom: '4rem'}}>
+              Start Volunteering!
+        </Button>
 			</div>
   )
 }

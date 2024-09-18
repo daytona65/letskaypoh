@@ -15,7 +15,6 @@ import Profile from './pages/Profile/index.tsx';
 import RegisterVisit from './pages/RegisterVisit/index.tsx';
 import Visits from './pages/Visits/index.tsx';
 import CompleteVisit from './pages/CompleteVisit/index.tsx';
-import { data, userData } from './models/dummyData.ts';
 import VisitConfirmed from './pages/VisitConfirmed/index.tsx';
 
 const router = createBrowserRouter([
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
         element: <Visits />,
       },
       {
-        path: "/complete",
+        path: "/visit-completed/:visitId",
         element: <CompleteVisit />,
       },
       {

@@ -1,3 +1,17 @@
+export enum VisitStatus {
+	UPCOMING = "Upcoming",
+	COMPLETED = "Completed",
+	CANCELLED = "Cancelled"
+}
+
+type VisitColorMap = {[key in VisitStatus]: string}
+
+export const visitToColorMapping: VisitColorMap = {
+	[VisitStatus.UPCOMING]: "geekblue",
+	[VisitStatus.COMPLETED]: "green",
+	[VisitStatus.CANCELLED]: "volcano",
+}
+
 export interface SeniorInterface {
     senior_id: number,
 	name: string,

@@ -18,6 +18,11 @@
         padding: 1rem;
         width: 85%;
     }
+
+    .ant-btn {
+        margin-top: 0.5rem;
+        width: 100px;
+    }
 }
 
 .card:hover {
@@ -26,42 +31,88 @@
     transition: ease-in-out 0.3s;
 }
 
-.visitInfo {
-    width: 80%;
-    align-items: center;
-
-    @media (max-width: 400px) {
-        width: 90%;
-        align-items: center;
+    
+.ant-descriptions  {
+    .ant-descriptions-row >td {
+        padding-bottom: 0.25rem;
+        padding-top: 0.05rem;
+    }
+    .ant-descriptions-item-content {
+        font-size: 12px;
     }
 
+    .ant-descriptions-item-label {
+        font-size: 12px;
+        width: 80px;
+    }
+
+    .ant-descriptions-item-label::after {
+        margin-inline-start: 0;
+    }
+}
+
+.visitCard {
+    width: 90%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-gray-6);
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.visitInfo {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
 
     .ant-btn {
         margin-top: 0.5rem;
-        width: 100px;
+        width: 100%;
     }
-    
-    .ant-descriptions  {
-        .ant-descriptions-row >td {
-            padding-bottom: 0.25rem;
-            padding-top: 0.05rem;
-        }
-        .ant-descriptions-item-content {
-            font-size: 12px;
-        }
+}
 
-        .ant-descriptions-item-label {
-            font-size: 12px;
-            width: 80px;
-        }
+.visitHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .ant-descriptions-item-label::after {
-            margin-inline-start: 0;
-        }
 
-    }
+.visitRow {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.visitDate {
+    font-size: 12px;
+    text-align: start;
+}
+
+.visitTitle {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.visitButtons {
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .seniorProfile {

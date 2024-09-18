@@ -5,7 +5,7 @@ import './styles.css'
 import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { SeniorInterface, VisitInterface } from '../../models/interfaces'
+import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
@@ -17,6 +17,8 @@ type FieldType = {
 
 const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
+    const [visitId, setVisitId] = useState<number>(0)
+
 
     const userId = localStorage.getItem('userId')
 
@@ -30,10 +32,10 @@ const RegisterVisit: React.FC = () => {
         setLoading(true)
 
         const visitDetails: VisitInterface = {
-                datetime: values.visitDate,
-                senior_id: seniorId,
-                visitor_ids: [Number(userId)],
-                status: "Upcoming"
+            datetime: values.visitDate,
+            senior_id: seniorId,
+            visitor_ids: [Number(userId)],
+            status: VisitStatus.UPCOMING
         }
         
         const postData = async () => {
@@ -125,7 +127,8 @@ const RegisterVisit: React.FC = () => {
                         <Button 
                             type={'primary'}
                             className={'confirmButton'} 
-                            htmlType='submit'>
+                            htmlType='submit'
+                        >
                             Confirm Visit
                         </Button>
                     </Form.Item>

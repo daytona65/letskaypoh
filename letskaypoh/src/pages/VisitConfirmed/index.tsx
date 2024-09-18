@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
-import { SeniorInterface, UserInterface, VisitInterface } from '../../models/interfaces'
+import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import Check from '../../assets/check.webp'
 import { Alert, Button } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
-import { data, visitsData } from '../../models/dummyData'
 import { VisitCard } from '../../components/Card/VisitCard'
 import { getAllSeniorsData, getVisitByIdData } from '../../api'
 
@@ -50,25 +49,25 @@ const VisitConfirmed: React.FC = () => {
                         Thank you for volunteering, {userName}!
                     </h3>
                 </div>
-                <img className={'checkImg'} src={Check}/>
+                <img className={'checkImg'} src={Check} />
 
-                <Alert 
+                <Alert
                     className='alert'
                     // message={<h3 >Visit confirmed!</h3>}
                     // description={`Drop ${props.senior.name} a call to notify ${props.senior.gender.toLowerCase() === "m" ? 'him' : 'her'} that you're visiting!`} 
                     description={'A social worker will be reaching out to you on details of your first visit!'}
                     type="info"
-                    showIcon 
+                    showIcon
                 />
-                
+
                 <h3 className={'visitDetails'}>Visit Details</h3>
 
-                {senior && 
-                <SeniorCard senior={senior}/> }
+                {senior &&
+                    <SeniorCard senior={senior} />}
                 {visit &&
-                <VisitCard visit={visit}/> }
-                <Button 
-                    className={'regularBtn'} 
+                    <VisitCard visit={visit} />}
+                <Button
+                    className={'regularBtn'}
                     onClick={() => navigateToRoute('/home', navigate)}>
                     Back to Home
                 </Button>
