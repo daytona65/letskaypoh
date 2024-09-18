@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './styles.css'
 import '../commonStyles.css'
 import '../../App.css'
@@ -7,10 +7,28 @@ import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap from './components/Map/Map'
 import { data } from '../../models/dummyData'
+import { SeniorInterface } from '../../models/interfaces'
+import { getAllSeniorsData } from '../../api'
 
 const Home = () => {
     const [selectedPlace, setSelectedPlace] =
     useState<google.maps.places.PlaceResult | null>(null);
+
+    const [seniors, setSeniors] = useState<SeniorInterface[]>([])
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const seniorsData = await getAllSeniorsData();
+                setSeniors(seniorsData);
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        fetchData();
+    }, [])
 
     return (
         <div className={'container-home'}>
@@ -30,7 +48,7 @@ const Home = () => {
                 </div>
 
                 <CustomMap
-                    locations={data}
+                    locations={seniors}
                 />
                 {/* <Map
                     defaultZoom={3}
