@@ -3,7 +3,7 @@ import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
 import { SeniorInterface, VisitInterface } from '../../models/interfaces'
-import { SeniorCard } from '../../components/Card/SeniorCard'
+// import { SeniorCard } from '../../components/Card/SeniorCard'
 import Check from '../../assets/check.webp'
 import { Alert, Button } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -35,6 +35,8 @@ const VisitConfirmed: React.FC = () => {
 
         fetchData();
     }, [visitId])
+
+    console.log(senior)
 
     return (
         <div className={'container'}>
