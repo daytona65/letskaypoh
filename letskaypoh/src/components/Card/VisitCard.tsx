@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Button, Descriptions, DescriptionsProps, Tooltip } from 'antd'
+import { Button, Descriptions, DescriptionsProps } from 'antd'
 import { SeniorInterface, VisitInterface } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
 import { separatedArray } from '../utils'
 
 interface Props {
     visit: VisitInterface
+    cancellable?: boolean
 }
 
 export const VisitCard: React.FC<Props> = (props) => {
@@ -45,6 +46,11 @@ export const VisitCard: React.FC<Props> = (props) => {
                 label: 'Postal',
                 children: senior.postal_code
             },
+            {
+                key: 'status',
+                label: 'Status',
+                children: visit.status
+            },
             // {
             //     key: 'volunteers',
             //     label: 'Volunteers',
@@ -82,9 +88,9 @@ export const VisitCard: React.FC<Props> = (props) => {
                     column={1}
                 />
                 
-                <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
+                {props.cancellable && <Button className={'cancelBtn'} onClick={() => console.log('cancel')}>
                     Cancel
-                </Button>
+                </Button>}
             </div>
         </div>
     )

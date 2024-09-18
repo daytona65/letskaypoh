@@ -30,6 +30,7 @@ const Visits = () => {
     return <VisitCard 
       key={visit.visit_id}
       visit={visit}
+      cancellable={true}
     />
   })
 

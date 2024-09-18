@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
-import { SeniorInterface, UserInterface } from '../../models/interfaces'
+import { UserInterface, VisitInterface } from '../../models/interfaces'
 import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
-import { Divider, Image } from 'antd'
+import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { SeniorCard } from '../../components/Card/SeniorCard'
-import { getAllSeniorsData, getSeniorByIdData, getUserByIdData } from '../../api'
+import { getAllVisitsData } from '../../api'
+import { VisitCard } from '../../components/Card/VisitCard'
 
 interface profileItem {
 	key: React.Key
@@ -32,14 +32,16 @@ const Profile: React.FC = () => {
 
 	const navigate = useNavigate();
 
-	// add api endpoint - get user - but i think should be done in main.tsx
-	const [seniors, setSeniors] = useState<SeniorInterface[] | []>([]);
+	// add api endpoint - get user
+
+
+	const [pastVisits, setPastVisits] = useState<VisitInterface[] | []>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorData = await getAllSeniorsData();
-                setSeniors(seniorData);
+                const visitsData = await getAllVisitsData();
+				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === "Completed" || visit.status === "Cancelled"))
             } catch (error) {
                 console.error("Error fetching senior data:", error);
             }
@@ -47,9 +49,9 @@ const Profile: React.FC = () => {
 
         fetchData();
     }, [user])
-	const seniorCards = seniors.map((senior) => {
-		return <SeniorCard
-			senior={senior} closable={false} />
+
+	const visitCards = pastVisits.map((visit) => {
+		return <VisitCard visit={visit}/>
 	})
 
 	const profileItems: profileItem[] = [
@@ -126,12 +128,19 @@ const Profile: React.FC = () => {
 				<div className={'row'}>
 					<h3>Visit History</h3>
 				</div>
-				{seniorCards}
-			</div>
 
-			{/* <Button className={'logOut'} onClick={() => navigateToRoute('/entry', navigate)}>
-				<LogoutOutlined /> Log Out
-			</Button> */}
+				{pastVisits.length === 0 ? <>
+					<p>
+						You don't have any past visits.
+					</p>
+					<div className={'buttons'}>
+						<Button onClick={() => navigateToRoute('/home', navigate)} style={{marginTop: '1rem'}}>
+						Explore
+						</Button>
+					</div>
+					</> : 
+				visitCards}
+			</div>
 		</div>
 	)
 }
