@@ -48,15 +48,18 @@ export const SeniorCard: React.FC<Props> = (props) => {
                     {senior.name}, {senior.age}{senior.gender}
                 </h3>
             </div>
-            <div className={'visitInfo'}>
+            <div>
                 <Descriptions 
                     items={infoItems}
                     layout={'horizontal'}
                     column={1}
                 />
+                <div>
+
                 {props.showVisitBtn && <Button onClick={() => navigateToRoute(`/register-visit/${senior.senior_id}`, navigate)}>
                     Visit
                 </Button>}
+                </div>
             </div>
         </div>
     )

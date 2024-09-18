@@ -1,4 +1,4 @@
-import { SeniorInterface, UserInterface, VisitInterface } from "./interfaces";
+import { SeniorInterface, UserInterface, VisitInterface, VisitStatus } from "./interfaces";
 
 export const data: SeniorInterface[] = [
     {   
@@ -52,13 +52,13 @@ export const visitsData: VisitInterface[] = [
         senior_id: 1,
         visitor_ids: [1, 2],
         datetime: '10 Sep 2024',
-        status: 'Upcoming'
+        status: VisitStatus.UPCOMING
     },
     {   
         visit_id: 2,
         senior_id: 2,
         visitor_ids: [3, 2],
         datetime: '10 Sep 2024',
-        status: 'Upcoming'
+        status: VisitStatus.COMPLETED
     }
 ]

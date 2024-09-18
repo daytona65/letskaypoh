@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
-import { UserInterface, VisitInterface } from '../../models/interfaces'
+import { UserInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
 import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
@@ -41,9 +41,9 @@ const Profile: React.FC = () => {
         const fetchData = async () => {
             try {
                 const visitsData = await getAllVisitsData();
-				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === "Completed" || visit.status === "Cancelled"))
+				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED))
             } catch (error) {
-                console.error("Error fetching senior data:", error);
+                console.error("Error fetching visits data:", error);
             }
         };
 

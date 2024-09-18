@@ -5,7 +5,7 @@ import './styles.css'
 import { navigateToRoute } from '../../components/utils';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { getAllVisitsData } from '../../api';
-import { VisitInterface } from '../../models/interfaces';
+import { VisitInterface, VisitStatus } from '../../models/interfaces';
 
 const Visits = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const Visits = () => {
     const fetchData = async () => {
         try {
             const visitsData = await getAllVisitsData();
-            setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status == "Upcoming"));
+            setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status == VisitStatus.UPCOMING));
         } catch (error) {
             console.error("Error fetching visit data:", error);
         }

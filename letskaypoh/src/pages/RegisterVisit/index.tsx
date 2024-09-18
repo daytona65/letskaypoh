@@ -5,7 +5,7 @@ import './styles.css'
 import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { SeniorInterface, VisitInterface } from '../../models/interfaces'
+import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
@@ -17,6 +17,8 @@ type FieldType = {
 
 const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
+    const [visitId, setVisitId] = useState<number>(0)
+
 
     const userId = localStorage.getItem('userId')
 
@@ -30,35 +32,37 @@ const RegisterVisit: React.FC = () => {
 
         //latest id to get from api..
         const visitDetails: VisitInterface = {
-                datetime: values.visitDate,
-                senior_id: seniorId,
-                visitor_ids: [Number(userId)],
-                status: "Upcoming"
+            datetime: values.visitDate,
+            senior_id: seniorId,
+            visitor_ids: [Number(userId)],
+            status: VisitStatus.UPCOMING
         }
-        const [visitId, setVisitId] = useState<Number>(0)
 
-        useEffect(() => {
-            const postData = async () => {
-                try {
-                    await createVisit(visitDetails);
-                    const visitId = await getLatestVisitId();
-                    setVisitId(visitId)
-                } catch (error) {
-                    console.error("Error fetching senior data:", error);
-                }
-            };
+        const postData = async () => {
+            try {
+                await createVisit(visitDetails);
+                console.log('aaa')
+                const visitIdData = await getLatestVisitId();
 
-            postData();
-        })
+                console.log('visitId', visitIdData)
+                setVisitId(visitIdData)
+
+                navigateToRoute(`/visit-confirmed/${visitIdData}`, navigate)
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        postData();
         
-        console.log('visitDetails: ', visitDetails)
+        console.log('visitDetails: ', visitDetails.visit_id)
 
         setLoading(false)
         console.log('loading', loading)
 
         message.success('Visit confirmed')
 
-        navigateToRoute(`/visit-confirmed/${visitId}`, navigate)
+       
     }
 
     const [senior, setSenior] = useState<SeniorInterface | null>(null)
@@ -130,7 +134,7 @@ const RegisterVisit: React.FC = () => {
                             type={'primary'}
                             className={'confirmButton'} 
                             htmlType='submit'
-                            onClick={() => console.log('aaa')}>
+                        >
                             Confirm Visit
                         </Button>
                     </Form.Item>
