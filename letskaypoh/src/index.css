@@ -42,6 +42,20 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: var(--color-text-dark);
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #484ca0;
+    transition: ease-in-out 0.2s;
+  }
+  button {
+    background-color: var(--color-bg);
+  }
+}
+
 
 a {
   font-weight: 500;

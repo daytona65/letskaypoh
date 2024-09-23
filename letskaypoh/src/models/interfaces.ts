@@ -21,6 +21,10 @@ export interface SeniorInterface {
 	postal_code: number,
 	address: string,
 	last_visited_date: string,
+	story: string,
+	medical: string[],
+	dislikes: string,
+	social: string,
 	lat: number,
 	lon: number
 }

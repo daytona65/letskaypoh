@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { SeniorInterface, UserInterface, VisitInterface } from './models/interfaces';
-
+ 
 const api = axios.create({
-    baseURL: import.meta.env.BACK_END,
+    baseURL: import.meta.env.VITE_BACK_END,
 });
 export const getAllUsersData = async () => {
     try {

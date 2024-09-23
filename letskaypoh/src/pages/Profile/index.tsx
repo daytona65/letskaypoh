@@ -5,7 +5,7 @@ import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { getAllVisitsData } from '../../api'
+import { getAllVisitsData, getUserByIdData } from '../../api'
 import { VisitCard } from '../../components/Card/VisitCard'
 
 interface profileItem {
@@ -17,29 +17,30 @@ interface profileItem {
 
 const Profile: React.FC = () => {
 
-	const user: UserInterface = useMemo(() => ({
-		user_id: 1,
-		nric: localStorage.getItem('nric')!,
-		name: localStorage.getItem('name')!,
-		email: localStorage.getItem('email')!,
-		mobile: localStorage.getItem('mobile')!,
-		gender: localStorage.getItem('gender')!,
-		age: Number(localStorage.getItem('age'))!,
-		languages: JSON.parse(localStorage.getItem('languages')!),
-		postal_code: Number(localStorage.getItem('postalCode'))!,
-		address: localStorage.getItem('address')!,
-	}), [])
+	// const user: UserInterface = useMemo(() => ({
+	// 	user_id: 1,
+	// 	nric: localStorage.getItem('nric')!,
+	// 	name: localStorage.getItem('name')!,
+	// 	email: localStorage.getItem('email')!,
+	// 	mobile: localStorage.getItem('mobile')!,
+	// 	gender: localStorage.getItem('gender')!,
+	// 	age: Number(localStorage.getItem('age'))!,
+	// 	languages: JSON.parse(localStorage.getItem('languages')!),
+	// 	postal_code: Number(localStorage.getItem('postalCode'))!,
+	// 	address: localStorage.getItem('address')!,
+	// }), [])
 
 	const navigate = useNavigate();
 
 	// add api endpoint - get user
-
-
+	const [user, setUser] = useState<UserInterface>();
 	const [pastVisits, setPastVisits] = useState<VisitInterface[] | []>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
+				setUser(userData);
                 const visitsData = await getAllVisitsData();
 				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED))
             } catch (error) {
@@ -62,7 +63,7 @@ const Profile: React.FC = () => {
 				<span>
 					Speaks {' '}
 					<span>
-						{separatedArray(user.languages)}
+						{separatedArray(user && user.languages)}
 					</span>
 				</span>
 			)
@@ -74,7 +75,7 @@ const Profile: React.FC = () => {
 				<span>
 					Lives in {' '}
 					<span>
-						{user.address}
+						{user && user.address}
 					</span>
 				</span>
 			)
@@ -82,12 +83,12 @@ const Profile: React.FC = () => {
 		{
 			key: 'email',
 			icon: <MailOutlined />,
-			children: <span>{user.email}</span>
+			children: <span>{user && user.email}</span>
 		},
 		{
 			key: 'mobile',
 			icon: <PhoneOutlined />,
-			children: <span>{user.mobile}</span>
+			children: <span>{user && user.mobile}</span>
 		}
 	]
 
@@ -116,10 +117,10 @@ const Profile: React.FC = () => {
 					src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}
 				/>
 				<div className={'column'}>
-					<h2 className={'name'}>
+					{user && (<h2 className={'name'}>
 						{user.name}, {user.age}{user.gender}
-					</h2>
-
+					</h2>)
+					}
 					{profileAttributes}
 				</div>
 			</div>

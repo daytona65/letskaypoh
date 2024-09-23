@@ -6,6 +6,7 @@ import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
+import { createUser } from '../../api'
 
 type FieldType = {
     name: string;
@@ -34,7 +35,7 @@ const Register = () => {
         </Form.Item>
       );
 
-    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         console.log('Received values of form: ', values);
         setLoading(true)
 
@@ -68,14 +69,19 @@ const Register = () => {
         localStorage.setItem('postal_code', values.postal_code)
 
         // add api endpoint - register user
+        try {
+            console.log('Registering new user', loading)
+            const response = await createUser(newUserDetails)
+            message.success('Registration success')
+            console.log(response.data)
+            navigateToRoute('/register-success', navigate)
+        } catch (error) {
+            console.error("Error updating visit status:", error);
+        }
         // when api successful then route change
 
         setLoading(false)
-        console.log('loading', loading)
-
-        message.success('Registration success')
-
-        navigateToRoute('/register-success', navigate)
+        
     };
 
     return (
