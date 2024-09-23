@@ -44,7 +44,7 @@ def create_new_visit():
             upsert=True
         )["count"]
 
-        visit_collection.insert_one(data)
+        visit_collection.insert_one({visit_id, ...data})
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
