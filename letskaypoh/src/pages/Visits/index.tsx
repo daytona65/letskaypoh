@@ -10,7 +10,7 @@ import { VisitInterface, VisitStatus } from '../../models/interfaces';
 const Visits = () => {
   const navigate = useNavigate();
 
-   // add api endpoint - get upcoming visits
+   // api endpoint - get upcoming visits
    const [visits, setVisits] = useState<VisitInterface[] | []>([]);
    const [loading, setLoading] = useState<boolean>(false);
 
@@ -36,7 +36,7 @@ const Visits = () => {
     />
   })
 
-  // add api endpoint - get upcoming  - filter by upcoming
+  // api endpoint - get upcoming  - filter by upcoming
   const [upcomingVisits, setUpcomingVisits] = useState<VisitInterface[] | []>([])
 
   useEffect(() => {

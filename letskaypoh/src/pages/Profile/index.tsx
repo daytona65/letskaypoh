@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
 
 	const navigate = useNavigate();
 
-	// add api endpoint - get user
+	// api endpoint - get user
 	const [user, setUser] = useState<UserInterface>();
 	const [pastVisits, setPastVisits] = useState<VisitInterface[] | []>([]);
 

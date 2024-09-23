@@ -79,7 +79,7 @@ export const VisitCard: React.FC<Props> = (props) => {
     // }
 
     const handleCompleteVisit = () => {
-        // add api to mark visit as completed
+        // api to mark visit as completed
         try {
             updateVisit({
                 "visit_id": visit.visit_id,
@@ -94,7 +94,7 @@ export const VisitCard: React.FC<Props> = (props) => {
     }
 
     const handleCancelVisit = () => {
-        // add api to mark visit as cancelled
+        // api to mark visit as cancelled
         try {
             updateVisit({
                 "visit_id": visit.visit_id,

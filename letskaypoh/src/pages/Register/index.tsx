@@ -68,7 +68,7 @@ const Register = () => {
         localStorage.setItem('address', values.address)
         localStorage.setItem('postal_code', values.postal_code)
 
-        // add api endpoint - register user
+        // api endpoint - register user
         try {
             console.log('Registering new user', loading)
             const response = await createUser(newUserDetails)

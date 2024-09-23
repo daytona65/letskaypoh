@@ -32,13 +32,9 @@ def latest_visit_id():
     return Response(json.dumps(latest_visit_id), mimetype="application/json")
 
 def create_new_visit():
-    data = request.json
-    senior_id = data.get("senior_id")
-    visitor_ids = data.get("visitor_ids")
-    datetime = data.get("datetime")
-    
-    if not data or not senior_id or not visitor_ids or not datetime or not isinstance(visitor_ids, list):
-        return jsonify({"error": "Request body error. senior_id, visitor_ids, datetime are required fields."}), 400
+    data = request.json 
+    if not data:
+        return jsonify({"error": "Data needed to CREATE visit"}), 400
 
     try:
         visit_id = counter_collection.find_one_and_update(
@@ -48,19 +44,11 @@ def create_new_visit():
             upsert=True
         )["count"]
 
-        new_visit = {
-                "visit_id": visit_id,
-                "senior_id": senior_id,
-                "visitor_ids": visitor_ids,
-                "datetime": datetime,
-                "status": "Upcoming"
-        }
-
-        visit_collection.insert_one(new_visit)
+        visit_collection.insert_one(data)
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
-    return jsonify({"message": "Visit created!", "new_visit": str(new_visit)}), 201
+    return jsonify({"message": "Visit created!", "new_visit": str(data)}), 201
 
 # def update_visitor():
 #     data = request.json
