@@ -48,7 +48,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
             return (
                 <div key={navItem.key} className={'nav-btn'}>
                     <div onClick={() => navigateToRoute(navItem.path, navigate)}>
-                        <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
+                        <Avatar className={'avatar'} src={"https://avatar.iran.liara.run/public"}/>
                     </div>
                     {navItem.title}
                 </div>
@@ -67,7 +67,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         if (isLoggedIn && navItem.title === 'Profile') {
             return (
                 <div key={navItem.key} className={'nav-btn'} onClick={() => navigateToRoute(navItem.path, navigate)}>
-                    <Avatar className={'avatar'} src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}/>
+                    <Avatar className={'avatar'} src={"https://avatar.iran.liara.run/public"}/>
                 </div>
             )
         }

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HomeOutlined, LogoutOutlined, MailOutlined, PhoneOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { UserInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
 import { navigateToRoute, separatedArray } from '../../components/utils'
@@ -94,13 +94,13 @@ const Profile: React.FC = () => {
 
 	const profileAttributes = profileItems.map((attr) => {
 		return (
-			<>
+			<React.Fragment key={attr.key}>
 				<div key={attr.key} className={'profileDetail'}>
 					{attr.icon}
 					{attr.children}
 				</div>
 				<Divider style={{ margin: '0.5rem' }} />
-			</>
+			</React.Fragment>
 		)
 	})
 
@@ -114,7 +114,7 @@ const Profile: React.FC = () => {
 				<Image
 					className={'profileImg'}
 					width={150}
-					src={"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"}
+					src={"https://avatar.iran.liara.run/public"}
 				/>
 				<div className={'column'}>
 					{user && (<h2 className={'name'}>

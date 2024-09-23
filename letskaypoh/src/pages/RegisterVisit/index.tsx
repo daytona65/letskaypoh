@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
-import { Button, Checkbox, DatePicker, Form, FormProps, message } from 'antd'
+import { Button, Checkbox, DatePicker, DatePickerProps, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
+import dayjs from 'dayjs'
 
 interface TimeslotButtonProps {
     time: string
@@ -47,7 +48,7 @@ const RegisterVisit: React.FC = () => {
         setLoading(true)
 
         const visitDetails: VisitInterface = {
-            datetime: dateValue.format('DD MMM YYYY'),
+            date: dateValue.format('DD MMM YYYY'),
             time: selectedTimeslot ? selectedTimeslot : "",
             senior_id: seniorId,
             visitor_ids: [Number(userId)],
@@ -90,6 +91,11 @@ const RegisterVisit: React.FC = () => {
         fetchData();
     }, [seniorId])
 
+    const disabledDate: DatePickerProps['disabledDate'] = (current) => {
+        // Can not select days before today
+        return current < dayjs().endOf('day');
+      };
+
     return (
         <div className={'container'}>
             <div className={'header'}>
@@ -114,7 +120,10 @@ const RegisterVisit: React.FC = () => {
                         name="visitDate"
                         rules={[{ required: true, message: 'Please input intended date of visit!' }]}
                     >
-                        <DatePicker style={{width:'200px'}} />
+                        <DatePicker 
+                            style={{width:'200px'}} 
+                            disabledDate={disabledDate}
+                        />
                     </Form.Item>
 
                     <Form.Item name='visitTime' label="Timeslot"

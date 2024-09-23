@@ -21,6 +21,7 @@ const Home = () => {
             try {
                 const seniorsData = await getAllSeniorsData();
                 setSeniors(seniorsData);
+                console.log(seniorsData)
             } catch (error) {
                 console.error("Error fetching senior data:", error);
             }
