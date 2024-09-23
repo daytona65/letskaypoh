@@ -19,7 +19,8 @@ def get_all_visits():
     visits = list(visit_collection.find())
     return Response(json.dumps(visits, default=str), mimetype="application/json")
 
-def get_visit(visit_id):
+def get_visit():
+    visit_id = int(request.args.get('id'))
     visit = list(visit_collection.find({"visit_id": visit_id}))
     if visit is None:
         print("Visit not found!")
@@ -30,7 +31,8 @@ def latest_visit_id():
     latest_visit_id = counter_collection.find_one({"id": "visit_count"})["count"]
     return Response(json.dumps(latest_visit_id), mimetype="application/json")
 
-def create_new_visit(data):
+def create_new_visit():
+    data = request.json
     senior_id = data.get("senior_id")
     visitor_ids = data.get("visitor_ids")
     datetime = data.get("datetime")
@@ -60,44 +62,44 @@ def create_new_visit(data):
 
     return jsonify({"message": "Visit created!", "new_visit": str(new_visit)}), 201
 
-def update_visitor(data):
-    visit_id = data.get('visit_id')
-    visitor_id = data.get('visitor_id')
-    action = data.get('action')
-    if not visit_id or not visitor_id or not action or (action != "add" and action != "delete"):
-        return jsonify({"error": "visit id, visitor_id and action fields are required. For actions, only 'add' and 'delete' are allowed."}), 400
-    visit_id = int(visit_id)
-    visitor_id = int(visitor_id)
-    action = str(action)
-    try:
-        if (action == "add"):
-            result = visit_collection.update_one(
-                {"visit_id": visit_id},       
-                {"$addToSet": {"visitor_ids": visitor_id}}  
-            )
-        elif (action == "delete"):
-            result = visit_collection.update_one(
-                {"visit_id": visit_id},
-                {"$pull": {"visitor_ids": visitor_id}}
-            )
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+# def update_visitor():
+#     data = request.json
+#     visit_id = data.get('visit_id')
+#     visitor_id = data.get('visitor_id')
+#     action = data.get('action')
+#     if not visit_id or not visitor_id or not action or (action != "add" and action != "delete"):
+#         return jsonify({"error": "visit id, visitor_id and action fields are required. For actions, only 'add' and 'delete' are allowed."}), 400
+#     visit_id = int(visit_id)
+#     visitor_id = int(visitor_id)
+#     action = str(action)
+#     try:
+#         if (action == "add"):
+#             result = visit_collection.update_one(
+#                 {"visit_id": visit_id},       
+#                 {"$addToSet": {"visitor_ids": visitor_id}}  
+#             )
+#         elif (action == "delete"):
+#             result = visit_collection.update_one(
+#                 {"visit_id": visit_id},
+#                 {"$pull": {"visitor_ids": visitor_id}}
+#             )
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
     
-    return jsonify({"message": f"Visitor {visitor_id} {action} on visit {visit_id}"}), 201
+#     return jsonify({"message": f"Visitor {visitor_id} {action} on visit {visit_id}"}), 201
 
-def update_status(data):
+def update_visit():
+    data = request.json
     visit_id = data.get('visit_id')
-    status = data.get('status')
-    if not visit_id or not status or (status != "Completed" or status != "Upcoming" or status != "Cancelled"):
-        return jsonify({"error": "visit_id and status fields are required. For status, only 'Completed', 'Upcoming' and 'Cancelled' are allowed."}), 400
+    if not data:
+        return jsonify({"error": "Data needed for PATCH visit"}), 400
     visit_id = int(visit_id)
-    statis = str(status)
     try:
         result = visit_collection.update_one(
             {"visit_id": visit_id},
-            {"$set": {"status": status}}
+            {"$set": data}
         )
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-    return jsonify({"message": f"Visit {visit_id} status: {status}"}), 201
+    return jsonify({"message": f"Visit {visit_id} updated: {data}"}), 201

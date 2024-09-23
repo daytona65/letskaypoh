@@ -36,8 +36,7 @@ def seniors():
 
 @app.route("/senior", methods=["GET"])
 def senior():
-    senior_id = int(request.args.get('id'))
-    return get_senior(senior_id)
+    return get_senior()
 
 @app.route("/create_senior", methods=["POST"])
 def create_senior():
@@ -49,8 +48,7 @@ def visits():
 
 @app.route("/visit", methods=["GET"])
 def visit():
-    visit_id = int(request.args.get('id'))
-    return get_visit(visit_id)
+    return get_visit()
 
 @app.route("/visit_id", methods=["GET"])
 def visit_id():
@@ -61,8 +59,8 @@ def create_visit():
     return create_new_visit(request.json)
 
 @app.route("/update_visit", methods=["PATCH"])
-def update_visit():
-    return update_visitor(request.json)
+def update():
+    return update_visit()
 
 
 @app.route("/update_visit_status", methods=["PATCH"])

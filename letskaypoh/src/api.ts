@@ -2,7 +2,7 @@ import axios from 'axios';
 import { SeniorInterface, UserInterface, VisitInterface } from './models/interfaces';
 
 const api = axios.create({
-    baseURL: 'https://letskaypoh-backend.up.railway.app',
+    baseURL: import.meta.env.BACK_END,
 });
 export const getAllUsersData = async () => {
     try {
@@ -95,22 +95,13 @@ export const createVisit = async (visitData: VisitInterface) => {
     }
 };
 
-export const updateVisitorInVisit = async (visitData: VisitInterface) => {
+type PartialVisit = Partial<VisitInterface>;
+export const updateVisit = async (visitData: PartialVisit) => {
     try {
         const response = await api.patch('/update_visit', visitData);
         return response.data;
     } catch (error) {
         console.error('Error updating visit:', error);
-        throw error;
-    }
-};
-
-export const updateVisitStatus = async (statusData: string) => {
-    try {
-        const response = await api.patch('/update_visit_status', statusData);
-        return response.data;
-    } catch (error) {
-        console.error('Error updating visit status:', error);
         throw error;
     }
 };

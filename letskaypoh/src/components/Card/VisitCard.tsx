@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './styles.css'
 import { Button, message, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
-import { getSeniorByIdData } from '../../api'
+import { getSeniorByIdData, updateVisit } from '../../api'
 import { navigateToRoute, separatedArray } from '../utils'
 import { CheckCircleTwoTone, DownOutlined, UpOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +18,6 @@ export const VisitCard: React.FC<Props> = (props) => {
 
     const [isActionsExpanded, setIsActionsExpanded] = useState<boolean>(false)
 
-    // add api endpoint
     const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
     useEffect(() => {
@@ -81,12 +80,30 @@ export const VisitCard: React.FC<Props> = (props) => {
 
     const handleCompleteVisit = () => {
         // add api to mark visit as completed
+        try {
+            updateVisit({
+                "visit_id": visit.visit_id,
+                "status": VisitStatus.COMPLETED 
+            })
+            
+        } catch (error) {
+            console.error("Error updating visit status:", error);
+        }
         message.success('Visit completed!')
         navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
     }
 
     const handleCancelVisit = () => {
         // add api to mark visit as cancelled
+        try {
+            updateVisit({
+                "visit_id": visit.visit_id,
+                "status": VisitStatus.CANCELLED
+            })
+            
+        } catch (error) {
+            console.error("Error updating visit status:", error);
+        }
         console.log('cancel visit')
         message.success('Visit cancelled!')
         // navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)

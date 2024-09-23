@@ -18,7 +18,8 @@ def get_all_seniors():
     seniors = list(senior_collection.find())
     return Response(json.dumps(seniors, default=str), mimetype="application/json")
 
-def get_senior(senior_id):
+def get_senior():
+    senior_id = int(request.args.get('id'))
     senior = list(senior_collection.find({"senior_id": senior_id}))
     if senior is None:
         print("Senior not found!")
