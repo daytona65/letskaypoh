@@ -48,7 +48,7 @@ const RegisterVisit: React.FC = () => {
 
         const visitDetails: VisitInterface = {
             datetime: dateValue.format('DD MMM YYYY'),
-            time: selectedTimeslot,
+            time: selectedTimeslot ? selectedTimeslot : "",
             senior_id: seniorId,
             visitor_ids: [Number(userId)],
             status: VisitStatus.UPCOMING
