@@ -17,10 +17,8 @@ counter_collection = db['counters']
 def register_user():
     data = request.json
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-    user = {"username": data['username'], "email": data['email'], "password": hashed_password}
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
-    
     try:
         user_id = counter_collection.find_one_and_update(
             {"id": "user_count"},
@@ -28,7 +26,7 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
-        new_user = {**data, "user_id": user_id}
+        new_user = {**data, "user_id": user_id, "password": hashed_password}
         user_collection.insert_one(new_user)
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
