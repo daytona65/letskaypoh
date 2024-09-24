@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token
 from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
-from config import app, db, bcrypt, jwt
+from config import app, db, bcrypt
 from models import User, Senior, Visit
 import json
 
@@ -18,6 +18,7 @@ counter_collection = db['counters']
 def register_user():
     data = request.json
     hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
+    user_id = None
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     try:
@@ -52,7 +53,7 @@ def login_user():
     if not user or not bcrypt.check_password_hash(user['password'], password):
         return Response(json.dumps({"error": "Invalid credentials"}), mimetype='application/json', status=401)
     
-    access_token = jwt.create_access_token(identity=user['user_id'])
+    access_token = create_access_token(identity=user['user_id'])
     return jsonify({"message": "User login successfully!"}), 201
 
 def get_all_users():
