@@ -51,14 +51,11 @@ def register_user():
 
 def login_user():
     data = request.json
-    try:
-        mobile = data['mobile']
-    except Exception as e:
-        return jsonify({"mobile1": str(e)}), 500
+    mobile = data['mobile']
 
     if not data or not mobile:
         return Response(json.dumps({"error": "Mobile number missing"}), mimetype='application/json', status=400)
-    
+
     try:
         existing_user = user_collection.find_one({
             "$or": [
@@ -67,8 +64,14 @@ def login_user():
         })
     except Exception as e:
         return jsonify({"error": "User does not exist"}), 400
-
-    return jsonify({"exists": true}), 201
+    try:
+        user_id = None
+        if existing_user:
+            user_id = existing_user['user_id']
+        access_token = create_access_token(identity={"user_id": user_id})
+    except Exception as e:
+        return jsonify({"Error with access token": str(e)}), 500
+    return jsonify({"message": "Login successfully!", "access_token": access_token}), 201
 
 def check_mobile():
     mobile = str(request.args.get('mobile'))
