@@ -55,6 +55,8 @@ const Login = () => {
             localStorage.clear()
             const response = await loginUser(values.mobile)
             const { access_token, user } = response
+            console.log(user);
+            console.log(user.user_id);
             localStorage.setItem('access_token', access_token)
             localStorage.setItem('user_id', user.user_id)
             localStorage.setItem('name', user.name)
