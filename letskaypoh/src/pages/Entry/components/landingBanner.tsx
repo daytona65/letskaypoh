@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeScreenshot from '../../../assets/home.png'
+import HomeScreenshot from '../../../assets/SShome.png'
 import { ArrowDownOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import cn from 'classnames'

@@ -1,7 +1,13 @@
 import React from 'react'
 import cn from 'classnames'
 import { ArrowDownOutlined, CalendarOutlined, EnvironmentOutlined, FileDoneOutlined, HomeOutlined} from '@ant-design/icons'
-import Granny from '../../../assets/logo.png'
+import HomeSS from '../../../assets/SShome.png'
+import VisitsSS from '../../../assets/SSvisits.png'
+import VisitDetailsSS from '../../../assets/SSvisitDetails.png'
+import RegisterVisitSS from '../../../assets/SSregisterVisits.png'
+import VisitCompletedSS from '../../../assets/SSvisitCompleted.png'
+import { Carousel } from 'antd'
+
 
 export interface EntryBannerProps {
     sectionRef: React.RefObject<HTMLDivElement>
@@ -54,7 +60,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
     ]
 
     const featureItems = items.map((item) => {
-        return (<div className='descRow'>
+        return (<div className='descRow' key={item.key}>
             <div className='descIcon'>
                 {item.icon}
             </div>
@@ -69,21 +75,33 @@ const Features: React.FC<EntryBannerProps> = (props) => {
     
     return (
         <div className={'entryContainer'} ref={props.sectionRef}>
-            <div className={cn('smallTitle', 'fullHeight')}>
+            <div className={cn('featurebanner', 'fullHeight')}>
                 <div className={'sectionHeading'}>How it works</div>
                 <h1>let's kaypoh!</h1>
 
                 {featureItems}
 
                 <a onClick={props.onClickNextSection} style={{ marginTop: '3rem' }}> <ArrowDownOutlined /> So what differentiates us? </a>
-            </div>
-            <div className={cn('illustration', 'fullHeight')}>
-                <img
-                    className={'imgLeft'}
-                    src={Granny}/>
-                <img
-                    className={'imgRight'}
-                    src="https://avatar.iran.liara.run/public/45" />
+            </div >
+            <div className={cn( 'fullHeight')}>
+
+                <Carousel autoplay arrows style={{width: '350px', height: '400px'}}>
+                    <div className={'carousel'}>
+                        <img src={HomeSS} className={'screenshotCarousel'} />
+                    </div>
+                    <div className={'carousel'}>
+                        <img src={RegisterVisitSS} className={'screenshotCarousel'} />
+                    </div>
+                    <div className={'carousel'}>
+                        <img src={VisitsSS} className={'screenshotCarousel'} />
+                    </div>
+                    <div className={'carousel'}>
+                        <img src={VisitDetailsSS} className={'screenshotCarousel'} />
+                    </div>
+                    <div className={'carousel'}>
+                        <img src={VisitCompletedSS} className={'screenshotCarousel'} />
+                    </div>
+                </Carousel>
             </div>
         </div>
     )

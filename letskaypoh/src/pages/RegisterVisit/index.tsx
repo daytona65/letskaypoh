@@ -98,8 +98,8 @@ const RegisterVisit: React.FC = () => {
       };
 
     return (
-        <div className={'container'}>
-            <div className={'header'}>
+        <div className={'registerContainer'}>
+            <div className={'registerHeader'}>
                 <h1>let's kaypoh!</h1>
                 <h3>Register your visit</h3>
             </div>

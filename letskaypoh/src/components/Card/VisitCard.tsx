@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Button, Tag } from 'antd'
+import { Button, Popconfirm, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
@@ -33,26 +33,6 @@ export const VisitCard: React.FC<Props> = (props) => {
         fetchData();
     }, [visit.senior_id])
 
-
-            //     label: 'Volunteers',
-            //     children: <Avatar.Group
-            //             max={{
-            //                 count: 2,
-            //                 style: { color: '#f56a00', backgroundColor: '#fde3cf' },
-            //               }}
-            //         >
-            //             <Avatar src="https://avatar.iran.liara.run/public" />
-            //             <a href="https://ant.design">
-            //                 <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-            //             </a>
-            //             <Tooltip title="Ant User" placement="top">
-            //                 <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-            //             </Tooltip>
-            //             <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} />
-            //         </Avatar.Group>
-            // },
-        // ]
-    // }
 
     const handleViewVisitDetails = () => {
         // add api to mark visit as completed
@@ -119,9 +99,20 @@ export const VisitCard: React.FC<Props> = (props) => {
                                     <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
                                         Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                                     </Button>
-                                    <Button className={'cancelBtn'} onClick={() => handleCancelVisit(visit)}>
-                                        Cancel Visit <FrownTwoTone twoToneColor="#eb2f96"/>
-                                    </Button>
+                                    <Popconfirm 
+                                        title={'Are you sure you want to cancel this visit?'}
+                                        description={
+                                            <div className='column'>
+                                                The senior will be disappointed to see you cancel! 
+                                                <FrownTwoTone style={{fontSize: '50px', marginTop: '1rem'}} twoToneColor="#eb2f96" />
+                                            </div>
+                                        }
+                                        onConfirm={() => handleCancelVisit(visit)}
+                                    >
+                                        <Button className={'cancelBtn'}>
+                                            Cancel Visit <FrownTwoTone twoToneColor="#eb2f96"/>
+                                        </Button>
+                                    </Popconfirm>
                                 </>}
                                 {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />

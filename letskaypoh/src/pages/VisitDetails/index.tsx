@@ -1,11 +1,11 @@
-import { Button, Divider } from 'antd'
+import { Avatar, Button, Divider, Popconfirm, Tooltip } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
 import { getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
+import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone, UserOutlined } from '@ant-design/icons';
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import CustomMap from '../Home/components/Map/Map';
@@ -21,7 +21,7 @@ const VisitDetails = () => {
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
   if (!token) {
-      navigateToRoute('/', navigate)
+    navigateToRoute('/', navigate)
   }
   const visitId = Number(useLocation().pathname.split("/")[2]);
 
@@ -102,6 +102,34 @@ const VisitDetails = () => {
 
   const googleDirectionsLink = (origin: google.maps.LatLngLiteral, destination: google.maps.LatLngLiteral) => `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${destination.lat},${destination.lng}`
 
+  const visitorItems = visit && visit.visitor_ids.map((id) => {
+    let visitorLabel = `Kaypoh #${id}`
+
+    if (localStorage.getItem('user_id') && id.toString() === localStorage.getItem('user_id')) {
+      visitorLabel = 'You'
+    }
+
+    return <Tooltip title={visitorLabel} placement="top">
+      <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+    </Tooltip>
+  })
+
+  const visitors = <Avatar.Group
+    max={{
+      count: 2,
+      style: { color: '#f56a00', backgroundColor: '#fde3cf' },
+    }}
+  >
+    {visitorItems}
+    {/* <Avatar src="https://avatar.iran.liara.run/public" />
+                  <a href="https://ant.design">
+                    <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
+                  </a>
+                  <Tooltip title="Ant User" placement="top">
+                    <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                  </Tooltip>
+                  <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} /> */}
+  </Avatar.Group>
   return (
     <div className={'container'}>
       <div className={'header'} style={{ marginBottom: 0 }}>
@@ -135,25 +163,38 @@ const VisitDetails = () => {
 
                     </APIProvider>
                   </div>
-                  <Button>
-                    <a
-                      style={{fontWeight: 400}}
-                      target="_blank" rel="noopener noreferrer"
-                      href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
-                      Get Directions  <EnvironmentTwoTone />
-                    </a>
-                  </Button>
                 </>}
 
-                <div >
+                <div>
+                  {(visit.status === VisitStatus.UPCOMING || visit.status === VisitStatus.ONGOING) &&
+                    <Button>
+                      <a
+                        style={{ fontWeight: 400 }}
+                        target="_blank" rel="noopener noreferrer"
+                        href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
+                        Get Directions  <EnvironmentTwoTone />
+                      </a>
+                    </Button>
+                  }
                   {visit.status === VisitStatus.UPCOMING &&
                     <>
                       <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
                         Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                       </Button>
-                      <Button className={'cancelBtn'} onClick={() => handleCancelVisit(visit)}>
-                        Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
-                      </Button>
+                      <Popconfirm
+                        title={'Are you sure you want to cancel your visit?'}
+                        description={
+                          <div className='column'>
+                            The senior will be disappointed to see you cancel! 
+                            <FrownTwoTone style={{fontSize: '50px', marginTop: '1rem'}} twoToneColor="#eb2f96" />
+                          </div>
+                        }
+                        onConfirm={() => handleCancelVisit(visit)}
+                      >
+                        <Button className={'cancelBtn'}>
+                          Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
+                        </Button>
+                      </Popconfirm>
                     </>}
                   {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
@@ -169,7 +210,8 @@ const VisitDetails = () => {
                 {seniorProfileAttributes}
 
                 <div className={'sectionHeader'}>
-                  <h3>Visitors</h3>
+                  <h3>Who's coming in this visit</h3>
+                  {visitors}
                 </div>
 
                 <Button onClick={() => navigateToRoute('/visits', navigate)}>

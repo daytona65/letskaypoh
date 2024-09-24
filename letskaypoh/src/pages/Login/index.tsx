@@ -52,6 +52,7 @@ const Login = () => {
 
         try {
             console.log('Logging in', loading)
+            localStorage.clear()
             const response = await loginUser(values.mobile)
             const { access_token, user } = response
             console.log(user);
