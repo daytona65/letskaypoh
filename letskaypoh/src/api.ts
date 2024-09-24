@@ -4,6 +4,28 @@ import { SeniorInterface, UserInterface, VisitInterface } from './models/interfa
 const api = axios.create({
     baseURL: import.meta.env.VITE_BACK_END,
 });
+
+export const registerUser = async (userData: UserInterface) => {
+    try {
+        const response = await api.post('/register', userData);
+        console.log(response.data)
+        return response.data;
+    } catch (error) {
+        console.error('Error creating user:', error);
+        throw error;
+    }
+};
+
+export const loginUser = async (userData: UserInterface) => {
+    try {
+        const response = await api.post('/login', userData);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating user:', error);
+        throw error;
+    }
+};
+
 export const getAllUsersData = async () => {
     try {
         const response = await api.get(`/users`);
@@ -20,16 +42,6 @@ export const getUserByIdData = async (userId: string) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
-        throw error;
-    }
-};
-
-export const registerUser = async (userData: UserInterface) => {
-    try {
-        const response = await api.post('/register', userData);
-        return response.data;
-    } catch (error) {
-        console.error('Error creating user:', error);
         throw error;
     }
 };

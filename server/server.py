@@ -21,9 +21,14 @@ counter_collection = db['counters']
 def register():
     return register_user()
 
-# @app.route('/login', methods=['POST'])
-# def login():
-#     return login_user()
+@app.route('/login', methods=['POST'])
+def login():
+    return login_user()
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user', None)
+    return jsonify({'message': 'Logged out successfully'})
 
 @app.route("/users", methods=["GET"])
 def users():
