@@ -20,6 +20,17 @@ def register_user():
     # hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
+    existing_user = user_collection.find_one({
+        "$or": [
+            {"nric": nric},
+            {"email": email},
+            {"mobile": mobile}
+        ]
+    })
+    
+    if existing_user:
+        return jsonify({"error": "User with this NRIC, email, or mobile number already exists."}), 400
+
     try:
         user_id = counter_collection.find_one_and_update(
             {"id": "user_count"},
@@ -27,6 +38,7 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
+  
         new_user = {**data, "user_id": user_id} #, "password": hashed_password}
         user_collection.insert_one(new_user)
     except Exception as e:
