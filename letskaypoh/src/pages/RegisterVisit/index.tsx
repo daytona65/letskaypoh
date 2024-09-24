@@ -28,9 +28,6 @@ export const TimeSlotButton: React.FC<TimeslotButtonProps> = (props) => {
 
 const RegisterVisit: React.FC = () => {
     const seniorId = Number(useLocation().pathname.split("/")[2]);
-
-    const userId = localStorage.getItem('userId')
-
     const [loading, setLoading] = useState<boolean>(false)
 
     const token = localStorage.getItem('access_token');
@@ -50,7 +47,7 @@ const RegisterVisit: React.FC = () => {
         console.log('selectedTimeslot ', selectedTimeslot);
         console.log('visitDate', dateValue, dateValue.format('DD MMM YYYY'))
         setLoading(true)
-
+        const userId = localStorage.getItem('user_id');
         const visitDetails: VisitInterface = {
             date: dateValue.format('DD MMM YYYY'),
             time: selectedTimeslot!,

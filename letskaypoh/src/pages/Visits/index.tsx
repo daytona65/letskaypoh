@@ -27,6 +27,7 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
+        console.log(Number(user_id))
         const visitsData = await getUserVisitData(Number(user_id));
         console.log(user_id)
         console.log(visitsData)

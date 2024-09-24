@@ -53,9 +53,10 @@ const Login = () => {
         try {
             console.log('Logging in', loading)
             const response = await loginUser(values.mobile)
-            const { access_token, user_id } = response
+            const { access_token, user } = response
             localStorage.setItem('access_token', access_token)
-            localStorage.setItem('user_id', user_id)
+            localStorage.setItem('user_id', user.user_id)
+            localStorage.setItem('name', user.name)
             navigateToRoute('/home', navigate);
         } catch (error) {
             console.error("Error logging in:", error);

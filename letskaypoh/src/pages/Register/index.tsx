@@ -70,9 +70,10 @@ const Register = () => {
             console.log('Registering new user', loading)
             const response = await registerUser(newUserDetails)
             message.success('Registration success')
-            const { access_token, user_id } = response
+            const { access_token, user } = response
             localStorage.setItem('access_token', access_token)
-            localStorage.setItem('user_id', user_id)
+            localStorage.setItem('user_id', user.user_id)
+            localStorage.setItem('name', user.name)
             navigateToRoute('/register-success', navigate)
         } catch (error) {
             console.error("Error registering user:", error);
