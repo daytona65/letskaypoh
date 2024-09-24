@@ -2,11 +2,11 @@ import { useState } from 'react'
 import '../../App.css'
 import './styles.css'
 import '../commonStyles.css'
-import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
+import { Button, Form, FormProps, Input, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
-import { UserInterface } from '../../models/interfaces'
+
 import { navigateToRoute } from '../../components/utils'
-import { loginUser, registerUser } from '../../api'
+import { loginUser } from '../../api'
 
 type FieldType = {
     name: string;
