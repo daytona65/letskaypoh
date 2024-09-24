@@ -31,8 +31,12 @@ const Visits = () => {
         const visitsData = await getUserVisitData(Number(user_id));
         console.log(user_id)
         console.log(visitsData)
-        setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING));
-        setCurVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING));
+        setUpcomingVisits(visitsData
+          .filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING)
+          .sort((a: VisitInterface, b: VisitInterface) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+        setCurVisits(visitsData
+          .filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING)
+          .sort((a: VisitInterface, b: VisitInterface) => new Date(a.date).getTime() - new Date(b.date).getTime()));
       } catch (error) {
         console.error("Error fetching visit data; Multiple visits:", error);
       }
