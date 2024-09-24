@@ -34,26 +34,6 @@ export const VisitCard: React.FC<Props> = (props) => {
     }, [visit.senior_id])
 
 
-            //     label: 'Volunteers',
-            //     children: <Avatar.Group
-            //             max={{
-            //                 count: 2,
-            //                 style: { color: '#f56a00', backgroundColor: '#fde3cf' },
-            //               }}
-            //         >
-            //             <Avatar src="https://avatar.iran.liara.run/public" />
-            //             <a href="https://ant.design">
-            //                 <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-            //             </a>
-            //             <Tooltip title="Ant User" placement="top">
-            //                 <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-            //             </Tooltip>
-            //             <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} />
-            //         </Avatar.Group>
-            // },
-        // ]
-    // }
-
     const handleViewVisitDetails = () => {
         // add api to mark visit as completed
         navigateToRoute(`/visit-details/${visit.visit_id}`, navigate)
