@@ -66,9 +66,6 @@ def login_user():
             ]
         })
     except Exception as e:
-        return jsonify({"mobile2222": str(e)}), 500
-    
-    if not existing_user:
         return jsonify({"error": "User does not exist"}), 400
 
     return jsonify({"exists": true}), 201
