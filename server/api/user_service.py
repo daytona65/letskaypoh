@@ -18,7 +18,6 @@ counter_collection = db['counters']
 def register_user():
     data = request.json
     hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
-    user_id = None
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     try:
@@ -33,7 +32,7 @@ def register_user():
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
-    access_token = 1 #create_access_token(identity=user_id)
+    access_token = create_access_token(identity=data['email'])
     return jsonify({"message": "User registered successfully!", "access_token": access_token}), 201
 
 def login_user():
