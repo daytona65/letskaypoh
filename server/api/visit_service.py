@@ -29,7 +29,7 @@ def get_visit():
 
 def get_user_visits():
     user_id = int(request.args.get('id'))
-    visits = list(visit_collection.find({"visitors": {"$elemMatch": {"$eq": user_id}}}))
+    visits = list(visit_collection.find({"visitor_ids": {"$elemMatch": {"$eq": user_id}}}))
     if visits is None:
         print("User visits not found!")
         return jsonify({"error": "user visits not found"}), 404
