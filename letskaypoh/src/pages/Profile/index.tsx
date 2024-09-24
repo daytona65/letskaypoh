@@ -108,7 +108,7 @@ const Profile: React.FC = () => {
 	})
 
 	return (
-		<div className={'container'}>
+		<div className={'profileContainer'}>
 			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Profile</h3>
@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
 				</div>
 			</div>
 
-			<div className={'section'} style={{ marginBottom: '5rem' }}>
+			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Visit History</h3>
 				</div>
