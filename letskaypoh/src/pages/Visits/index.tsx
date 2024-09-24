@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css'
 import { navigateToRoute } from '../../components/utils';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { getAllVisitsData, getUserVisitData } from '../../api';
+import { getUserVisitData } from '../../api';
 import { VisitInterface, VisitStatus } from '../../models/interfaces';
 
 const Visits = () => {
@@ -27,7 +27,7 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitsData = await getAllVisitsData();
+        const visitsData = await getUserVisitData(Number(user_id));
         console.log(visitsData)
         setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING));
         setCurVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING));

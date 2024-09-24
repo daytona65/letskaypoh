@@ -25,7 +25,7 @@ def get_visit():
     if visit is None:
         print("Visit not found!")
         return jsonify({"error": "Visit not found"}), 404
-    return Response(json.dumps(visit[0], default=json_util.default), mimetype="application/json")
+    return Response(json.dumps(visit[0], default=str), mimetype="application/json")
 
 def get_user_visits():
     user_id = int(request.args.get('id'))
@@ -33,7 +33,7 @@ def get_user_visits():
     if visits is None:
         print("User visits not found!")
         return jsonify({"error": "user visits not found"}), 404
-    return Response(json.dumps(visits, default=json_util.default), mimetype="application/json")
+    return Response(json.dumps(visits, default=str), mimetype="application/json")
 
 def latest_visit_id():
     latest_visit_id = counter_collection.find_one({"id": "visit_count"})["count"]
