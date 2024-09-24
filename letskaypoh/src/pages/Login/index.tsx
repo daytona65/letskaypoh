@@ -38,7 +38,7 @@ const Login = () => {
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         console.log('Received values of form: ', values);
-        setLoading(true)
+        setLoading(true);
 
         try {
             await checkMobileExists(values.mobile);
@@ -57,7 +57,7 @@ const Login = () => {
             localStorage.setItem('access_token', access_token)
             navigateToRoute('/home', navigate);
         } catch (error) {
-            console.error("Error registering user:", error);
+            console.error("Error logging in:", error);
             navigateToRoute('/', navigate);
         }
         setLoading(false);

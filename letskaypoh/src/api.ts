@@ -10,7 +10,7 @@ export const registerUser = async (userData: UserInterface) => {
         const response = await api.post('/register', userData);
         return response.data;
     } catch (error) {
-        console.error('Error creating user:', error);
+        console.error('api: Error registering user:', error);
         throw error;
     }
 };
@@ -21,7 +21,7 @@ export const loginUser = async (mobile: string) => {
         const response = await api.post('/login', userData);
         return response.data;
     } catch (error) {
-        console.error('Error creating user:', error);
+        console.error('api: Error logging in:', error);
         throw error;
     }
 };
@@ -31,7 +31,7 @@ export const checkMobileExists = async (mobile: string) => {
         const response = await api.get(`/mobile?mobile=${mobile}`);
         return response.data;
     } catch (error) {
-        console.error('Error creating user:', error);
+        console.error('api: Error checking mobile:', error);
         throw error;
     }
 };
