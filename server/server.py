@@ -62,6 +62,10 @@ def visits():
 def visit():
     return get_visit()
 
+@app.route("/user_visits", methods=["GET"])
+def user_visits():
+    return get_user_visits()
+
 @app.route("/visit_id", methods=["GET"])
 def visit_id():
     return latest_visit_id()

@@ -97,6 +97,16 @@ export const getVisitByIdData = async (visitId: number) => {
     }
 };
 
+export const getUserVisitData = async (user_id: number) => {
+    try {
+        const response = await api.get(`/user_visits?id=${user_id}` );
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching visits for user ${user_id}:`, error);
+        throw error;
+    }
+};
+
 export const getLatestVisitId = async () => {
     try {
         const response = await api.get('/visit_id');

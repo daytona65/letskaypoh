@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css'
 import { navigateToRoute } from '../../components/utils';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { getAllVisitsData } from '../../api';
+import { getAllVisitsData, getUserVisitData } from '../../api';
 import { VisitInterface, VisitStatus } from '../../models/interfaces';
 
 const Visits = () => {
@@ -13,7 +13,7 @@ const Visits = () => {
   if (!token) {
       navigateToRoute('/', navigate)
   }
-  const user = localStorage.get
+  const user_id = localStorage.getItem('user_id')
 
   // add api endpoint - get upcoming visits
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,12 +27,12 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitsData = await getAllVisitsData();
-        visitsData.filter((visit: VisitInterface) => visit.visitor_ids.some(visitor => visitor === user.user_id))
+        const visitsData = await getUserVisitData(Number(user_id));
+        console.log(visitsData)
         setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING));
         setCurVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING));
       } catch (error) {
-        console.error("Error fetching visit data:", error);
+        console.error("Error fetching visit data; Multiple visits:", error);
       }
     };
 
