@@ -57,7 +57,7 @@ const Entry = () => {
 			<About sectionRef={aboutRef} onClickNextSection={() => onClickSection(featuresRef)} />
 			<Features sectionRef={featuresRef} onClickNextSection={() => onClickSection(valueRef)}/>
 			<ValueProposition sectionRef={valueRef} onClickNextSection={() => onClickSection(teamRef)}/>
-			<Team teamRef={teamRef} onClickRegister={onClickRegister} />
+			<Team teamRef={teamRef} onClickRegister={onClickJoin} />
 			<LoginModal 
 				open={isRegisterModalOpen} 
 				handleClose={onCloseModal} 

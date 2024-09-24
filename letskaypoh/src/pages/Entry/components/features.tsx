@@ -82,7 +82,9 @@ const Features: React.FC<EntryBannerProps> = (props) => {
                 {featureItems}
 
                 <a onClick={props.onClickNextSection} style={{ marginTop: '3rem' }}> <ArrowDownOutlined /> So what differentiates us? </a>
-            </div>
+            </div >
+            <div className={cn( 'fullHeight')}>
+
                 <Carousel autoplay arrows style={{width: '350px', height: '400px'}}>
                     <div className={'carousel'}>
                         <img src={HomeSS} className={'screenshotCarousel'} />
@@ -100,6 +102,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
                         <img src={VisitCompletedSS} className={'screenshotCarousel'} />
                     </div>
                 </Carousel>
+            </div>
         </div>
     )
 }
