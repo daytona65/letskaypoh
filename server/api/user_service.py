@@ -1,5 +1,6 @@
 from flask import Response, request, jsonify
 from flask_cors import CORS
+from flask_jwt_extended import create_access_token
 from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
@@ -31,7 +32,7 @@ def register_user():
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
-    access_token = jwt.create_access_token(identity=user_id)
+    access_token = create_access_token(identity=user_id)
     return jsonify({"message": "User registered successfully!", "access_token": access_token}), 201
 
 def login_user():
