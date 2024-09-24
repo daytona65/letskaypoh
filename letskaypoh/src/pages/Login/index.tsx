@@ -53,7 +53,7 @@ const Login = () => {
         try {
             console.log('Logging in', loading)
             const response = await loginUser(values.mobile)
-            const { access_token } = response.data
+            const { access_token } = response
             localStorage.setItem('access_token', access_token)
             navigateToRoute('/home', navigate);
         } catch (error) {
