@@ -76,7 +76,7 @@ const Register = () => {
             console.log(response.data)
             navigateToRoute('/register-success', navigate)
         } catch (error) {
-            console.error("Error updating visit status:", error);
+            console.error("Error registering user:", error);
         }
         // when api successful then route change
 

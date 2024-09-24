@@ -17,7 +17,7 @@ counter_collection = db['counters']
 
 def register_user():
     data = request.json
-    hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
+    # hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     try:
@@ -27,7 +27,7 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
-        new_user = {**data, "user_id": user_id, "password": hashed_password}
+        new_user = {**data, "user_id": user_id} #, "password": hashed_password}
         user_collection.insert_one(new_user)
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
@@ -39,20 +39,18 @@ def register_user():
 
 def login_user():
     data = request.json
-    email = data['email']
     mobile = data['mobile']
-    password = data['password']
-    
-    if not (email or mobile) or not password:
-        return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
+
+    if not data or not mobile:
+        return Response(json.dumps({"error": "Mobile number missing"}), mimetype='application/json', status=400)
     user = None
-    if email:
-        user = user_collection.find_one({"email": email})
+    # if email:
+    #     user = user_collection.find_one({"email": email})
     if mobile:
         user = user_collection.find_one({"mobile": mobile})
         
-    if not user or not bcrypt.check_password_hash(user['password'], password):
-        return Response(json.dumps({"error": "Invalid credentials"}), mimetype='application/json', status=401)
+    # if not user or not bcrypt.check_password_hash(user['password'], password):
+    #     return Response(json.dumps({"error": "Invalid credentials"}), mimetype='application/json', status=401)
     
     access_token = create_access_token(identity={"user_id": user_id})
     return jsonify({"message": "User login successfully!"}), 201
