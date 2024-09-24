@@ -23,8 +23,7 @@ def users():
 
 @app.route("/user", methods=["GET"])
 def user():
-    user_id = int(request.args.get('id'))
-    return get_user(user_id)
+    return get_user()
 
 @app.route("/create_user", methods=["POST"])
 def create_user():
@@ -56,7 +55,7 @@ def visit_id():
 
 @app.route("/create_visit", methods=["POST"])
 def create_visit():
-    return create_new_visit(request.json)
+    return create_new_visit()
 
 @app.route("/update_visit", methods=["PATCH"])
 def update():

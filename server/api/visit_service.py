@@ -43,12 +43,12 @@ def create_new_visit():
             return_document=True,
             upsert=True
         )["count"]
-        data = {**data, "visit_id": visit_id}
-        visit_collection.insert_one(data)
+        new_vist = {**data, "visit_id": visit_id}
+        visit_collection.insert_one(new_visit)
     except Exception as e:
         return jsonify({"message": str(e)}), 500
 
-    return jsonify({"message": "Visit created!", "new_visit": str(data)}), 201
+    return jsonify({"message": "Visit created!", "new_visit": str(new_visit)}), 201
 
 # def update_visitor():
 #     data = request.json
