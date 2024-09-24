@@ -16,5 +16,6 @@ bcrypt = Bcrypt(app)
 CORS(app)
 jwt = JWTManager(app)
 
+
 client = MongoClient(os.getenv('ATLAS_URI'))
 db = client[os.getenv('DB_NAME')]
