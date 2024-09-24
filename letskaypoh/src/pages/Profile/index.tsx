@@ -5,7 +5,7 @@ import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { getAllVisitsData, getUserByIdData, getUserVisitData } from '../../api'
+import { getUserByIdData, getUserVisitData } from '../../api'
 import { VisitCard } from '../../components/Card/VisitCard'
 
 interface profileItem {
