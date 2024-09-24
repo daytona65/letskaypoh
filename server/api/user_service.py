@@ -26,8 +26,8 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
-        new_user = {**data, "user_id": user_id}
-        user_collection.insert_one(new_user)
+        # new_user = {**data, "user_id": user_id}
+        user_collection.insert_one(data)
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
