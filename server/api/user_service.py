@@ -31,13 +31,11 @@ def register_user():
         user_collection.insert_one(new_user)
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
-
     try:
-        # Create access token with user_id
         access_token = create_access_token(identity={"user_id": user_id})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    return jsonify({"message": "User registered successfully!"}), 201
+    return jsonify({"message": "User registered successfully!", "access_token": access_token}), 201
 
 def login_user():
     data = request.json

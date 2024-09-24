@@ -7,16 +7,14 @@ from dotenv import dotenv_values, load_dotenv
 import os
 
 app = Flask(__name__)
+load_dotenv()
+
+app.config['SECRET_KEY'] = secrets.token_hex(16)
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+
 bcrypt = Bcrypt(app)
 CORS(app)
 jwt = JWTManager(app)
-load_dotenv()
 
-config = dotenv_values(".env")
-ATLAS_URI = os.getenv('ATLAS_URI')
-DB_NAME = os.getenv('DB_NAME')
-JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
-
-app.config['JWT_SECRET_KEY'] = JWT_SECRET_KEY
-client = MongoClient(ATLAS_URI)
-db = client[DB_NAME]
+client = MongoClient(os.getenv('ATLAS_URI'))
+db = client[os.getenv('DB_NAME')]
