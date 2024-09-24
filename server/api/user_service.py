@@ -3,7 +3,7 @@ from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
-from config import app, db
+from config import app, db, bcrypt
 from models import User, Senior, Visit
 import json
 
@@ -16,7 +16,7 @@ counter_collection = db['counters']
 
 def register_user():
     data = request.json
-    # hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
+    hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     try:
@@ -26,8 +26,8 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
-        # new_user = {**data, "user_id": user_id}
-        user_collection.insert_one(data)
+        new_user = {**data, "user_id": user_id, "password": hashed_password}
+        user_collection.insert_one(new_user)
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
