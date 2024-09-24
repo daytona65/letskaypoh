@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { ArrowDownOutlined, CalendarOutlined, EnvironmentOutlined, FileDoneOutlined, HeartOutlined, HomeOutlined} from '@ant-design/icons'
+import { ArrowDownOutlined, CalendarOutlined, EnvironmentOutlined, FileDoneOutlined, HomeOutlined} from '@ant-design/icons'
 import Granny from '../../../assets/logo.png'
 
 export interface EntryBannerProps {
