@@ -22,9 +22,9 @@ def register_user():
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     existing_user = user_collection.find_one({
         "$or": [
-            {"nric": nric},
-            {"email": email},
-            {"mobile": mobile}
+            {"nric": data['nric']},
+            {"email": data['email']},
+            {"mobile": data['mobile']}
         ]
     })
     
