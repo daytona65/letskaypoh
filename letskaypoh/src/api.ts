@@ -15,9 +15,20 @@ export const registerUser = async (userData: UserInterface) => {
     }
 };
 
-export const loginUser = async (userData: { mobile: string; }) => {
+export const loginUser = async (mobile: string) => {
+    const userData = ({ "mobile": mobile })
     try {
         const response = await api.post('/login', userData);
+        return response.data;
+    } catch (error) {
+        console.error('Error creating user:', error);
+        throw error;
+    }
+};
+
+export const checkMobileExists = async (mobile: string) => {
+    try {
+        const response = await api.get(`/mobile?mobile=${mobile}`);
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error);

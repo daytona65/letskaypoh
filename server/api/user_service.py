@@ -55,20 +55,24 @@ def login_user():
 
     if not data or not mobile:
         return Response(json.dumps({"error": "Mobile number missing"}), mimetype='application/json', status=400)
-    user = None
-    # if email:
-    #     user = user_collection.find_one({"email": email})
-    if mobile:
-        user = user_collection.find_one({"mobile": mobile})
-        
-    # if not user or not bcrypt.check_password_hash(user['password'], password):
-    #     return Response(json.dumps({"error": "Invalid credentials"}), mimetype='application/json', status=401)
     
-    try:
-        access_token = create_access_token(identity={"user_id": user_id})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    return jsonify({"message": "User login successfully!", "access_token": access_token}), 201
+    existing_user = user_collection.find_one({
+        "$or": [
+            {"mobile": mobile}
+        ]
+    })
+    
+    if !existing_user:
+        return jsonify({"error": "User does not exist"}), 400
+
+    return jsonify({"exists": true}), 201
+
+def check_mobile():
+    mobile = str(request.args.get('mobile'))
+    user = list(user_collection.find({"mobile": mobile}))
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
 
 def get_all_users():
     users = list(user_collection.find())
@@ -78,6 +82,5 @@ def get_user():
     user_id = int(request.args.get('id'))
     user = list(user_collection.find({"user_id": user_id}))
     if user is None:
-        print("User not found!")
         return jsonify({"error": "User not found"}), 404
     return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")

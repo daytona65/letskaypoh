@@ -6,7 +6,7 @@ import { Button, Form, FormProps, Input, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 
 import { navigateToRoute } from '../../components/utils'
-import { loginUser } from '../../api'
+import { checkMobileExists, loginUser } from '../../api'
 
 type FieldType = {
     name: string;
@@ -24,6 +24,7 @@ const Login = () => {
     const { Option } = Select;
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [mobileError, setMobileError] = useState<boolean>(false);
 
     const navigate = useNavigate(); 
 
@@ -39,15 +40,19 @@ const Login = () => {
         console.log('Received values of form: ', values);
         setLoading(true)
 
-        const userDetails = (
-            {
-                mobile: values.mobile,
-            }
-        )
+        try {
+            await checkMobileExists(values.mobile);
+            setMobileError(false);
+        } catch (error) {
+            console.error("Error checking user mobile:", error);
+            setMobileError(true);
+            setLoading(false);
+            return;
+        }
 
         try {
             console.log('Logging in', loading)
-            const response = await loginUser(userDetails)
+            const response = await loginUser(values.mobile)
             const { access_token } = response.data
             localStorage.setItem('access_token', access_token)
             navigateToRoute('/home', navigate);
@@ -55,8 +60,7 @@ const Login = () => {
             console.error("Error registering user:", error);
             navigateToRoute('/', navigate);
         }
-        setLoading(false)
-        
+        setLoading(false);
     };
 
     return (
@@ -82,11 +86,13 @@ const Login = () => {
                     <Form.Item
                         label="Mobile No."
                         name="mobile"
-                        rules={[{ required: true, message: 'Please input your mobile number' }]}
+                        rules={[
+                            { required: true, message: 'Please input your mobile number' }
+                        ]}
                     >
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     </Form.Item>
-                   
+                   {mobileError && <div style={{ color: 'red', marginTop: -10 }}><p>Mobile number does not exist.</p></div>}
                     <Button htmlType='submit'>
                         Login
                     </Button>

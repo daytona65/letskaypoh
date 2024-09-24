@@ -25,6 +25,10 @@ def register():
 def login():
     return login_user()
 
+@app.route('/mobile', methods=['GET'])
+def mobile():
+    return check_mobile()
+
 @app.route('/logout', methods=['POST'])
 def logout():
     session.pop('user', None)
