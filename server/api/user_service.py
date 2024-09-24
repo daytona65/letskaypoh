@@ -16,7 +16,7 @@ counter_collection = db['counters']
 
 def register_user():
     data = request.json
-    hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
+    # hashed_password = bcrypt.generate_password_hash(data["password"]).decode('utf-8')
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     try:
