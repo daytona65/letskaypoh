@@ -70,7 +70,7 @@ const Register = () => {
             console.log('Registering new user', loading)
             const response = await registerUser(newUserDetails)
             message.success('Registration success')
-            const { access_token, user_id } = response.data
+            const { access_token, user_id } = response
             localStorage.setItem('access_token', access_token)
             localStorage.setItem('user_id', user_id)
             navigateToRoute('/register-success', navigate)
