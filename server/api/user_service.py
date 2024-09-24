@@ -33,8 +33,8 @@ def register_user():
 
     return jsonify({"message": "User registered successfully!"}), 201
 
-def login_user():
-    return jsonify({"message": "User login successfully!"}), 201
+# def login_user():
+#     return jsonify({"message": "User login successfully!"}), 201
 
 def get_all_users():
     users = list(user_collection.find())

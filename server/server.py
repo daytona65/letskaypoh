@@ -21,9 +21,9 @@ counter_collection = db['counters']
 def register():
     return register_user()
 
-@app.route('/login', methods=['POST'])
-def login():
-    return login_user()
+# @app.route('/login', methods=['POST'])
+# def login():
+#     return login_user()
 
 @app.route("/users", methods=["GET"])
 def users():
