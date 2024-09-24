@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import './styles.css'
 import { Button, Descriptions, DescriptionsProps } from 'antd'
 import { navigateToRoute, separatedArray } from '../utils'
@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { CloseOutlined } from '@ant-design/icons'
 
 interface Props {
+    style?: CSSProperties
     senior: SeniorInterface
     closable?: boolean
     onClose?: () => void
@@ -38,7 +39,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
     const closeBtn = props.onClose && <CloseOutlined className='closeBtn' onClick={props.onClose}/>
 
     return (
-        <div className={'card'}>
+        <div className={'card'} style={props.style}>
             <div className={'closeBtnDiv'}>
                 {closeBtn}
             </div>
