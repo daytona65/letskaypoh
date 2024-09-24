@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, Tooltip } from 'antd'
+import { Avatar, Button, Divider, Popconfirm, Tooltip } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
@@ -181,9 +181,20 @@ const VisitDetails = () => {
                       <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
                         Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                       </Button>
-                      <Button className={'cancelBtn'} onClick={() => handleCancelVisit(visit)}>
-                        Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
-                      </Button>
+                      <Popconfirm
+                        title={'Are you sure you want to cancel your visit?'}
+                        description={
+                          <div className='column'>
+                            The senior will be disappointed to see you cancel! 
+                            <FrownTwoTone style={{fontSize: '50px', marginTop: '1rem'}} twoToneColor="#eb2f96" />
+                          </div>
+                        }
+                        onConfirm={() => handleCancelVisit(visit)}
+                      >
+                        <Button className={'cancelBtn'}>
+                          Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
+                        </Button>
+                      </Popconfirm>
                     </>}
                   {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
