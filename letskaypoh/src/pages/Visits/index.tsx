@@ -27,7 +27,7 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitsData = await getUserVisitData(Number(user_id));
+        const visitsData = await getAllVisitsData();
         console.log(visitsData)
         setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING));
         setCurVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING));
