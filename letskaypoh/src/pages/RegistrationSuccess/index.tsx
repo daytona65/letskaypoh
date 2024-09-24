@@ -4,7 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { navigateToRoute } from '../../components/utils';
 
 const RegistrationSuccess = () => {
+    const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    }
 
     const onClickGetStarted = () => {
         navigateToRoute('/home', navigate)

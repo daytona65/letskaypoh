@@ -14,7 +14,11 @@ import { getAllSeniorsData, getVisitByIdData } from '../../api'
 const VisitConfirmed: React.FC = () => {
     const visitId = Number(useLocation().pathname.split("/")[2]);
 
-    const navigate = useNavigate()
+    const token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    }
 
     const userName = localStorage.getItem('name')
 

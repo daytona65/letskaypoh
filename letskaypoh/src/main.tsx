@@ -17,6 +17,7 @@ import Visits from './pages/Visits/index.tsx';
 import CompleteVisit from './pages/CompleteVisit/index.tsx';
 import VisitConfirmed from './pages/VisitConfirmed/index.tsx';
 import VisitDetails from './pages/VisitDetails/index.tsx';
+import Login from './pages/Login/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <NavBarWrapper isLoggedIn={true} />,
     children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
       {
         path: "/home",
         element: <Home />,

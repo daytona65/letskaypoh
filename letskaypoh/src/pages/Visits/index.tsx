@@ -8,7 +8,11 @@ import { getAllVisitsData } from '../../api';
 import { VisitInterface, VisitStatus } from '../../models/interfaces';
 
 const Visits = () => {
+  const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
+  if (!token) {
+      navigateToRoute('/', navigate)
+  }
 
   // add api endpoint - get upcoming visits
   const [loading, setLoading] = useState<boolean>(false);

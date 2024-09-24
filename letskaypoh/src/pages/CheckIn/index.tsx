@@ -16,9 +16,13 @@ type FieldType = {
 
 
 const CompleteVisit = () => {
-  const visitId = Number(useLocation().pathname.split("/")[2]);
-
+  const token = localStorage.getItem('access_token');
   const navigate = useNavigate()
+  if (!token) {
+    navigateToRoute('/', navigate)
+  }
+  
+  const visitId = Number(useLocation().pathname.split("/")[2]);
 
   const userName = localStorage.getItem('name')
 

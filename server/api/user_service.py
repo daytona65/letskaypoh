@@ -52,8 +52,11 @@ def login_user():
     # if not user or not bcrypt.check_password_hash(user['password'], password):
     #     return Response(json.dumps({"error": "Invalid credentials"}), mimetype='application/json', status=401)
     
-    access_token = create_access_token(identity={"user_id": user_id})
-    return jsonify({"message": "User login successfully!"}), 201
+    try:
+        access_token = create_access_token(identity={"user_id": user_id})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    return jsonify({"message": "User login successfully!", "access_token": access_token}), 201
 
 def get_all_users():
     users = list(user_collection.find())

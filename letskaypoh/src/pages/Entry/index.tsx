@@ -40,7 +40,7 @@ const Entry = () => {
 	}
 
 	const onClickLogin = () => {
-		navigateToRoute('/home', navigate) // go to login
+		navigateToRoute('/login', navigate)
 	}
 
 	return (

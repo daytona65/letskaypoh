@@ -8,8 +8,15 @@ import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap from './components/Map/Map'
 import { SeniorInterface } from '../../models/interfaces'
 import { getAllSeniorsData } from '../../api'
+import { useNavigate } from 'react-router-dom'
+import { navigateToRoute } from '../../components/utils'
 
 const Home = () => {
+    const token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    }
     const [selectedPlace, setSelectedPlace] =
     useState<google.maps.places.PlaceResult | null>(null);
 

@@ -8,7 +8,6 @@ const api = axios.create({
 export const registerUser = async (userData: UserInterface) => {
     try {
         const response = await api.post('/register', userData);
-        console.log(response.data)
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error);
@@ -16,7 +15,7 @@ export const registerUser = async (userData: UserInterface) => {
     }
 };
 
-export const loginUser = async (userData: UserInterface) => {
+export const loginUser = async (userData: { mobile: string; }) => {
     try {
         const response = await api.post('/login', userData);
         return response.data;

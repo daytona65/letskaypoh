@@ -33,7 +33,11 @@ const RegisterVisit: React.FC = () => {
 
     const [loading, setLoading] = useState<boolean>(false)
 
-    const navigate = useNavigate(); 
+    const token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    } 
 
     const [selectedTimeslot, setSelectedTimeslot] = useState<string>()
 

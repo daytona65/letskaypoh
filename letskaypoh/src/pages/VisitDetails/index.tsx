@@ -16,7 +16,11 @@ interface profileItem {
 }
 
 const VisitDetails = () => {
+  const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
+  if (!token) {
+      navigateToRoute('/', navigate)
+  }
   const visitId = Number(useLocation().pathname.split("/")[2]);
 
   // add api endpoint - get visit

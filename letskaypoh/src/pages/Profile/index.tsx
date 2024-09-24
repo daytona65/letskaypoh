@@ -16,6 +16,11 @@ interface profileItem {
 
 
 const Profile: React.FC = () => {
+	const token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    }
 
 	// const user: UserInterface = useMemo(() => ({
 	// 	user_id: 1,
@@ -29,8 +34,6 @@ const Profile: React.FC = () => {
 	// 	postal_code: Number(localStorage.getItem('postalCode'))!,
 	// 	address: localStorage.getItem('address')!,
 	// }), [])
-
-	const navigate = useNavigate();
 
 	// api endpoint - get user
 	const [user, setUser] = useState<UserInterface>();
