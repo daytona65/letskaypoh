@@ -5,7 +5,7 @@ import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { getAllVisitsData, getUserByIdData } from '../../api'
+import { getAllVisitsData, getUserByIdData, getUserVisitData } from '../../api'
 import { VisitCard } from '../../components/Card/VisitCard'
 
 interface profileItem {
@@ -44,7 +44,7 @@ const Profile: React.FC = () => {
             try {
 				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
 				setUser(userData);
-                const visitsData = await getAllVisitsData();
+                const visitsData = await getUserVisitData(Number(localStorage.getItem('user_id')));
 				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED))
             } catch (error) {
                 console.error("Error fetching visits data:", error);
