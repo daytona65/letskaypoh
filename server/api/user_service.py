@@ -62,7 +62,7 @@ def login_user():
         ]
     })
     
-    if !existing_user:
+    if not existing_user:
         return jsonify({"error": "User does not exist"}), 400
 
     return jsonify({"exists": true}), 201
