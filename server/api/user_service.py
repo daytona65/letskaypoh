@@ -14,21 +14,10 @@ senior_collection = db['seniors']
 visit_collection = db['visits']
 counter_collection = db['counters']
 
-def get_all_users():
-    users = list(user_collection.find())
-    return Response(json.dumps(users, default=str), mimetype="application/json")
-
-def get_user():
-    user_id = int(request.args.get('id'))
-    user = list(user_collection.find({"user_id": user_id}))
-    if user is None:
-        print("User not found!")
-        return jsonify({"error": "User not found"}), 404
-    return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
-
-def create_new_user():
+def register_user():
     data = request.json
-        
+    hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+    user = {"username": data['username'], "email": data['email'], "password": hashed_password}
     if not data:
         return Response(json.dumps({"error": "Request body error in create new user"}), mimetype='application/json', status=400)
     
@@ -44,4 +33,19 @@ def create_new_user():
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
-    return jsonify({"message": "User created!", "new_user": str(new_user)}), 201
+    return jsonify({"message": "User registered successfully!"}), 201
+
+def login_user():
+    return jsonify({"message": "User login successfully!"}), 201
+
+def get_all_users():
+    users = list(user_collection.find())
+    return Response(json.dumps(users, default=str), mimetype="application/json")
+
+def get_user():
+    user_id = int(request.args.get('id'))
+    user = list(user_collection.find({"user_id": user_id}))
+    if user is None:
+        print("User not found!")
+        return jsonify({"error": "User not found"}), 404
+    return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")

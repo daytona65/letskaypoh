@@ -6,7 +6,7 @@ import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
-import { createUser } from '../../api'
+import { registerUser } from '../../api'
 
 type FieldType = {
     name: string;
@@ -71,7 +71,7 @@ const Register = () => {
         // api endpoint - register user
         try {
             console.log('Registering new user', loading)
-            const response = await createUser(newUserDetails)
+            const response = await registerUser(newUserDetails)
             message.success('Registration success')
             console.log(response.data)
             navigateToRoute('/register-success', navigate)

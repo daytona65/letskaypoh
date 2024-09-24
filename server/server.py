@@ -3,7 +3,7 @@ from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
-from config import app, db
+from config import app, db, bcrypt
 from models import User, Senior, Visit
 from api.user_service import *
 from api.senior_service import *
@@ -17,6 +17,14 @@ senior_collection = db['seniors']
 visit_collection = db['visits']
 counter_collection = db['counters']
 
+@app.route("/register", methods=["POST"])
+def register():
+    return register_user()
+
+@app.route('/login', methods=['POST'])
+def login():
+    return login_user()
+
 @app.route("/users", methods=["GET"])
 def users():
     return get_all_users()
@@ -24,10 +32,6 @@ def users():
 @app.route("/user", methods=["GET"])
 def user():
     return get_user()
-
-@app.route("/create_user", methods=["POST"])
-def create_user():
-    return create_new_user()
 
 @app.route("/seniors", methods=["GET"])
 def seniors():
@@ -60,14 +64,8 @@ def create_visit():
 @app.route("/update_visit", methods=["PATCH"])
 def update():
     return update_visit()
-
-
-@app.route("/update_visit_status", methods=["PATCH"])
-def update_visit_status():
-    return update_status(request.json)
     
-
-# 11 Send SMS
+# Send SMS
 
 
 if __name__ == "__main__":

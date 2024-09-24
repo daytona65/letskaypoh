@@ -24,9 +24,9 @@ export const getUserByIdData = async (userId: string) => {
     }
 };
 
-export const createUser = async (userData: UserInterface) => {
+export const registerUser = async (userData: UserInterface) => {
     try {
-        const response = await api.post('/create_user', userData);
+        const response = await api.post('/register', userData);
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error);

@@ -21,6 +21,10 @@ import VisitDetails from './pages/VisitDetails/index.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Entry />,
+  },
+  {
+    path: "/",
     element: <NavBarWrapper isLoggedIn={true} />,
     children: [
       {
@@ -52,10 +56,6 @@ const router = createBrowserRouter([
         element: <VisitConfirmed/>,
       },
     ]
-  },
-  {
-    path: "/entry",
-    element: <Entry />,
   },
   {
     path: "/register",
