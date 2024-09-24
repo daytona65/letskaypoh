@@ -78,7 +78,9 @@ def create_visit():
 def update():
     return update_visit()
     
-# Send SMS
+@app.route("/days", methods=["GET"])
+def days():
+    return days_last_visited()
 
 
 if __name__ == "__main__":

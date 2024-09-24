@@ -1,10 +1,11 @@
 from flask import Response, request, jsonify
 from flask_cors import CORS
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
 from config import app, db
 from models import User, Senior, Visit
+from api.date_service import *
 import json
 
 config = dotenv_values(".env")
@@ -65,4 +66,16 @@ def create_new_senior():
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
     return jsonify({"message": "Senior created!", "new_senior": str(new_senior)}), 201
+
+def days_last_visited():
+    senior_id = int(request.args.get('id'))
+
+    latest_completed_visit = list(visit_collection.find({"senior_id": senior_id, "status": "Completed"}))
+    visit_data = json.loads(json.dumps(latest_completed_visit[0], default=json_util.default))
+
+    if not visit_data:
+        return jsonify({ "days": "NEVER VISITED" }), 201
+    days = days_difference(visit_data['date'])
+    print(days)
+    return jsonify({ "days": days }), 201
 

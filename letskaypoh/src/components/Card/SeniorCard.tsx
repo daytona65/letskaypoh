@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useEffect, useState } from 'react'
 import './styles.css'
 import { Button, Descriptions, DescriptionsProps } from 'antd'
 import { navigateToRoute, separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { CloseOutlined } from '@ant-design/icons'
+import { getDaysLastVisted } from '../../api'
 
 interface Props {
     style?: CSSProperties
@@ -18,11 +19,25 @@ export const SeniorCard: React.FC<Props> = (props) => {
     const {senior} = props
     const navigate = useNavigate()
 
+    const [daysLastVisited, setDaysLastVisited] = useState<string>("");
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const days = await getDaysLastVisted(senior.last_visited_date);
+                setDaysLastVisited(days);
+            } catch (error) {
+                console.error("Error fetching senior data:", error);
+            }
+        };
+
+        fetchData();
+    }, [senior])
+
     const infoItems: DescriptionsProps['items'] = [
         {
             key: 'lastVisited',
             label: 'Last Visited',
-            children: senior.last_visited_date
+            children: daysLastVisited
         },
         {
             key: 'language',

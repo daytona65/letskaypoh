@@ -137,3 +137,13 @@ export const updateVisit = async (visitData: PartialVisit) => {
         throw error;
     }
 };
+
+export const getDaysLastVisted = async (date: string) => {
+    try {
+        const response = await api.get(`/days?date=${date}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting days:', error);
+        throw error;
+    }
+};
