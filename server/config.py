@@ -9,7 +9,7 @@ import os
 app = Flask(__name__)
 load_dotenv()
 
-app.config['SECRET_KEY'] = secrets.token_hex(16)
+app.config['SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
 
 bcrypt = Bcrypt(app)
