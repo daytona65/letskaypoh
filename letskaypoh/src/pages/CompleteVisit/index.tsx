@@ -4,11 +4,11 @@ import Check from '../../assets/check.webp'
 import { Alert, Button, Form, FormProps, Rate } from 'antd';
 import { SeniorInterface, VisitInterface } from '../../models/interfaces';
 import { getVisitByIdData, getAllSeniorsData } from '../../api';
-import { SeniorCard } from '../../components/Card/SeniorCard';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { navigateToRoute } from '../../components/utils';
 import TextArea from 'antd/es/input/TextArea';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import cn from 'classnames';
 
 type FieldType = {
   visitNotes: string;
@@ -52,12 +52,12 @@ const CompleteVisit = () => {
   }, [visitId])
 
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    console.log('Received values of form: ', values);
+    console.log('Received values of form: ', values, senior);
   }
 
   return (
     <div className={'container'}>
-      <div className={'header'}>
+      <div className={cn('header', 'hide')}>
         <h1>let's kaypoh!</h1>
       </div>
 
@@ -86,7 +86,7 @@ const CompleteVisit = () => {
             onFinish={onFinish}
             name="completeVisit"
             layout="horizontal"
-            labelCol={{ span: 4 }}
+            labelCol={{ span: 9 }}
             wrapperCol={{ span: 14 }}
             className='formInput'
           >
@@ -118,9 +118,6 @@ const CompleteVisit = () => {
           </Form>
         </div>
 
-
-        {senior &&
-          <SeniorCard senior={senior} />}
         {visit &&
           <VisitCard visit={visit} />}
         <Button

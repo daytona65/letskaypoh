@@ -75,11 +75,12 @@
     display: flex;
     flex-direction: column;
     font-size: 14px;
+    align-items: center;
 
     .ant-btn {
         margin-top: 0.5rem;
         width: 100%;
-        max-width: 300px;
+        max-width: 500px;
     }
 
     h3 {

@@ -21,7 +21,7 @@ const VisitDetails = () => {
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
   if (!token) {
-      navigateToRoute('/', navigate)
+    navigateToRoute('/', navigate)
   }
   const visitId = Number(useLocation().pathname.split("/")[2]);
 
@@ -135,17 +135,19 @@ const VisitDetails = () => {
 
                     </APIProvider>
                   </div>
-                  <Button>
-                    <a
-                      style={{fontWeight: 400}}
-                      target="_blank" rel="noopener noreferrer"
-                      href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
-                      Get Directions  <EnvironmentTwoTone />
-                    </a>
-                  </Button>
                 </>}
 
-                <div >
+                <div>
+                  {(visit.status === VisitStatus.UPCOMING || visit.status === VisitStatus.ONGOING) &&
+                    <Button>
+                      <a
+                        style={{ fontWeight: 400 }}
+                        target="_blank" rel="noopener noreferrer"
+                        href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
+                        Get Directions  <EnvironmentTwoTone />
+                      </a>
+                    </Button>
+                  }
                   {visit.status === VisitStatus.UPCOMING &&
                     <>
                       <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>

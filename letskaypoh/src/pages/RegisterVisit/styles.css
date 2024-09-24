@@ -41,3 +41,39 @@
     margin-right: 0.5rem;
     margin-top: 0.5rem;
 }
+
+.registerContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: calc(100vh - 2rem);
+    height: 100%;
+    overflow-y: scroll;
+    margin-bottom: 5rem;
+    width: 100vw;
+  
+    @media (max-height: 850px) {
+      padding-bottom: 4rem;
+    }
+}
+
+.registerHeader {
+    width: 90%;
+    text-align: start;
+    margin: 1rem 2rem;
+
+    @media (min-width: 1000px) {
+        text-align: center;
+    }
+  
+    h1 {
+        font-size: 40px;
+        margin-bottom: 0.5rem;
+        font-family: Poppins-SemiBold, sans-serif;
+    }
+  
+    p {
+        margin: 0;
+    }
+  }
