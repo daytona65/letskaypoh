@@ -28,7 +28,7 @@
 }
 
 .banner {
-    width: 80%;
+    width: 85%;
 
     h1 {
         font-size: 60px;
@@ -60,15 +60,15 @@
 
 
 .subtitle {
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 40px;
+    line-height: 28px;
     padding-bottom: 0.5rem;
     font-family: Poppins-SemiBold, sans-serif;
 
     @media (min-width: 1000px) {
         font-size: 45px;
-        line-height: 50px;
+        line-height: 55px;
     }
 }
 
@@ -82,6 +82,7 @@
     h1 {
         font-size: 60px;
         margin: 0 0 1rem 0;
+        font-family: Poppins-SemiBold, sans-serif;
     }
 
     h2 {
@@ -107,11 +108,12 @@
 }
 
 .accentText {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 0.5rem;
 
     @media (min-width: 1000px) {
         margin-bottom: 1rem;
+        font-size: 20px;
     }
 }
 
@@ -289,4 +291,79 @@
     margin: 0.25rem 0;
     border-color: transparent;
     box-shadow: 0 2px 10px var(--color-gray-6);
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-size: 14px;
+
+    @media (min-width: 1000px) {
+        font-size: 16px;
+    } 
+    
+    ul {
+        padding-left: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.descRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    margin: 1.5rem 0 0 0;
+    width: 100%;
+}
+
+.descTitle {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.descIcon {
+    margin: 0 1rem 0 0;
+
+    @media (min-width: 1000px) {
+        margin: 0 1.5rem;
+    } 
+
+    .anticon {
+        font-size: 24px;
+        color: var(--color-link);
+    }
+}
+
+.bannerText {
+    font-weight: 500;
+    font-size: 15px;
+
+    @media (min-width: 1000px) {
+        width: 75%;
+        font-size: 16px;
+    } 
+}
+
+.smallTitle {
+    width: 80%;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    h1 {
+        font-size: 40px;
+        margin: 0 0 1rem 0;
+        font-family: Poppins-SemiBold, sans-serif;
+
+        @media (min-width: 1000px) {
+            font-size: 60px;
+        } 
+    }
 }

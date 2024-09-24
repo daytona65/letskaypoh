@@ -22,7 +22,6 @@ const Home = () => {
 
     const [seniors, setSeniors] = useState<SeniorInterface[]>([])
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -39,14 +38,12 @@ const Home = () => {
 
     return (
         <div className={'container-home'}>
-            <div className={'explore'}>
                 <div className={'header-container'}>
                     <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>
                         <h1>let's kaypoh!</h1>
                         <p>Show some love to our seniors nearby!</p>
                     </div>
                 </div>
-            </div>
             <APIProvider 
                 apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
                 onLoad={() => console.log('maps api has loaded')}>

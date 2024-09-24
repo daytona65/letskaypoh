@@ -20,7 +20,8 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
     if (!places || !inputRef.current) return;
 
     const options = {
-      fields: ['geometry', 'name', 'formatted_address']
+      fields: ['geometry', 'name', 'formatted_address'],
+      componentRestrictions: { country: "sg" },
     };
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));

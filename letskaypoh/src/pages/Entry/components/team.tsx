@@ -4,6 +4,10 @@ import '../../../App.css'
 import './../styles.css'
 import cn from 'classnames'
 import { Avatar, Button } from 'antd';
+import Keryang from '../../../assets/keryang.jpg'
+import Nic from '../../../assets/nic.jpg'
+import Eileen from '../../../assets/eileen.jpg'
+import Jo from '../../../assets/jo.jpg'
 
 interface memberItem {
   key: number
@@ -23,32 +27,31 @@ const Team: React.FC<Props> = (props) => {
     {
       key: 1,
       name: 'Ker Yang Low',
-      role: 'Product & Project Manager',
+      role: 'Product Manager',
       icon: <ProjectOutlined />,
-      imgPath: 'https://avatar.iran.liara.run/public/15',
+      imgPath: Keryang,
     },
     {
       key: 2,
       name: 'Nicholas Halim',
       role: 'Backend Engineer',
       icon: <ApiOutlined />,
-      imgPath: 'https://avatar.iran.liara.run/public/21',
+      imgPath: Nic,
     },
     {
       key: 3,
       name: 'Eileen Chua',
       role: 'UI/UX Designer',
       icon: <FormatPainterOutlined />,
-      imgPath: 'https://avatar.iran.liara.run/public/73',
+      imgPath: Eileen,
     },
     {
       key: 4,
       name: 'Josephine Hemingway',
       role: 'Frontend Engineer',
       icon: <DesktopOutlined />,
-      imgPath: 'https://avatar.iran.liara.run/public/80',
+      imgPath: Jo,
     },
-    
   ]
 
   const teamMembers = members.map((member) => {

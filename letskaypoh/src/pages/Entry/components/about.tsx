@@ -1,46 +1,57 @@
 import React from 'react'
 import cn from 'classnames'
 import { ArrowDownOutlined } from '@ant-design/icons'
+import Granny from '../../../assets/logo.png'
+import Grandpa from '../../../assets/grandpa.jpg'
+import { EntryBannerProps } from './features'
 
-interface Props {
-    aboutRef: React.RefObject<HTMLDivElement>
-    onClickTeam: () => void
-}
-
-const About: React.FC<Props> = (props) => {
+const About: React.FC<EntryBannerProps> = (props) => {
     return (
-        <div className={'entryContainer'} ref={props.aboutRef}>
+        <div className={'entryContainer'} ref={props.sectionRef}>
             <div className={cn('about', 'fullHeight')}>
                 <div className={'sectionHeading'}>About Us</div>
                 <h1>let's kaypoh!</h1>
 
                 <div className={cn('accentText')}>
                     <a>
-                        A project for Open Government Products' Build For Good 2024
+                        Kay-poh / noun & adjective
                     </a>
                 </div>
 
                 <p>
-                    Social isolation in the elderly is a serious and growing issue.
+                    Kaypoh is a Singaporean slang usually used to described a person who is nosy or prying. But Kaypoh does not necessary needs to be negative.
+                </p>
+                <p>
+                    As the Singapore population ages, the demand for senior care has become more pressing.
+                    Most seniors are worrying about being alone at home and having no one to help them when they are in need. 
+                </p>
+                <p>
+                    But.. how can we show some care and concern to our next door seniors?
                 </p>
 
                 <h2>
-                    How do we help?
+                    We can help.
                 </h2>
 
                 <p>
-                    Let's Kaypoh! aims to democratise and lower the barriers to volunteering by reducing the dependency on befriender organisations to allocate and schedule resources such as volunteer visitations and errand running.
+                    Let’s Kaypoh aims to rally the help from the community to <b><i>"kaypoh"</i></b> and check-in on seniors who are living alone around their neighbourhood.
+
+                    We hope to build a closer knit community by encouraging the younger generations to cultivate an organic relationship with the elderly.
                 </p>
 
-                <a onClick={props.onClickTeam} style={{ marginTop: '1rem' }}> <ArrowDownOutlined /> Meet the team</a>
+                <h4>
+                    Let’s be a kind Kaypoh today!
+                </h4>
+
+                <a onClick={props.onClickNextSection} style={{ marginTop: '1rem' }}> <ArrowDownOutlined /> See how it works </a>
             </div>
             <div className={cn('illustration', 'fullHeight')}>
                 <img
                     className={'imgLeft'}
-                    src="https://avatar.iran.liara.run/public/90" />
+                    src={Granny} />
                 <img
                     className={'imgRight'}
-                    src="https://avatar.iran.liara.run/public/45" />
+                    src={Grandpa} />
             </div>
         </div>
     )
