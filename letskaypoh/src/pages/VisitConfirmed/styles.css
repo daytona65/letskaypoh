@@ -1,10 +1,13 @@
 .confirmVisit {
     width: 85%;
-    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
+    @media (min-width: 1000px) {
+        width: 50%;
+    }
 }
 
 .thankYou {
@@ -37,5 +40,11 @@
     h3 {
         font-size: 20px;
         margin: 0;
+    }
+}
+
+.hide {
+    @media (min-width: 1000px) {
+        display: none;
     }
 }

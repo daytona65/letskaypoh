@@ -12,26 +12,31 @@ interface Props {
     onClickAbout: () => void
 }
 
-const LandingBanner: React.FC<Props> = ({onClickRegister, onClickAbout}) => {
+const LandingBanner: React.FC<Props> = ({ onClickRegister, onClickAbout }) => {
     return (
-    <div className={'entryContainer'}>
-        <div className={cn('fullHeight', 'banner')}>
-            <img className={'bannerImg'} src={BannerImg} />
-            <div className={'subtitle'}>rebuild the kampung spirit with</div>
-            <h1>let's kaypoh!</h1>
-            <a>
-                Redefining volunteering with the seniors.
-            </a>
-            <Button className={'joinButton'} onClick={onClickRegister}>
-                Start Volunteering
-            </Button>
-            <a onClick={onClickAbout}><ArrowDownOutlined /> Read About Us</a>
+        <div className={'entryContainer'}>
+            <div className={cn('fullHeight', 'banner')}>
+                <img className={'bannerImg'} src={BannerImg} />
+
+                <div className={'subtitle'}>rebuild the kampung spirit with</div>
+                <h1>let's kaypoh!</h1>
+                <a className='accentText'>
+                    Redefining volunteering with the elderly.
+                </a>
+                <p className='bannerText'>
+                A crowd-sourced volunteering platform to monitor the wellbeing of the seniors around us through simple check ins
+                </p>
+
+                <Button className={'joinButton'} onClick={onClickRegister}>
+                    Join us as a Kaypoh!
+                </Button>
+                <a onClick={onClickAbout}><ArrowDownOutlined /> Read About Us</a>
+            </div>
+            <div>
+                <img src={HomeScreenshot} className={'screenshot'} />
+            </div>
         </div>
-        <div>
-            <img src={HomeScreenshot} className={'screenshot'} />
-        </div>
-    </div>
-  )
+    )
 }
 
 export default LandingBanner

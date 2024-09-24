@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { VisitCard } from '../../components/Card/VisitCard'
 import { getAllSeniorsData, getVisitByIdData } from '../../api'
+import cn from 'classnames'
 
 const VisitConfirmed: React.FC = () => {
     const visitId = Number(useLocation().pathname.split("/")[2]);
@@ -44,7 +45,7 @@ const VisitConfirmed: React.FC = () => {
 
     return (
         <div className={'container'}>
-            <div className={'header'}>
+            <div className={cn('header', 'hide')}>
                 <h1>let's kaypoh!</h1>
             </div>
 
