@@ -56,8 +56,6 @@ const Register = () => {
         console.log('newUserDetails:', newUserDetails)
 
         localStorage.clear()
-
-        localStorage.setItem('userId', '1')
         localStorage.setItem('name', values.name)
         localStorage.setItem('nric', values.nric)
         localStorage.setItem('email', values.email)
@@ -68,18 +66,18 @@ const Register = () => {
         localStorage.setItem('address', values.address)
         localStorage.setItem('postal_code', values.postal_code)
 
-        // api endpoint - register user
         try {
             console.log('Registering new user', loading)
             const response = await registerUser(newUserDetails)
             message.success('Registration success')
-            const { access_token } = response.data
+            const { access_token, user_id } = response.data
             localStorage.setItem('access_token', access_token)
+            localStorage.setItem('user_id', user_id)
             navigateToRoute('/register-success', navigate)
         } catch (error) {
             console.error("Error registering user:", error);
         }
-        // when api successful then route change
+
 
         setLoading(false)
         

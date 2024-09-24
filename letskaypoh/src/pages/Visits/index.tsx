@@ -13,6 +13,7 @@ const Visits = () => {
   if (!token) {
       navigateToRoute('/', navigate)
   }
+  const user = localStorage.get
 
   // add api endpoint - get upcoming visits
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,6 +28,7 @@ const Visits = () => {
     const fetchData = async () => {
       try {
         const visitsData = await getAllVisitsData();
+        visitsData.filter((visit: VisitInterface) => visit.visitor_ids.some(visitor => visitor === user.user_id))
         setUpcomingVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING));
         setCurVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING));
       } catch (error) {
