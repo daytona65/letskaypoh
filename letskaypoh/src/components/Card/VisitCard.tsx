@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Button, message, Tag } from 'antd'
+import { Button, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
-import { getSeniorByIdData, updateVisit } from '../../api'
-import { navigateToRoute, separatedArray } from '../utils'
-import { CheckCircleTwoTone, ClockCircleOutlined, DownOutlined, EnvironmentOutlined, EnvironmentTwoTone, FrownTwoTone, UpOutlined, ZhihuOutlined } from '@ant-design/icons'
+import { getSeniorByIdData } from '../../api'
+import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
+import { CheckCircleTwoTone, ClockCircleOutlined, DownOutlined, EnvironmentOutlined, FrownTwoTone, UpOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 interface Props {
@@ -57,51 +57,6 @@ export const VisitCard: React.FC<Props> = (props) => {
     const handleViewVisitDetails = () => {
         // add api to mark visit as completed
         navigateToRoute(`/visit-details/${visit.visit_id}`, navigate)
-    }
-
-    const handleCompleteVisit = () => {
-        // api to mark visit as completed
-        try {
-            updateVisit({
-                "visit_id": visit.visit_id,
-                "status": VisitStatus.COMPLETED 
-            })
-            
-        } catch (error) {
-            console.error("Error updating visit status:", error);
-        }
-        message.success('Visit completed!')
-        navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
-    }
-
-    const handleCheckInVisit = () => {
-        // add api to check in visit 
-        try {
-            updateVisit({
-                "visit_id": visit.visit_id,
-                "status": VisitStatus.ONGOING 
-            })
-            
-        } catch (error) {
-            console.error("Error updating visit status:", error);
-        }
-        message.success('Checked in!')
-    }
-
-    const handleCancelVisit = () => {
-        // api to mark visit as cancelled
-        try {
-            updateVisit({
-                "visit_id": visit.visit_id,
-                "status": VisitStatus.CANCELLED
-            })
-            
-        } catch (error) {
-            console.error("Error updating visit status:", error);
-        }
-        console.log('cancel visit')
-        message.success('Visit cancelled!')
-        // navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
     }
 
     let visitDetails
@@ -161,14 +116,14 @@ export const VisitCard: React.FC<Props> = (props) => {
                                 </Button>
                                 {visit.status === VisitStatus.UPCOMING && 
                                 <>
-                                    <Button className={'cancelBtn'} onClick={handleCheckInVisit}>
-                                        Check In <EnvironmentTwoTone />
+                                    <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
+                                        Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                                     </Button>
-                                    <Button className={'cancelBtn'} onClick={handleCancelVisit}>
+                                    <Button className={'cancelBtn'} onClick={() => handleCancelVisit(visit)}>
                                         Cancel Visit <FrownTwoTone twoToneColor="#eb2f96"/>
                                     </Button>
                                 </>}
-                                {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={handleCompleteVisit}>
+                                {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
                                 </Button>}
                             </div>

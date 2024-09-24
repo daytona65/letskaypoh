@@ -3,6 +3,7 @@ import { AdvancedMarker, Map, MapCameraChangedEvent} from '@vis.gl/react-google-
 import './styles.css'
 import { SeniorInterface } from '../../../../models/interfaces';
 import { SeniorCard } from '../../../../components/Card/SeniorCard';
+import { Directions } from '../mapDirections';
 
 interface Coordinates {
 	lat: number,
@@ -11,16 +12,22 @@ interface Coordinates {
 
 type Props = {
 	locations: SeniorInterface[]
+	defaultCenter: Coordinates
+	showDirections?: boolean
+	defaultZoom?: number
+	hideDetails?: boolean
 }
 
 export type MarkerProps = {
 	info: SeniorInterface;
 	position: Coordinates
+	hideDetails?: boolean
 }
 
-const CustomMap: React.FC<Props> = ({ locations }) => {
-	const [center, setCenter] = useState<Coordinates>({ lat: 1.287953, lng: 103.851784 })
-	const [currentLocation, setCurrentLocation] = useState<Coordinates>({ lat: 1.287953, lng: 103.851784 })
+
+const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails }) => {
+	const [center, setCenter] = useState<Coordinates>(defaultCenter)
+	const [currentLocation, setCurrentLocation] = useState<Coordinates>(defaultCenter)
 	// const [currentZoom, setCurrentZoom] = useState<number>(13)
 
 	useEffect(() => {
@@ -30,7 +37,8 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude,
 				}
-				setCenter(pos);
+
+				if (!hideDetails) setCenter(pos)
 				setCurrentLocation(pos);
 			});
 		} else {
@@ -39,7 +47,7 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 	}, []);
 
 
-	const CustomMarker: React.FC<MarkerProps> = ({ info, position }) => {
+	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails }) => {
 		const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false)
 
 		return (
@@ -47,13 +55,22 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 				position={position}
 				onClick={() => setShowInfoWindow(true)}
 			>
-				<div
+				<div 
 					// onMouseEnter={() => setShowInfoWindow(true)}
 					// onMouseLeave={() => setShowInfoWindow(false)}
 				>
-					{(showInfoWindow) ?
-							<SeniorCard senior={info} closable={true} onClose={() => setShowInfoWindow(false)} showVisitBtn={true}/> :
-						<div className={'seniorMarker'} >
+					{(showInfoWindow && !hideDetails) ?
+						<SeniorCard 
+							// style={{zIndex: locations.length + 100, position: 'sticky'}}
+							senior={info} 
+							closable={true} 
+							onClose={() => setShowInfoWindow(false)} 
+							showVisitBtn={true}
+						/> :
+						<div 
+							className={'seniorMarker'} 
+							// style={{zIndex: locations.indexOf(info),  position: 'sticky'}}
+						>
 							{info.name}
 						</div>
 					}
@@ -73,18 +90,18 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 			disableDefaultUI
 			gestureHandling={'greedy'}
 			onCameraChanged={handleCameraChange}
-			mapId={'hi'}
-			defaultZoom={13}
+			mapId={'7c0e62f0200dd8aa'}
+			defaultZoom={defaultZoom ?? 13}
 			defaultCenter={center}
 		// zoom={currentZoom}
 		// center={center}
-		// styles={mapStyles}
 		>
 			{locations?.map(marker => (
 				<CustomMarker
 					key={marker.senior_id}
 					info={marker}
 					position={{ lat: marker.lat, lng: marker.lon }}
+					hideDetails={hideDetails}
 				/>
 			))}
 
@@ -93,6 +110,13 @@ const CustomMap: React.FC<Props> = ({ locations }) => {
 			>
 				<div className={'userMarker'} ></div>
 			</AdvancedMarker>
+
+			{showDirections && 
+				<Directions 
+					origin={currentLocation}
+					destination={{lat: locations[0].lat, lng: locations[0].lon}}
+				/>
+			}
 		</Map>
 	)
 }

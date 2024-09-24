@@ -56,15 +56,8 @@ const Home = () => {
 
                 <CustomMap
                     locations={seniors}
+                    defaultCenter={{lat: 1.287953, lng: 103.851784 }}
                 />
-                {/* <Map
-                    defaultZoom={3}
-                    defaultCenter={{lat: 22.54992, lng: 0}}
-                    gestureHandling={'greedy'}
-                    disableDefaultUI={true}
-                /> */}
-
-
                 <MapHandler place={selectedPlace} />
             </APIProvider>
 

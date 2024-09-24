@@ -26,6 +26,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .ant-btn {
+    border-radius: 20px;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -96,5 +100,30 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+@font-face {
+  font-family: 'Poppins-SemiBold';
+  src: local('Poppins'), url(./assets/fonts/Poppins/Poppins-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: local('Poppins'), url(./assets/fonts/Poppins/Poppins-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(./assets/fonts/Poppins/Poppins-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: local('Poppins'), url(./assets/fonts/Poppins/Poppins-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins-Light';
+  src: local('Poppins'), url(./assets/fonts/Poppins/Poppins-Light.ttf) format('truetype');
 }
 

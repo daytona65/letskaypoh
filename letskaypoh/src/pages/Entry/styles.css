@@ -33,6 +33,8 @@
     h1 {
         font-size: 60px;
         margin: 0 0 1rem 0;
+        font-family: Poppins-SemiBold, sans-serif;
+        line-height: 60px;
     }
 
     p {
@@ -49,6 +51,8 @@
         h1 {
             font-size: 80px;
             margin: 0 0 2rem 0;
+            font-family: Poppins-SemiBold, sans-serif;
+
         }
     }
 }
@@ -60,6 +64,7 @@
     font-weight: 600;
     line-height: 40px;
     padding-bottom: 0.5rem;
+    font-family: Poppins-SemiBold, sans-serif;
 
     @media (min-width: 1000px) {
         font-size: 45px;
@@ -127,7 +132,7 @@
 }
 
 .bannerImg {
-    height: 100px;
+    height: 120px;
     margin-bottom: 0.5rem;
 
     @media (min-width: 1000px) {

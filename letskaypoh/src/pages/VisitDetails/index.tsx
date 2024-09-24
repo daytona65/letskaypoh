@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
 import { getSeniorByIdData, getVisitByIdData } from '../../api';
-import { SeniorInterface, VisitInterface} from '../../models/interfaces';
+import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined } from '@ant-design/icons';
-import { navigateToRoute } from '../../components/utils';
+import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
+import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
+import { APIProvider } from '@vis.gl/react-google-maps';
+import CustomMap from '../Home/components/Map/Map';
 
 interface profileItem {
   key: React.Key
@@ -98,9 +100,11 @@ const VisitDetails = () => {
     )
   })
 
+  const googleDirectionsLink = (origin: google.maps.LatLngLiteral, destination: google.maps.LatLngLiteral) => `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${destination.lat},${destination.lng}`
+
   return (
     <div className={'container'}>
-      <div className={'header'}>
+      <div className={'header'} style={{ marginBottom: 0 }}>
         <h1>let's kaypoh!</h1>
         <h3>Visit Details</h3>
       </div>
@@ -111,10 +115,50 @@ const VisitDetails = () => {
 
             <div className={'visits'}>
               <div className='visitInfo'>
-                <VisitCard 
-                  visit={visit} 
+                <VisitCard
+                  visit={visit}
                   cancellable={false}
                 />
+                {(visit.status === VisitStatus.UPCOMING || visit.status === VisitStatus.ONGOING) && <>
+                  <div className='map'>
+                    <APIProvider
+                      apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                      onLoad={() => console.log('maps api 2 has loaded')}
+                    >
+                      <CustomMap
+                        locations={[senior]}
+                        defaultCenter={{ lat: senior.lat, lng: senior.lon }}
+                        showDirections={true}
+                        defaultZoom={15}
+                        hideDetails={true}
+                      />
+
+                    </APIProvider>
+                  </div>
+                  <Button>
+                    <a
+                      style={{fontWeight: 400}}
+                      target="_blank" rel="noopener noreferrer"
+                      href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
+                      Get Directions  <EnvironmentTwoTone />
+                    </a>
+                  </Button>
+                </>}
+
+                <div >
+                  {visit.status === VisitStatus.UPCOMING &&
+                    <>
+                      <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
+                        Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
+                      </Button>
+                      <Button className={'cancelBtn'} onClick={() => handleCancelVisit(visit)}>
+                        Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
+                      </Button>
+                    </>}
+                  {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
+                    Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
+                  </Button>}
+                </div>
 
                 <Divider style={{ margin: '0.5rem' }} />
 
@@ -123,16 +167,6 @@ const VisitDetails = () => {
                 </div>
 
                 {seniorProfileAttributes}
-
-                <div className={'sectionHeader'}>
-                  <h3>Getting there</h3>
-                      // map
-                // copy address
-                // get directions
-                </div>
-
-
-                <Divider style={{ margin: '0.5rem' }} />
 
                 <div className={'sectionHeader'}>
                   <h3>Visitors</h3>

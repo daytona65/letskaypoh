@@ -112,7 +112,7 @@ const Profile: React.FC = () => {
 			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Profile</h3>
-					<a onClick={() => navigateToRoute('/entry', navigate)}> <LogoutOutlined /> Sign Out</a>
+					<a onClick={() => navigateToRoute('/', navigate)}> <LogoutOutlined /> Sign Out</a>
 				</div>
 				<Image
 					className={'profileImg'}
