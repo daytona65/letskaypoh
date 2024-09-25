@@ -157,15 +157,6 @@ const Register = () => {
                             {Object.values(SupportedLanguages).map((lang) => 
                                 <Option value={lang}>{lang}</Option>
                             )}
-                            {/* <Option value="English">English</Option>
-                            <Option value="Mandarin">Mandarin</Option>
-                            <Option value="Malay">Malay</Option>
-                            <Option value="Indonesian">Indonesian</Option>
-                            <Option value="Tamil">Tamil</Option>
-                            <Option value="Hindi">Hindi</Option>
-                            <Option value="Hokkien">Hokkien</Option>
-                            <Option value="Cantonese">Cantonese</Option>
-                            <Option value="Teochew">Teo Chew</Option> */}
                         </Select>
                     </Form.Item>
                     <Form.Item

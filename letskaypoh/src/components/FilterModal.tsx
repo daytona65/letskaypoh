@@ -18,7 +18,6 @@ const FilterModal: React.FC<Props> = (props) => {
         props.onClickApply(selectedLanguages)
     }
 
-
     const checkAll = langOptions.length === selectedLanguages.length;
     const indeterminate = selectedLanguages.length > 0 && selectedLanguages.length < langOptions.length;
 
