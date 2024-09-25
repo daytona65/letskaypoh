@@ -23,11 +23,11 @@ export const SeniorCard: React.FC<Props> = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { days } = await getDaysLastVisted(String(senior.senior_id));
+                const days = senior.daysLastVisited
                 
                 if (days === "NEVER VISITED") {
                     setDaysLastVisited(days);
-                } else{
+                } else {
                     setDaysLastVisited(String(days) + " days ago")
                 }
                 

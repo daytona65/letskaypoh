@@ -80,7 +80,10 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 							showVisitBtn={true}
 						/> :
 						<div 
-							className={'seniorMarker'} 
+							className={`seniorMarker ${
+								info.daysLastVisited === "NEVER VISITED" || info.daysLastVisited > 5 ? 'red' : 
+								info.daysLastVisited > 3 ? 'yellow' : 'green'
+							}`} 
 							// style={{zIndex: locations.indexOf(info),  position: 'sticky'}}
 						>
 							{info.name}
@@ -113,7 +116,7 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 				<CustomMarker
 					key={marker.senior_id}
 					info={marker}
-					position={{ lat: marker.lat, lng: marker.lon }}
+					position={{ lat: currentLocation.lat + marker.lat, lng: currentLocation.lng + marker.lon }}
 					hideDetails={hideDetails}
 				/>
 			))}

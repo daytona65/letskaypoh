@@ -23,6 +23,7 @@ export interface SeniorInterface {
 	postal_code: number,
 	address: string,
 	last_visited_date: string,
+	daysLastVisited?: any,
 	story: string,
 	medical: string[],
 	dislikes: string,
