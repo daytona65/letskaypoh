@@ -107,7 +107,7 @@ const Home = () => {
             <div className={'header-container'}>
                 <div className='row' style={{ margin: 0 }}>
                     <div className={'header'} style={{ width: '100%', marginBottom: '0.5rem' }}>
-                        <h1>let's kaypoh!</h1>
+                        <h1  style={{ marginTop: '1rem' }}>let's kaypoh!</h1>
                         <p>Show some love to our seniors nearby!</p>
                     </div>
                     <Button className={'filterBtn'} onClick={onClickFilter}>

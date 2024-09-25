@@ -11,6 +11,10 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+
+  h1 {
+    font-family: Poppins-Semibold, sans-serif;
+  }
 }
 
 
