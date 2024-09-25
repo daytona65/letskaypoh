@@ -5,7 +5,7 @@ import { SeniorInterface } from '../../../../models/interfaces';
 import { SeniorCard } from '../../../../components/Card/SeniorCard';
 import { Directions } from '../mapDirections';
 
-interface Coordinates {
+export interface Coordinates {
 	lat: number,
 	lng: number
 }
@@ -16,6 +16,7 @@ type Props = {
 	showDirections?: boolean
 	defaultZoom?: number
 	hideDetails?: boolean
+	currentLocation: Coordinates
 }
 
 export type MarkerProps = {
@@ -25,29 +26,7 @@ export type MarkerProps = {
 }
 
 
-const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails }) => {
-	const [center, setCenter] = useState<Coordinates>(defaultCenter)
-	const [currentLocation, setCurrentLocation] = useState<Coordinates>(defaultCenter)
-	// const [currentZoom, setCurrentZoom] = useState<number>(13)
-
-	useEffect(() => {
-		if ("geolocation" in navigator) {
-			navigator.geolocation.getCurrentPosition(function (position) {
-				const pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude,
-				}
-
-				if (!hideDetails) setCenter(pos)
-				setCurrentLocation(pos);
-				localStorage.setItem('lat', String(position.coords.latitude))
-				localStorage.setItem('lon', String(position.coords.longitude))
-			});
-		} else {
-			console.log("Geolocation is not available in your browser.");
-		}
-	}, []);
-
+const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails, currentLocation }) => {
 	const [closeAllInfoWindows, setCloseAllInfoWindows] = useState<boolean>(false);
 
 	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails }) => {
@@ -67,15 +46,11 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 					setCloseAllInfoWindows(false);
 				}}
 			>
-				<div 
-					// onMouseEnter={() => setShowInfoWindow(true)}
-					// onMouseLeave={() => setShowInfoWindow(false)}
-				>
+				<div>
 					{(showInfoWindow && !closeAllInfoWindows && !hideDetails) ?
 						<SeniorCard 
 							// style={{zIndex: locations.length + 100, position: 'sticky'}}
 							senior={info} 
-							closable={true} 
 							onClose={() => setShowInfoWindow(false)} 
 							showVisitBtn={true}
 						/> :
@@ -107,10 +82,8 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			onCameraChanged={handleCameraChange}
 			mapId={'7c0e62f0200dd8aa'}
 			defaultZoom={defaultZoom ?? 13}
-			defaultCenter={center}
+			defaultCenter={defaultCenter}
 			onClick={() => setCloseAllInfoWindows(true)}
-		// zoom={currentZoom}
-		// center={center}
 		>
 			{locations?.map(marker => (
 				<CustomMarker

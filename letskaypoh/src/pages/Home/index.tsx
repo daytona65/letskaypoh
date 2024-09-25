@@ -5,7 +5,7 @@ import '../../App.css'
 import { APIProvider } from '@vis.gl/react-google-maps'  
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
-import CustomMap from './components/Map/Map'
+import CustomMap, { Coordinates } from './components/Map/Map'
 import { SeniorInterface } from '../../models/interfaces'
 import { getAllSeniorsData, getDaysLastVisted } from '../../api'
 import { useNavigate } from 'react-router-dom'
@@ -21,6 +21,7 @@ const Home = () => {
     useState<google.maps.places.PlaceResult | null>(null);
 
     const [seniors, setSeniors] = useState<SeniorInterface[]>([])
+	const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,6 +54,24 @@ const Home = () => {
         fetchData();
     }, [])
 
+    useEffect(() => {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				const pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				}
+
+				setCurrentLocation(pos);
+				localStorage.setItem('lat', String(position.coords.latitude))
+				localStorage.setItem('lon', String(position.coords.longitude))
+
+			});
+		} else {
+			console.log("Geolocation is not available in your browser.");
+		}
+	}, []);
+
     return (
         <div className={'container-home'}>
                 <div className={'header-container'}>
@@ -70,7 +89,8 @@ const Home = () => {
 
                 <CustomMap
                     locations={seniors}
-                    defaultCenter={{lat: 1.287953, lng: 103.851784 }}
+                    defaultCenter={currentLocation}
+                    currentLocation={currentLocation}
                 />
                 <MapHandler place={selectedPlace} />
             </APIProvider>
