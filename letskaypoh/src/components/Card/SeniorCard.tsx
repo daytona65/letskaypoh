@@ -5,7 +5,6 @@ import { navigateToRoute, separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { CalendarOutlined, CloseOutlined, DislikeOutlined, DownOutlined, EnvironmentOutlined, HeartOutlined, MessageOutlined, UpOutlined, ZhihuOutlined } from '@ant-design/icons'
-import { getDaysLastVisted } from '../../api'
 import { APIProvider } from '@vis.gl/react-google-maps'
 import CustomMap, { Coordinates } from '../../pages/Home/components/Map/Map'
 import { profileItem } from '../../pages/VisitDetails'
@@ -31,8 +30,8 @@ export const SeniorCard: React.FC<Props> = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { days } = await getDaysLastVisted(String(senior.senior_id));
-
+                const days = senior.daysLastVisited
+                
                 if (days === "NEVER VISITED") {
                     setDaysLastVisited(days);
                 } else {

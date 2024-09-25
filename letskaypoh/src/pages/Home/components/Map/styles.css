@@ -12,6 +12,19 @@
     /* box-shadow: 0 2px 10px var(--color-gray-6); */
 }
 
+.seniorMarker.green {
+    background-color: rgb(29, 255, 29);
+}
+
+.seniorMarker.yellow {
+    background-color: rgb(251, 255, 13);
+}
+
+.seniorMarker.red {
+    background-color: rgb(129, 0, 0);
+    color: white;
+}
+
 .userMarker {
     background-color: #4a80f5;
     width: 14px;

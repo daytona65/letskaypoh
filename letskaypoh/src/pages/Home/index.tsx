@@ -7,7 +7,7 @@ import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
 import { SeniorInterface, SupportedLanguages } from '../../models/interfaces'
-import { getAllSeniorsData } from '../../api'
+import { getAllSeniorsData, getDaysLastVisted } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { FilterOutlined } from '@ant-design/icons'
@@ -46,7 +46,24 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorsData = await getAllSeniorsData();
+                const seniorsData = await getAllSeniorsData().then((response: SeniorInterface[]) => {
+                    return Promise.all(
+                        response.map(async (senior) => {
+                            const { days } = await getDaysLastVisted(String(senior.senior_id));
+                            let daysLastVisited;
+                            if (days === "NEVER VISITED") {
+                                daysLastVisited = days;
+                            } else{
+                                daysLastVisited = days;
+                            }
+                            return ({
+                                ...senior,
+                                daysLastVisited: daysLastVisited
+                            })
+                        })
+                    )
+                });
+  
                 setSeniors(seniorsData);
                 console.log(seniorsData)
             } catch (error) {
