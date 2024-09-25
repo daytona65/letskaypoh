@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './styles.css'
 import '../commonStyles.css'
 import '../../App.css'
-import { APIProvider } from '@vis.gl/react-google-maps'  
+import { APIProvider } from '@vis.gl/react-google-maps'
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
@@ -21,22 +21,22 @@ const Home = () => {
         navigateToRoute('/', navigate)
     }
     const [selectedPlace, setSelectedPlace] =
-    useState<google.maps.places.PlaceResult | null>(null);
+        useState<google.maps.places.PlaceResult | null>(null);
 
     const [seniors, setSeniors] = useState<SeniorInterface[]>([])
     const [filteredSeniors, setFilteredSeniors] = useState<SeniorInterface[]>([])
-	const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
+    const [currentLocation, setCurrentLocation] = useState<Coordinates>({ lat: 1.287953, lng: 103.851784 })
 
-	const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
-	const [selectedLanguages, setSelectedLanguages] = useState<string[]>(Object.values(SupportedLanguages))
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
+    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(Object.values(SupportedLanguages))
 
     const onClickFilter = () => {
-		setIsFilterModalOpen(true)
-	}
+        setIsFilterModalOpen(true)
+    }
 
-	const onCloseModal = () => {
-		setIsFilterModalOpen(false)
-	}
+    const onCloseModal = () => {
+        setIsFilterModalOpen(false)
+    }
 
     const handleApplyFilter = (languages: string[]) => {
         setSelectedLanguages(languages)
@@ -53,7 +53,7 @@ const Home = () => {
                             let daysLastVisited;
                             if (days === "NEVER VISITED") {
                                 daysLastVisited = days;
-                            } else{
+                            } else {
                                 daysLastVisited = days;
                             }
                             return ({
@@ -63,9 +63,8 @@ const Home = () => {
                         })
                     )
                 });
-  
+
                 setSeniors(seniorsData);
-                console.log(seniorsData)
             } catch (error) {
                 console.error("Error fetching senior data:", error);
             }
@@ -82,39 +81,37 @@ const Home = () => {
     }, [selectedLanguages, seniors])
 
     useEffect(() => {
-		if ("geolocation" in navigator) {
-			navigator.geolocation.getCurrentPosition(function (position) {
-				const pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude,
-				}
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                }
 
-				setCurrentLocation(pos);
-				localStorage.setItem('lat', String(position.coords.latitude))
-				localStorage.setItem('lon', String(position.coords.longitude))
+                setCurrentLocation(pos);
+                localStorage.setItem('lat', String(position.coords.latitude))
+                localStorage.setItem('lon', String(position.coords.longitude))
 
-			});
-		} else {
-			console.log("Geolocation is not available in your browser.");
-		}
-	}, []);
+            });
+        } else {
+            console.error("Geolocation is not available in your browser.");
+        }
+    }, []);
 
     return (
         <div className={'container-home'}>
-                <div className={'header-container'}>
-                    <div className='row' style={{margin: 0}}>
-                        <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>
-                            <h1>let's kaypoh!</h1>
-                            <p>Show some love to our seniors nearby!</p>
-                        </div>
-                        <Button className={'filterBtn'} onClick={onClickFilter}>
-                            <FilterOutlined />
-                        </Button>
+            <div className={'header-container'}>
+                <div className='row' style={{ margin: 0 }}>
+                    <div className={'header'} style={{ width: '100%', marginBottom: '0.5rem' }}>
+                        <h1>let's kaypoh!</h1>
+                        <p>Show some love to our seniors nearby!</p>
                     </div>
+                    <Button className={'filterBtn'} onClick={onClickFilter}>
+                        <FilterOutlined />
+                    </Button>
                 </div>
-            <APIProvider 
-                apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-                onLoad={() => console.log('maps api has loaded')}>
+            </div>
+            <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
                 <div className={'explore'}>
                     <PlaceAutocompleteClassic onPlaceSelect={setSelectedPlace} />
                 </div>
@@ -126,11 +123,11 @@ const Home = () => {
                 />
                 <MapHandler place={selectedPlace} />
             </APIProvider>
-            <FilterModal 
-				open={isFilterModalOpen} 
-				handleClose={onCloseModal} 
-				onClickApply={handleApplyFilter}
-			/>
+            <FilterModal
+                open={isFilterModalOpen}
+                handleClose={onCloseModal}
+                onClickApply={handleApplyFilter}
+            />
         </div>
     )
 }

@@ -51,6 +51,7 @@ const CompleteVisit = () => {
     fetchData();
   }, [visitId])
 
+  // add api to store form values
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
     console.log('Received values of form: ', values, senior);
   }

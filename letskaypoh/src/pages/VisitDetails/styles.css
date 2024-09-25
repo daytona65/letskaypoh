@@ -10,19 +10,6 @@
     }
 }
 
-.visits {
-    width: 85%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    @media (max-width: 1000px) {
-        margin-bottom: 2rem;
-    }
-}
-
 .sectionHeader {
     text-align: start;
     width: 100%;

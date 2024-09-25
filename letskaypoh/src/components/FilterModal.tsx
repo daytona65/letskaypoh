@@ -50,7 +50,6 @@ const FilterModal: React.FC<Props> = (props) => {
                 </Checkbox>
                 <Divider style={{ margin: '0.5rem' }} />
                 <Checkbox.Group options={Object.values(SupportedLanguages)} value={selectedLanguages} onChange={onCheckLanguage} />
-
             </div>
         </Modal>
     )

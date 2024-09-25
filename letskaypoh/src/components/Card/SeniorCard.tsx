@@ -153,10 +153,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
                             {
                                 isMapExpanded &&
                                 <div className='map'>
-                                    <APIProvider
-                                        apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-                                        onLoad={() => console.log('maps api 2 has loaded')}
-                                    >
+                                    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
                                         <CustomMap
                                             locations={[senior]}
                                             defaultCenter={{ lat: senior.lat, lng: senior.lon }}

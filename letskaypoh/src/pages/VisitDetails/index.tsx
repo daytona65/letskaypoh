@@ -1,5 +1,5 @@
 import { Avatar, Button, Divider, Popconfirm, Tooltip } from 'antd'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
 import { getSeniorByIdData, getVisitByIdData } from '../../api';
@@ -41,7 +41,7 @@ const VisitDetails = () => {
 
 			});
 		} else {
-			console.log("Geolocation is not available in your browser.");
+			console.error("Geolocation is not available in your browser.");
 		}
 	}, []);
 
@@ -56,7 +56,6 @@ const VisitDetails = () => {
       try {
         const visitData = await getVisitByIdData(visitId);
         setVisit(visitData);
-        console.log(visitData)
       } catch (error) {
         console.error("Error fetching visit data:", error);
       }
@@ -111,13 +110,13 @@ const VisitDetails = () => {
 
   const seniorProfileAttributes = seniorProfileItems.map((attr) => {
     return (
-      <>
+      <React.Fragment key={attr.key}>
         <div key={attr.key} className={'seniorProfileDetail'}>
           <span>{attr.icon} <h4>{attr.label}</h4></span>
           {attr.children}
         </div>
         <Divider style={{ margin: '0.5rem' }} />
-      </>
+      </React.Fragment>
     )
   })
 
@@ -130,7 +129,7 @@ const VisitDetails = () => {
       visitorLabel = 'You'
     }
 
-    return <Tooltip title={visitorLabel} placement="top">
+    return <Tooltip key={id} title={visitorLabel} placement="top">
       <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
     </Tooltip>
   })
@@ -165,7 +164,7 @@ const VisitDetails = () => {
                   <div className='map'>
                     <APIProvider
                       apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-                      onLoad={() => console.log('maps api 2 has loaded')}
+                      // onLoad={() => console.log('maps api 2 has loaded')}
                     >
                       <CustomMap
                         locations={[senior]}

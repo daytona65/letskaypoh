@@ -36,7 +36,6 @@ const Register = () => {
       );
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-        console.log('Received values of form: ', values);
         setLoading(true)
 
         const newUserDetails: UserInterface = (
@@ -52,8 +51,6 @@ const Register = () => {
                 postal_code: Number(values.postal_code),
             }
         )
-
-        console.log('newUserDetails:', newUserDetails)
 
         localStorage.clear()
         localStorage.setItem('name', values.name)

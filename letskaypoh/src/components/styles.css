@@ -125,6 +125,7 @@
     height: 40px;
     background-color: var(--color-bg);
     padding: 1rem 0;
+    font-family: Poppins-SemiBold, sans-serif;
 
     display: flex;
     flex-direction: row;
@@ -170,7 +171,6 @@
 .filterTitle {
     font-size: 14px;
     font-weight: 500;
-    color: var(--color-gray-8);
     margin-bottom: 0.5rem;
 }
 

@@ -43,9 +43,6 @@ const RegisterVisit: React.FC = () => {
     const handleConfirmVisit: FormProps['onFinish'] = (fieldValues) => {
         const dateValue = fieldValues['visitDate']
         
-        console.log('Received values of form: ', fieldValues);
-        console.log('selectedTimeslot ', selectedTimeslot);
-        console.log('visitDate', dateValue, dateValue.format('DD MMM YYYY'))
         setLoading(true)
         const userId = localStorage.getItem('user_id');
         const visitDetails: VisitInterface = {
@@ -60,8 +57,6 @@ const RegisterVisit: React.FC = () => {
             try {
                 await createVisit(visitDetails);
                 const visitId = await getLatestVisitId();
-
-                console.log('visitDetails: ', visitDetails)
 
                 setLoading(false)
                 console.log('loading', loading)

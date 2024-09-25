@@ -27,13 +27,12 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        console.log(Number(user_id))
         const visitsData = await getUserVisitData(Number(user_id));
-        console.log(user_id)
-        console.log(visitsData)
+
         setUpcomingVisits(visitsData
           .filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING)
           .sort((a: VisitInterface, b: VisitInterface) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+        
         setCurVisits(visitsData
           .filter((visit: VisitInterface) => visit.status === VisitStatus.ONGOING)
           .sort((a: VisitInterface, b: VisitInterface) => new Date(a.date).getTime() - new Date(b.date).getTime()));
@@ -44,7 +43,7 @@ const Visits = () => {
 
     fetchData();
     setLoading(false)
-  }, [])
+  }, [user_id])
 
   const visitCards = upcomingVisits.map((visit) => {
     return <VisitCard
@@ -72,10 +71,10 @@ const Visits = () => {
             {curVisitCards}
           </>
         }
-        <h3>Upcoming Visits</h3>
       </div>
 
       <div className={'visits'}>
+        <h3>Upcoming Visits</h3>
         {
           loading ? 'Loading...' :
             upcomingVisits.length === 0 ? <>

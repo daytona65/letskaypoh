@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
-import { SeniorInterface, VisitInterface } from '../../models/interfaces'
-// import { SeniorCard } from '../../components/Card/SeniorCard'
+import { VisitInterface } from '../../models/interfaces'
 import Check from '../../assets/check.webp'
 import { Alert, Button } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { VisitCard } from '../../components/Card/VisitCard'
-import { getAllSeniorsData, getVisitByIdData } from '../../api'
+import { getVisitByIdData } from '../../api'
 import cn from 'classnames'
 
 const VisitConfirmed: React.FC = () => {
@@ -24,15 +23,12 @@ const VisitConfirmed: React.FC = () => {
     const userName = localStorage.getItem('name')
 
     const [visit, setVisit] = useState<VisitInterface | null>(null)
-    const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const visitData = await getVisitByIdData(visitId);
-                const seniorData = await getAllSeniorsData();
                 setVisit(visitData);
-                setSenior(seniorData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);
             }
@@ -40,8 +36,6 @@ const VisitConfirmed: React.FC = () => {
 
         fetchData();
     }, [visitId])
-
-    console.log(senior)
 
     return (
         <div className={'container'}>
@@ -60,8 +54,6 @@ const VisitConfirmed: React.FC = () => {
 
                 <Alert
                     className='alert'
-                    // message={<h3 >Visit confirmed!</h3>}
-                    // description={`Drop ${props.senior.name} a call to notify ${props.senior.gender.toLowerCase() === "m" ? 'him' : 'her'} that you're visiting!`} 
                     description={'A social worker will be reaching out to you on details of your first visit!'}
                     type="info"
                     showIcon

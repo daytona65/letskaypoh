@@ -18,6 +18,7 @@ import CompleteVisit from './pages/CompleteVisit/index.tsx';
 import VisitConfirmed from './pages/VisitConfirmed/index.tsx';
 import VisitDetails from './pages/VisitDetails/index.tsx';
 import Login from './pages/Login/index.tsx';
+import { ConfigProvider } from 'antd';
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile/>,
+        element: <Profile />,
       },
       {
         path: "/register-visit/:seniorId",
-        element: <RegisterVisit/>,
+        element: <RegisterVisit />,
       },
       {
         path: "/visits",
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/visit-confirmed/:visitId",
-        element: <VisitConfirmed/>,
+        element: <VisitConfirmed />,
       },
     ]
   },
@@ -73,8 +74,16 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')!).render(
-  // need to add userProvider, seniorProvider
   <StrictMode>
-    <RouterProvider router={router}/>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#8187f3',
+        },
+      }}
+    >
+      <RouterProvider router={router} />
+    </ConfigProvider>
+
   </StrictMode>,
 )

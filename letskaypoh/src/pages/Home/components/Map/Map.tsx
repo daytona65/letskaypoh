@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { AdvancedMarker, Map, MapCameraChangedEvent} from '@vis.gl/react-google-maps';
+import React, { useEffect, useState } from 'react'
+import { AdvancedMarker, Map} from '@vis.gl/react-google-maps';
 import './styles.css'
 import { SeniorInterface } from '../../../../models/interfaces';
 import { SeniorCard } from '../../../../components/Card/SeniorCard';
@@ -49,7 +49,6 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 				<div>
 					{(showInfoWindow && !closeAllInfoWindows && !hideDetails) ?
 						<SeniorCard 
-							// style={{zIndex: locations.length + 100, position: 'sticky'}}
 							senior={info} 
 							onClose={() => setShowInfoWindow(false)} 
 							showVisitBtn={true}
@@ -59,7 +58,6 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 								info.daysLastVisited === "NEVER VISITED" || info.daysLastVisited > 5 ? 'red' : 
 								info.daysLastVisited > 3 ? 'yellow' : 'green'
 							}`} 
-							// style={{zIndex: locations.indexOf(info),  position: 'sticky'}}
 						>
 							{info.name}
 						</div>
@@ -69,19 +67,13 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 		);
 	}
 
-	const handleCameraChange = useCallback((ev: MapCameraChangedEvent) => {
-		console.log('camera changed: ', ev.detail);
-	}, []);
-
-
 	return (
 		<Map
 			clickableIcons={false}
 			disableDefaultUI
 			gestureHandling={'greedy'}
-			onCameraChanged={handleCameraChange}
 			mapId={'7c0e62f0200dd8aa'}
-			defaultZoom={defaultZoom ?? 13}
+			defaultZoom={defaultZoom ?? 14}
 			defaultCenter={defaultCenter}
 			onClick={() => setCloseAllInfoWindows(true)}
 		>

@@ -9,4 +9,13 @@
     @media (max-width: 1000px) {
         margin-bottom: 2rem;
     }
+
+    h3 {
+        width: 100%;
+        text-align: start;
+
+        @media (min-width: 1000px) {
+            width: 95%;
+        }
+    }
 }
