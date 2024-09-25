@@ -24,7 +24,13 @@ export const SeniorCard: React.FC<Props> = (props) => {
         const fetchData = async () => {
             try {
                 const { days } = await getDaysLastVisted(String(senior.senior_id));
-                setDaysLastVisited(String(days));
+                
+                if (days === "NEVER VISITED") {
+                    setDaysLastVisited(days);
+                } else{
+                    setDaysLastVisited(String(days) + " days ago")
+                }
+                
             } catch (error) {
                 console.error("Error fetching days:", error);
             }

@@ -78,5 +78,5 @@ def days_last_visited():
     
     days = days_difference(visit_data['date'])
 
-    return jsonify({ "days": str(days) + " days ago" }), 201
+    return jsonify({ "days": days }), 201
 
