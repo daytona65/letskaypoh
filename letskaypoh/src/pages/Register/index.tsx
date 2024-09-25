@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { SupportedLanguages, UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
 import { registerUser } from '../../api'
+import BannerImg from '../../assets/banner.png'
 
 type FieldType = {
     name: string;
@@ -75,19 +76,22 @@ const Register = () => {
         } catch (error) {
             console.error("Error registering user:", error);
         }
-
-
         setLoading(false)
-        
     };
 
     return (
         <div className={'container'}>
             <div className={'header'}>
+                <img className={'registerBannerImg'} src={BannerImg} />
                 <h1>let's kaypoh!</h1>
                 <h3>Register to be a kaypoh!</h3>
                 <p>Thank you for your interest in volunteering with us!</p>
                 <p>Just a couple more questions...</p>
+
+                <p style={{marginTop: '2rem'}}>
+                    Already have an account? {' '}
+                    <a onClick={() => navigateToRoute('/login', navigate)}>Log in</a>
+                </p>
             </div>
 
             <div className={'form'}>
@@ -170,9 +174,11 @@ const Register = () => {
                     >
                         <Input />
                     </Form.Item>
-                    <Button htmlType='submit'>
+                    <Button className='joinButton' htmlType='submit'>
                         Register
                     </Button>
+
+                    
                 </Form>
             </div>
         </div>

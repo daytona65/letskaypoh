@@ -25,7 +25,8 @@ const Home = () => {
 
     const [seniors, setSeniors] = useState<SeniorInterface[]>([])
     const [filteredSeniors, setFilteredSeniors] = useState<SeniorInterface[]>([])
-    const [currentLocation, setCurrentLocation] = useState<Coordinates>({ lat: 1.287953, lng: 103.851784 })
+    const [currentLocation, setCurrentLocation] = useState<Coordinates>()
+    const [loadingCurLoc, setLoadingCurLoc] = useState<boolean>(false)
 
     const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>(Object.values(SupportedLanguages))
@@ -81,6 +82,7 @@ const Home = () => {
     }, [selectedLanguages, seniors])
 
     useEffect(() => {
+        setLoadingCurLoc(true)
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 const pos = {
@@ -93,7 +95,9 @@ const Home = () => {
                 localStorage.setItem('lon', String(position.coords.longitude))
 
             });
+            setLoadingCurLoc(false)
         } else {
+            setLoadingCurLoc(false)
             console.error("Geolocation is not available in your browser.");
         }
     }, []);
@@ -116,11 +120,12 @@ const Home = () => {
                     <PlaceAutocompleteClassic onPlaceSelect={setSelectedPlace} />
                 </div>
 
-                <CustomMap
+                { loadingCurLoc ? 'Loading Map...' : currentLocation && <CustomMap
                     locations={filteredSeniors}
                     defaultCenter={currentLocation}
                     currentLocation={currentLocation}
-                />
+                />}
+
                 <MapHandler place={selectedPlace} />
             </APIProvider>
             <FilterModal

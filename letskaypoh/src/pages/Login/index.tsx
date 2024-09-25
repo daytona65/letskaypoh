@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { navigateToRoute } from '../../components/utils'
 import { checkMobileExists, loginUser } from '../../api'
+import BannerImg from '../../assets/banner.png'
 
 type FieldType = {
     name: string;
@@ -66,10 +67,11 @@ const Login = () => {
     };
 
     return (
-        <div className={'container'}>
-            <div className={'header'}>
-                <h1>let's kaypoh!</h1>
-                <h3>Why so kaypoh?</h3>
+        <div className={'container-login'}>
+            <div>
+                <img className={'bannerImg'} src={BannerImg} />
+                <h1 style={{marginTop: 0}}>let's kaypoh!</h1>
+                <p>Welcome back our fellow kaypoh!</p>
             </div>
 
             <div className={'form'}>
@@ -81,8 +83,6 @@ const Login = () => {
                     }}
                     name="login"
                     layout="horizontal"
-                    labelCol={{span: 10}}
-                    wrapperCol={{ span: 14}}
                     className='formInput'
                 >
                     <Form.Item
@@ -95,9 +95,14 @@ const Login = () => {
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
                     </Form.Item>
                    {mobileError && <div style={{ color: 'red', marginTop: -10 }}><p>Mobile number does not exist.</p></div>}
-                    <Button htmlType='submit'>
+                    <Button htmlType='submit' className='joinButton' style={{width: '280px'}}>
                         Login
                     </Button>
+
+                    <p style={{marginBottom: '10rem'}}>
+                        Don't have an account? {' '}
+                        <a onClick={() => navigateToRoute('/register', navigate)}>Register</a>
+                    </p>
                 </Form>
             </div>
         </div>
