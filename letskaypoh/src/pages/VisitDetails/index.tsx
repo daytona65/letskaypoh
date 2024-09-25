@@ -25,26 +25,31 @@ const VisitDetails = () => {
   }
   const visitId = Number(useLocation().pathname.split("/")[2]);
 
-	const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
+	// const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
 
-  useEffect(() => {
-		if ("geolocation" in navigator) {
-			navigator.geolocation.getCurrentPosition(function (position) {
-				const pos = {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude,
-				}
+  // useEffect(() => {
+	// 	if ("geolocation" in navigator) {
+	// 		navigator.geolocation.getCurrentPosition(function (position) {
+	// 			const pos = {
+	// 				lat: position.coords.latitude,
+	// 				lng: position.coords.longitude,
+	// 			}
 
-				setCurrentLocation(pos);
-				localStorage.setItem('lat', String(position.coords.latitude))
-				localStorage.setItem('lon', String(position.coords.longitude))
+	// 			setCurrentLocation(pos);
+  //       console.log(pos)
+	// 			localStorage.setItem('lat', String(position.coords.latitude))
+	// 			localStorage.setItem('lon', String(position.coords.longitude))
 
-			});
-		} else {
-			console.error("Geolocation is not available in your browser.");
-		}
-	}, []);
+	// 		});
+	// 	} else {
+	// 		console.error("Geolocation is not available in your browser.");
+	// 	}
+	// }, []);
 
+  const currentLocation: google.maps.LatLngLiteral = {
+    lat: Number(localStorage.getItem('lat')), 
+    lng: Number(localStorage.getItem('lon'))
+  }
 
   // add api endpoint - get visit
   const [visit, setVisit] = useState<VisitInterface>();
@@ -185,7 +190,7 @@ const VisitDetails = () => {
                       <a
                         style={{ fontWeight: 400 }}
                         target="_blank" rel="noopener noreferrer"
-                        href={googleDirectionsLink({ lat: senior.lat, lng: senior.lon }, { lat: senior.lat, lng: senior.lon })} >
+                        href={googleDirectionsLink(currentLocation, { lat: senior.lat, lng: senior.lon })} >
                         Get Directions  <EnvironmentTwoTone />
                       </a>
                     </Button>

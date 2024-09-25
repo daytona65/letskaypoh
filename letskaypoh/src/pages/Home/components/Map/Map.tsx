@@ -25,7 +25,6 @@ export type MarkerProps = {
 	hideDetails?: boolean
 }
 
-
 const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails, currentLocation }) => {
 	const [closeAllInfoWindows, setCloseAllInfoWindows] = useState<boolean>(false);
 
