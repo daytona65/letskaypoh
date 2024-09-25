@@ -63,7 +63,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
 
             });
         } else {
-            console.log("Geolocation is not available in your browser.");
+            console.error("Geolocation is not available in your browser.");
         }
     }, []);
 

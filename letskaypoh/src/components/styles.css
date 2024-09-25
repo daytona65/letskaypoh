@@ -154,3 +154,23 @@
     align-items: center;
     margin: 1rem 2rem;
 }
+
+.modalContent-left {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin-top: 1rem;
+
+    .ant-checkbox-wrapper {
+        width: 45%;
+    }
+}
+
+.filterTitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-gray-8);
+    margin-bottom: 0.5rem;
+}
+

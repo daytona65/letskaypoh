@@ -6,10 +6,13 @@ import { APIProvider } from '@vis.gl/react-google-maps'
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
-import { SeniorInterface } from '../../models/interfaces'
+import { SeniorInterface, SupportedLanguages } from '../../models/interfaces'
 import { getAllSeniorsData } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
+import { FilterOutlined } from '@ant-design/icons'
+import { Button } from 'antd'
+import FilterModal from '../../components/FilterModal'
 
 const Home = () => {
     const token = localStorage.getItem('access_token');
@@ -21,7 +24,24 @@ const Home = () => {
     useState<google.maps.places.PlaceResult | null>(null);
 
     const [seniors, setSeniors] = useState<SeniorInterface[]>([])
+    const [filteredSeniors, setFilteredSeniors] = useState<SeniorInterface[]>([])
 	const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
+
+	const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false)
+	const [selectedLanguages, setSelectedLanguages] = useState<string[]>(Object.values(SupportedLanguages))
+
+    const onClickFilter = () => {
+		setIsFilterModalOpen(true)
+	}
+
+	const onCloseModal = () => {
+		setIsFilterModalOpen(false)
+	}
+
+    const handleApplyFilter = (languages: string[]) => {
+        setSelectedLanguages(languages)
+        onCloseModal()
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -36,6 +56,13 @@ const Home = () => {
 
         fetchData();
     }, [])
+
+    useEffect(() => {
+        setFilteredSeniors(seniors.filter(
+            (senior) => senior.languages.some((lang) => selectedLanguages.includes(lang))
+        ))
+
+    }, [selectedLanguages, seniors])
 
     useEffect(() => {
 		if ("geolocation" in navigator) {
@@ -58,9 +85,14 @@ const Home = () => {
     return (
         <div className={'container-home'}>
                 <div className={'header-container'}>
-                    <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>
-                        <h1>let's kaypoh!</h1>
-                        <p>Show some love to our seniors nearby!</p>
+                    <div className='row' style={{margin: 0}}>
+                        <div className={'header'} style={{width: '100%', marginBottom: '0.5rem'}}>
+                            <h1>let's kaypoh!</h1>
+                            <p>Show some love to our seniors nearby!</p>
+                        </div>
+                        <Button className={'filterBtn'} onClick={onClickFilter}>
+                            <FilterOutlined />
+                        </Button>
                     </div>
                 </div>
             <APIProvider 
@@ -71,13 +103,17 @@ const Home = () => {
                 </div>
 
                 <CustomMap
-                    locations={seniors}
+                    locations={filteredSeniors}
                     defaultCenter={currentLocation}
                     currentLocation={currentLocation}
                 />
                 <MapHandler place={selectedPlace} />
             </APIProvider>
-
+            <FilterModal 
+				open={isFilterModalOpen} 
+				handleClose={onCloseModal} 
+				onClickApply={handleApplyFilter}
+			/>
         </div>
     )
 }

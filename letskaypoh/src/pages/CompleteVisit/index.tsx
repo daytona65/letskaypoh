@@ -14,7 +14,7 @@ type FieldType = {
   visitNotes: string;
 };
 
-
+//check in not in use 
 const CompleteVisit = () => {
   const visitId = Number(useLocation().pathname.split("/")[2]);
   const token = localStorage.getItem('access_token');

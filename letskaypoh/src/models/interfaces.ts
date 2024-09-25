@@ -1,3 +1,16 @@
+export enum SupportedLanguages {
+	ENGLISH = "English",
+	MANDARIN = "Mandarin",
+	MALAY = "Malay",
+	INDONESIAN = "Indonesian",
+	TAMIL = "Tamil",
+	HOKKIEN = "Hokkien",
+	HINDI = "Hindi",
+	CANTONESE = "Cantonese",
+	TEOCHEW = "Teo Chew",
+}
+
+
 export enum VisitStatus {
 	UPCOMING = "Upcoming",
 	ONGOING = "Ongoing",

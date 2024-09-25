@@ -4,7 +4,7 @@ import './styles.css'
 import '../commonStyles.css'
 import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
-import { UserInterface } from '../../models/interfaces'
+import { SupportedLanguages, UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
 import { registerUser } from '../../api'
 
@@ -154,7 +154,10 @@ const Register = () => {
                         rules={[{ required: true, message: 'Please select your spoken languages' }]}
                     >
                         <Select mode="multiple" placeholder="Please select spoken languages">
-                            <Option value="English">English</Option>
+                            {Object.values(SupportedLanguages).map((lang) => 
+                                <Option value={lang}>{lang}</Option>
+                            )}
+                            {/* <Option value="English">English</Option>
                             <Option value="Mandarin">Mandarin</Option>
                             <Option value="Malay">Malay</Option>
                             <Option value="Indonesian">Indonesian</Option>
@@ -162,7 +165,7 @@ const Register = () => {
                             <Option value="Hindi">Hindi</Option>
                             <Option value="Hokkien">Hokkien</Option>
                             <Option value="Cantonese">Cantonese</Option>
-                            <Option value="Teochew">Teo Chew</Option>
+                            <Option value="Teochew">Teo Chew</Option> */}
                         </Select>
                     </Form.Item>
                     <Form.Item

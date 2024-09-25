@@ -1,7 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
 import { useMapsLibrary } from '@vis.gl/react-google-maps';
-import { Button } from 'antd';
-import { FilterOutlined } from '@ant-design/icons';
 import cn from 'classnames';
 
 interface Props {
@@ -36,12 +34,8 @@ export const PlaceAutocompleteClassic = ({ onPlaceSelect }: Props) => {
   }, [onPlaceSelect, placeAutocomplete]);
 
   return (
-    <div className={cn('row', 'autocomplete')} style={{ margin: '0.5rem 0' }}>
+    <div className={cn('row', 'autocomplete')} style={{ margin: '1rem 0' }}>
       <input className='styledInput' ref={inputRef} />
-      <Button className={'filterBtn'}>
-        <FilterOutlined />
-      </Button>
-
     </div>
   );
 };

@@ -14,15 +14,11 @@
 .styledInput {
     color: var(--color-gray-8);
     background: none;
-    margin-left: 0.5rem;
-    background: none;
     border-radius: 60px;
     height: 42px;
     display: flex;
     flex-direction: row;
     padding-left: 1rem;
-    margin: 0.5rem;
-    margin-left: 0;
     font-size: 14px;
     width: 100%;
     border-color: transparent;

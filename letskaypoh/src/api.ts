@@ -69,7 +69,7 @@ export const getAllSeniorsData = async () => {
 export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterface> => {
     try {
         const response = await api.get(`/senior?id=${seniorId}`);
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.error(`Error fetching senior with ID ${seniorId}:`, error);

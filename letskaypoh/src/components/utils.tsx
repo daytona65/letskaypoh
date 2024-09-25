@@ -88,7 +88,6 @@ export const handleCancelVisit = (visit: VisitInterface) => {
   } catch (error) {
       console.error("Error updating visit status:", error);
   }
-  console.log('cancel visit')
   message.success('Visit cancelled!')
   // navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
 }
