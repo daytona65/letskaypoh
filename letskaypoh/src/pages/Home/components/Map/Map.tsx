@@ -40,6 +40,8 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 
 				if (!hideDetails) setCenter(pos)
 				setCurrentLocation(pos);
+				localStorage.setItem('lat', String(position.coords.latitude))
+				localStorage.setItem('lon', String(position.coords.longitude))
 			});
 		} else {
 			console.log("Geolocation is not available in your browser.");
