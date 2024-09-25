@@ -8,9 +8,9 @@ import { VisitCard } from '../../components/Card/VisitCard';
 import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone, UserOutlined } from '@ant-design/icons';
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
-import CustomMap from '../Home/components/Map/Map';
+import CustomMap, { Coordinates } from '../Home/components/Map/Map';
 
-interface profileItem {
+export interface profileItem {
   key: React.Key
   label: string
   icon: JSX.Element
@@ -24,6 +24,27 @@ const VisitDetails = () => {
     navigateToRoute('/', navigate)
   }
   const visitId = Number(useLocation().pathname.split("/")[2]);
+
+	const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
+
+  useEffect(() => {
+		if ("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(function (position) {
+				const pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude,
+				}
+
+				setCurrentLocation(pos);
+				localStorage.setItem('lat', String(position.coords.latitude))
+				localStorage.setItem('lon', String(position.coords.longitude))
+
+			});
+		} else {
+			console.log("Geolocation is not available in your browser.");
+		}
+	}, []);
+
 
   // add api endpoint - get visit
   const [visit, setVisit] = useState<VisitInterface>();
@@ -121,14 +142,7 @@ const VisitDetails = () => {
     }}
   >
     {visitorItems}
-    {/* <Avatar src="https://avatar.iran.liara.run/public" />
-                  <a href="https://ant.design">
-                    <Avatar style={{ backgroundColor: '#f56a00' }}>K</Avatar>
-                  </a>
-                  <Tooltip title="Ant User" placement="top">
-                    <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                  </Tooltip>
-                  <Avatar style={{ backgroundColor: '#1677ff' }} icon={<AntDesignOutlined />} /> */}
+    
   </Avatar.Group>
   return (
     <div className={'container'}>
@@ -159,6 +173,7 @@ const VisitDetails = () => {
                         showDirections={true}
                         defaultZoom={15}
                         hideDetails={true}
+                        currentLocation={currentLocation}
                       />
 
                     </APIProvider>

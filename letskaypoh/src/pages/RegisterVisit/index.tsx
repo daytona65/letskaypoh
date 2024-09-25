@@ -101,12 +101,12 @@ const RegisterVisit: React.FC = () => {
         <div className={'registerContainer'}>
             <div className={'registerHeader'}>
                 <h1>let's kaypoh!</h1>
-                <h3>Register your visit</h3>
+                <h3 style={{marginBottom: '0'}}>Register your visit</h3>
             </div>
 
             <div className={'register-visit'}>
                 {senior && 
-                <SeniorCard senior={senior}/> }
+                <SeniorCard senior={senior} showDetails={true}/> }
 
                 <Form
                     scrollToFirstError

@@ -51,7 +51,6 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 						<SeniorCard 
 							// style={{zIndex: locations.length + 100, position: 'sticky'}}
 							senior={info} 
-							closable={true} 
 							onClose={() => setShowInfoWindow(false)} 
 							showVisitBtn={true}
 						/> :
