@@ -50,7 +50,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
             )
         },
         {
-            key: 3,
+            key: 4,
             title: 'Step 4: Record Visit Notes ',
             icon: <FileDoneOutlined />,
             children: (

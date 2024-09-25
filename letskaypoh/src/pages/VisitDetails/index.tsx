@@ -8,7 +8,7 @@ import { VisitCard } from '../../components/Card/VisitCard';
 import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone, UserOutlined } from '@ant-design/icons';
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
-import CustomMap, { Coordinates } from '../Home/components/Map/Map';
+import CustomMap from '../Home/components/Map/Map';
 
 export interface profileItem {
   key: React.Key

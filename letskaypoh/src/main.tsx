@@ -30,10 +30,6 @@ const router = createBrowserRouter([
     element: <NavBarWrapper isLoggedIn={true} />,
     children: [
       {
-        path: "/login",
-        element: <Login />,
-      },
-      {
         path: "/home",
         element: <Home />,
       },
@@ -62,6 +58,10 @@ const router = createBrowserRouter([
         element: <VisitConfirmed />,
       },
     ]
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/register",

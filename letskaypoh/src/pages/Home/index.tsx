@@ -120,7 +120,7 @@ const Home = () => {
                     <PlaceAutocompleteClassic onPlaceSelect={setSelectedPlace} />
                 </div>
 
-                { loadingCurLoc ? 'Loading Map...' : currentLocation && <CustomMap
+                { loadingCurLoc ? <div>'Loading Map...'</div> : currentLocation && <CustomMap
                     locations={filteredSeniors}
                     defaultCenter={currentLocation}
                     currentLocation={currentLocation}

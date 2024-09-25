@@ -99,7 +99,7 @@ const Login = () => {
                         Login
                     </Button>
 
-                    <p style={{marginBottom: '10rem'}}>
+                    <p style={{marginBottom: '3rem'}}>
                         Don't have an account? {' '}
                         <a onClick={() => navigateToRoute('/register', navigate)}>Register</a>
                     </p>

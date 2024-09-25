@@ -55,7 +55,7 @@ const Profile: React.FC = () => {
     }, [user])
 
 	const visitCards = pastVisits.map((visit) => {
-		return <VisitCard visit={visit}/>
+		return <VisitCard key={visit.visit_id} visit={visit}/>
 	})
 
 	const profileItems: profileItem[] = [
