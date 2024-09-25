@@ -115,7 +115,7 @@ const Profile: React.FC = () => {
 					<a onClick={() => {
 						localStorage.clear();
 						navigateToRoute('/', navigate)
-					}}> <LogoutOutlined /> Sign Out</a>
+					}}>  Sign Out <LogoutOutlined /></a> 
 				</div>
 				<Image
 					className={'profileImg'}
@@ -124,7 +124,7 @@ const Profile: React.FC = () => {
 				/>
 				<div className={'column'}>
 					{user && (<h2 className={'name'}>
-						{user.name}, {user.age}{user.gender}
+						{user.name.split(' ')[0]}, {user.age}{user.gender}
 					</h2>)
 					}
 					{profileAttributes}
@@ -133,7 +133,7 @@ const Profile: React.FC = () => {
 
 			<div className={'section'}>
 				<div className={'row'}>
-					<h3>Visit History</h3>
+					<h3>Kaypoh History</h3>
 				</div>
 
 				{pastVisits.length === 0 ? <>

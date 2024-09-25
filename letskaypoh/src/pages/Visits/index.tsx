@@ -65,6 +65,7 @@ const Visits = () => {
     <div className={'container'}>
       <div className={'header'}>
         <h1>let's kaypoh!</h1>
+        <a>Where to kaypoh next...</a>
         {curVisits.length > 0 &&
           <>
             <h3>Current Visit</h3>

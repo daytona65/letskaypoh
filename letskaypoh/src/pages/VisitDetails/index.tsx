@@ -233,7 +233,7 @@ const VisitDetails = () => {
                   {visitors}
                 </div>
 
-                <Button onClick={() => navigateToRoute('/visits', navigate)}>
+                <Button style={{ marginTop: '1.5rem'}} onClick={() => navigateToRoute('/visits', navigate)}>
                   Back to Visits
                 </Button>
 

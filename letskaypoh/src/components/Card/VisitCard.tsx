@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Button, Popconfirm, Tag } from 'antd'
+import { Avatar, Button, Popconfirm, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
 import { CheckCircleTwoTone, ClockCircleOutlined, DownOutlined, EnvironmentOutlined, FrownTwoTone, UpOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
+import Granny from '../../assets/logo.png'
+import Grandpa from '../../assets/grandpa.jpg'
 
 interface Props {
     visit: VisitInterface
@@ -33,6 +35,8 @@ export const VisitCard: React.FC<Props> = (props) => {
         fetchData();
     }, [visit.senior_id])
 
+    const seniorAvatar = senior && <Avatar style={{height: '30px', marginRight: '0.5rem'}} src={senior.gender.toLowerCase() == 'm' ? Grandpa : Granny}/>
+
 
     const handleViewVisitDetails = () => {
         // add api to mark visit as completed
@@ -50,7 +54,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                     </div>
                 </div>
                 <div className={'visitTitle'}>
-                    <span>Visit to {senior.name}</span>
+                    <span className={'seniorTitle'}> {seniorAvatar} Visit to {senior.name}</span>
                 </div>
 
                 <div className='visitRow'>
