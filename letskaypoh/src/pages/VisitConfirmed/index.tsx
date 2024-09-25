@@ -63,10 +63,11 @@ const VisitConfirmed: React.FC = () => {
 
                 {visit &&
                     <VisitCard visit={visit} />}
+                
                 <Button
                     className={'regularBtn'}
-                    onClick={() => navigateToRoute('/home', navigate)}>
-                    Back to Home
+                    onClick={() => navigateToRoute('/visits', navigate)}>
+                    View Upcoming Visits
                 </Button>
             </div>
 

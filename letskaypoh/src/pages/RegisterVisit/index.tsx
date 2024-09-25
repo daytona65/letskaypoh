@@ -126,6 +126,7 @@ const RegisterVisit: React.FC = () => {
                     >{
                         timeslots.map((time) => (
                             <TimeSlotButton 
+                                key={time}
                                 time={time} 
                                 setSelectedTime={setSelectedTimeslot}
                                 isSelected={time === selectedTimeslot}
