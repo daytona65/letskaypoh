@@ -71,11 +71,12 @@ def days_last_visited():
     senior_id = int(request.args.get('id'))
 
     latest_completed_visit = list(visit_collection.find({"senior_id": senior_id, "status": "Completed"}))
+    if not latest_completed_visit:
+        return jsonify({ "days": "NEVER VISITED" }), 201
     visit_data = json.loads(json.dumps(latest_completed_visit[0], default=json_util.default))
 
-    if not visit_data:
-        return jsonify({ "days": "NEVER VISITED" }), 201
+    
     days = days_difference(visit_data['date'])
-    print(days)
+
     return jsonify({ "days": days }), 201
 
