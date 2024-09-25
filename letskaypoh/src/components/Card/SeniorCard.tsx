@@ -23,10 +23,10 @@ export const SeniorCard: React.FC<Props> = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const days = await getDaysLastVisted(senior.last_visited_date);
-                setDaysLastVisited(days);
+                const { days } = await getDaysLastVisted(String(senior.senior_id));
+                setDaysLastVisited(String(days));
             } catch (error) {
-                console.error("Error fetching senior data:", error);
+                console.error("Error fetching days:", error);
             }
         };
 

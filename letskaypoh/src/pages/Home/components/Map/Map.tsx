@@ -46,20 +46,30 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 		}
 	}, []);
 
+	const [closeAllInfoWindows, setCloseAllInfoWindows] = useState<boolean>(false);
 
 	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails }) => {
-		const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false)
+		const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
+		useEffect(() => {
+			if (closeAllInfoWindows) {
+				setShowInfoWindow(false);
+			}
+			setCloseAllInfoWindows(false);
+		}, [closeAllInfoWindows]);
 
 		return (
 			<AdvancedMarker
 				position={position}
-				onClick={() => setShowInfoWindow(true)}
+				onClick={() => {
+					setShowInfoWindow(true);
+					setCloseAllInfoWindows(false);
+				}}
 			>
 				<div 
 					// onMouseEnter={() => setShowInfoWindow(true)}
 					// onMouseLeave={() => setShowInfoWindow(false)}
 				>
-					{(showInfoWindow && !hideDetails) ?
+					{(showInfoWindow && !closeAllInfoWindows && !hideDetails) ?
 						<SeniorCard 
 							// style={{zIndex: locations.length + 100, position: 'sticky'}}
 							senior={info} 
@@ -93,6 +103,7 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			mapId={'7c0e62f0200dd8aa'}
 			defaultZoom={defaultZoom ?? 13}
 			defaultCenter={center}
+			onClick={() => setCloseAllInfoWindows(true)}
 		// zoom={currentZoom}
 		// center={center}
 		>

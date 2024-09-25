@@ -138,9 +138,9 @@ export const updateVisit = async (visitData: PartialVisit) => {
     }
 };
 
-export const getDaysLastVisted = async (date: string) => {
+export const getDaysLastVisted = async (senior_id: string) => {
     try {
-        const response = await api.get(`/days?date=${date}`);
+        const response = await api.get(`/days?id=${senior_id}`);
         return response.data;
     } catch (error) {
         console.error('Error getting days:', error);
