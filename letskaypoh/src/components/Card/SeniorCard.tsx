@@ -136,7 +136,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
                     </span>
                 </div>
 
-                {props.showVisitBtn && <Button onClick={() => navigateToRoute(`/register-visit/${senior.senior_id}`, navigate)}>
+                {props.showVisitBtn && <Button onClick={() => navigate(`/register-visit/`, { state: { senior } })}>
                     Visit
                 </Button>}
 
@@ -156,7 +156,7 @@ export const SeniorCard: React.FC<Props> = (props) => {
                                     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
                                         <CustomMap
                                             locations={[senior]}
-                                            defaultCenter={{ lat: senior.lat, lng: senior.lon }}
+                                            defaultCenter={{ lat: currentLocation.lat + senior.lat, lng: currentLocation.lng + senior.lon }}
                                             showDirections={true}
                                             defaultZoom={15}
                                             hideDetails={true}

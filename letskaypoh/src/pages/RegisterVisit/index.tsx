@@ -27,7 +27,9 @@ export const TimeSlotButton: React.FC<TimeslotButtonProps> = (props) => {
 }
 
 const RegisterVisit: React.FC = () => {
-    const seniorId = Number(useLocation().pathname.split("/")[2]);
+
+    const { state } = useLocation();
+    const { senior } = state
     const [loading, setLoading] = useState<boolean>(false)
 
     const token = localStorage.getItem('access_token');
@@ -48,7 +50,7 @@ const RegisterVisit: React.FC = () => {
         const visitDetails: VisitInterface = {
             date: dateValue.format('DD MMM YYYY'),
             time: selectedTimeslot!,
-            senior_id: seniorId,
+            senior_id: senior.senior_id,
             visitor_ids: [Number(userId)],
             status: VisitStatus.UPCOMING
         }
@@ -71,21 +73,6 @@ const RegisterVisit: React.FC = () => {
 
         postData();
     }
-
-    const [senior, setSenior] = useState<SeniorInterface | null>(null)
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const seniorData = await getSeniorByIdData(seniorId);
-                setSenior(seniorData);
-            } catch (error) {
-                console.error("Error fetching senior data:", error);
-            }
-        };
- 
-        fetchData();
-    }, [seniorId])
 
     const disabledDate: DatePickerProps['disabledDate'] = (current) => {
         // Can not select days before today

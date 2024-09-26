@@ -173,7 +173,7 @@ const VisitDetails = () => {
                     >
                       <CustomMap
                         locations={[senior]}
-                        defaultCenter={{ lat: senior.lat, lng: senior.lon }}
+                        defaultCenter={{ lat: currentLocation.lat + senior.lat, lng: currentLocation.lng + senior.lon }}
                         showDirections={true}
                         defaultZoom={15}
                         hideDetails={true}
@@ -190,7 +190,7 @@ const VisitDetails = () => {
                       <a
                         style={{ fontWeight: 400 }}
                         target="_blank" rel="noopener noreferrer"
-                        href={googleDirectionsLink(currentLocation, { lat: senior.lat, lng: senior.lon })} >
+                        href={googleDirectionsLink(currentLocation, { lat: currentLocation.lat + senior.lat, lng: currentLocation.lng + senior.lon })} >
                         Get Directions  <EnvironmentTwoTone />
                       </a>
                     </Button>

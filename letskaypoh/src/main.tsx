@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
-        path: "/register-visit/:seniorId",
+        path: "/register-visit/",
         element: <RegisterVisit />,
       },
       {
