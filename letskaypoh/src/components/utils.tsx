@@ -12,7 +12,7 @@ export const separatedArray = (arr: (string | JSX.Element)[] | undefined, separa
         return (
             (arr.length === index+1) ? 
             <span key={index}>{elem}</span> : 
-            <span  key={index} className={'commaArrayElement'}>{elem}{separator ?? ', '} </span>
+            <span  key={index} className={'commaArrayElement'}>{elem}{separator ?? ','} </span>
         )
     })
     return items
