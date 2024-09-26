@@ -95,7 +95,13 @@ const Home = () => {
                 localStorage.setItem('lat', String(position.coords.latitude))
                 localStorage.setItem('lon', String(position.coords.longitude))
 
-            });
+            },
+            () => {
+                const defaultLocation = { lat: 1.3198, lng: 103.8923 };
+                setCurrentLocation(defaultLocation);
+                localStorage.setItem('lat', String(defaultLocation.lat))
+                localStorage.setItem('lon', String(defaultLocation.lng))
+              });
             setLoadingCurLoc(false)
             console.log('maps loading: ', loadingCurLoc)
 
