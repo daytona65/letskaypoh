@@ -159,14 +159,13 @@ const CompleteVisit = () => {
 
         <h3 className={'visitDetails'}>Visit Details</h3>
         
-        <div className={'form'} style={{ width: '100%' }}>
+        <div className={'completeForm'} style={{ width: '100%' }}>
           <Form
             scrollToFirstError
             onFinish={onFinish}
             name="completeVisit"
             layout="vertical"
-            wrapperCol={{ span: 14 }}
-            className='formInput'
+            className='completeFormInput'
             colon={false}
           >
 
