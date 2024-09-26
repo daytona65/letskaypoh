@@ -1,7 +1,7 @@
 import React, { CSSProperties, useEffect, useState } from 'react'
 import './styles.css'
 import { Avatar, Button, Divider } from 'antd'
-import { navigateToRoute, separatedArray } from '../utils'
+import { separatedArray } from '../utils'
 import { SeniorInterface } from '../../models/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { CalendarOutlined, CloseOutlined, DislikeOutlined, DownOutlined, EnvironmentOutlined, HeartOutlined, MessageOutlined, UpOutlined, ZhihuOutlined } from '@ant-design/icons'

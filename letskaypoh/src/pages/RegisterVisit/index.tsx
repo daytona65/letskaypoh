@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
 import { Button, Checkbox, DatePicker, DatePickerProps, Form, FormProps, message } from 'antd'
 import { SeniorCard } from '../../components/Card/SeniorCard'
 import { InfoCircleTwoTone } from '@ant-design/icons'
-import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces'
+import { VisitInterface, VisitStatus } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
-import { createVisit, getLatestVisitId, getSeniorByIdData } from '../../api'
+import { createVisit, getLatestVisitId } from '../../api'
 import dayjs from 'dayjs'
 
 interface TimeslotButtonProps {
