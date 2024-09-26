@@ -27,30 +27,37 @@ export type MarkerProps = {
 
 const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails, currentLocation }) => {
 	const [closeAllInfoWindows, setCloseAllInfoWindows] = useState<boolean>(false);
+	const [selectedId, setSelectedId] = useState<number | null>(null);
 
 	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails }) => {
 		const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
-		useEffect(() => {
-			if (closeAllInfoWindows) {
-				setShowInfoWindow(false);
-			}
-			setCloseAllInfoWindows(false);
-		}, [closeAllInfoWindows]);
 
+		useEffect(() => {
+			if (selectedId === info.senior_id && !closeAllInfoWindows && !hideDetails) {
+			  setShowInfoWindow(true);
+			} else {
+			  setShowInfoWindow(false);
+			}
+		  }, [selectedId, closeAllInfoWindows, hideDetails, info.senior_id]);
+		
 		return (
 			<AdvancedMarker
 				position={position}
 				onClick={() => {
-					setShowInfoWindow(true);
 					setCloseAllInfoWindows(false);
+					setSelectedId(info.senior_id);
+					setShowInfoWindow(true);
+					
 				}}
+				style={{zIndex: 0}}
 			>
 				<div>
-					{(showInfoWindow && !closeAllInfoWindows && !hideDetails) ?
+					{(showInfoWindow) ?
 						<SeniorCard 
 							senior={info} 
 							onClose={() => setShowInfoWindow(false)} 
 							showVisitBtn={true}
+							style={{zIndex: selectedId === info.senior_id ? 120398 : -500}}
 						/> :
 						<div 
 							className={`seniorMarker ${
