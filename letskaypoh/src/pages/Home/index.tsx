@@ -64,7 +64,6 @@ const Home = () => {
                         })
                     )
                 });
-
                 setSeniors(seniorsData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);
@@ -83,6 +82,8 @@ const Home = () => {
 
     useEffect(() => {
         setLoadingCurLoc(true)
+        console.log('maps loading: ', loadingCurLoc)
+
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 const pos = {
@@ -96,6 +97,8 @@ const Home = () => {
 
             });
             setLoadingCurLoc(false)
+            console.log('maps loading: ', loadingCurLoc)
+
         } else {
             setLoadingCurLoc(false)
             console.error("Geolocation is not available in your browser.");
