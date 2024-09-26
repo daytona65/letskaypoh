@@ -106,6 +106,7 @@ const Register = () => {
                     labelCol={{span: 10}}
                     wrapperCol={{ span: 14}}
                     className='formInput'
+                    colon={false}
                 >
                     <Form.Item label="Full Name" name="name" rules={[{ required: true, message: 'Please input your full name!' }]}>
                         <Input />
