@@ -4,6 +4,7 @@ import { ArrowDownOutlined, ClockCircleOutlined, EnvironmentOutlined, HeartOutli
 import VolunteerF from '../../../assets/volunteerF.jpg'
 import VolunteerM from '../../../assets/volunteerM.jpg'
 import { EntryBannerProps, featuresItem } from './features'
+import classNames from 'classnames'
 
 const Features: React.FC<EntryBannerProps> = (props) => {
 
@@ -71,9 +72,9 @@ const Features: React.FC<EntryBannerProps> = (props) => {
                 {item.icon}
             </div>
             <div className='desc'>
-                <a className='descTitle'>
+                <div className={classNames('descTitle', 'accent')}>
                     {item.title}
-                </a>
+                </div>
                 {item.children}
             </div>
         </div>)
@@ -85,9 +86,9 @@ const Features: React.FC<EntryBannerProps> = (props) => {
                 {item.icon}
             </div>
             <div className='desc'>
-                <a className='descTitle'>
+                <div className={classNames('descTitle', 'accent')}>
                     {item.title}
-                </a>
+                </div>
                 {item.children}
             </div>
         </div>)

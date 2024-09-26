@@ -67,7 +67,7 @@ const Team: React.FC<Props> = (props) => {
         </div>
         <div className={'column'} style={{marginBottom: '1rem'}}>
           {member.name}
-          <a>{member.role}</a>
+          <div className='accent'>{member.role}</div>
         </div>
       </div>
     )
@@ -80,7 +80,7 @@ const Team: React.FC<Props> = (props) => {
             <h1>let's kaypoh!</h1>
 
             <div className={cn('accentText')}>
-              <a>Team Bob (The Builders) </a>
+              Team Bob (The Builders)
             </div>
 
             <p>

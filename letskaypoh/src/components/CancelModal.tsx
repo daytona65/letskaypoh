@@ -13,7 +13,7 @@ const CancelModal: React.FC<Props> = (props) => {
     return (
         <Modal
             className={'registerModal'}
-            title={<a> Are you sure you want to cancel this visit?</a>}
+            title={<div className={'accent'}> Are you sure you want to cancel this visit?</div>}
             open={props.open}
             onCancel={props.handleClose}
             onOk={props.onClickConfirm}

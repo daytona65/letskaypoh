@@ -7,6 +7,7 @@ import VisitDetailsSS from '../../../assets/SSvisitDetails.png'
 import RegisterVisitSS from '../../../assets/SSregisterVisits.png'
 import VisitCompletedSS from '../../../assets/SSvisitCompleted.png'
 import { Carousel } from 'antd'
+import classNames from 'classnames'
 
 
 export interface EntryBannerProps {
@@ -65,9 +66,9 @@ const Features: React.FC<EntryBannerProps> = (props) => {
                 {item.icon}
             </div>
             <div className='desc'>
-                <a className='descTitle'>
+                <div className={classNames('descTitle', 'accent')}>
                     {item.title}
-                </a>
+                </div>
                 {item.children}
             </div>
         </div>)

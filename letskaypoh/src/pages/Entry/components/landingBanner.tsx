@@ -20,9 +20,9 @@ const LandingBanner: React.FC<Props> = ({ onClickRegister, onClickAbout }) => {
 
                 <div className={'subtitle'}>rebuild the kampung spirit with</div>
                 <h1>let's kaypoh!</h1>
-                <a className='accentText'>
+                <div className='accentText'>
                     Redefining volunteering with the elderly.
-                </a>
+                </div>
                 <p className='bannerText'>
                 A crowd-sourced volunteering platform to monitor the wellbeing of the seniors around us through simple check ins
                 </p>

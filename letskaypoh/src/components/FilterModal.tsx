@@ -32,7 +32,7 @@ const FilterModal: React.FC<Props> = (props) => {
     return (
         <Modal
             className={'registerModal'}
-            title={<a> <FilterOutlined style={{ marginRight: '0.25rem' }} /> Filter search results</a>}
+            title={<div className={'accent'}><FilterOutlined style={{ marginRight: '0.25rem' }} /> Filter search results</div>}
             open={props.open}
             onCancel={props.handleClose}
             onOk={handleApplyFilter}

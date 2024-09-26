@@ -13,7 +13,7 @@ const About: React.FC<EntryBannerProps> = (props) => {
                 <h1>let's kaypoh!</h1>
 
                 <div className={cn('accentText')}>
-                    <a>
+                    <a href='https://www.urbandictionary.com/define.php?term=kaypoh'>
                         <b><i>Kay-poh </i></b>/ noun & adjective
                     </a>
                 </div>

@@ -5,7 +5,7 @@ import './styles.css'
 import { getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone, UserOutlined } from '@ant-design/icons';
+import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import CustomMap from '../Home/components/Map/Map';
@@ -153,7 +153,7 @@ const VisitDetails = () => {
     }
 
     return <Tooltip key={id} title={visitorLabel} placement="top">
-      <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+      <Avatar src={"https://avatar.iran.liara.run/public"} />
     </Tooltip>
   })
 
