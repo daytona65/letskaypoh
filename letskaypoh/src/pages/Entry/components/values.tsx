@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import { ArrowDownOutlined, ClockCircleOutlined, EnvironmentOutlined, HeartOutlined, ZhihuOutlined} from '@ant-design/icons'
+import { ArrowDownOutlined, EnvironmentOutlined, HeartOutlined, HistoryOutlined, UsergroupAddOutlined, ZhihuOutlined} from '@ant-design/icons'
 import VolunteerF from '../../../assets/volunteerF.jpg'
 import VolunteerM from '../../../assets/volunteerM.jpg'
 import { EntryBannerProps, featuresItem } from './features'
@@ -11,7 +11,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
     const volunteerItem: featuresItem[] = [
         {
             key: 1,
-            title: 'HIGH FLEXIBILITY & GREATER CONVENIENCE',
+            title: 'High flexibility and convenience',
             icon: <EnvironmentOutlined />,
             children: (
                 <div>Volunteer with nearby seniors at a time of your choice. </div> 
@@ -19,7 +19,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
         },
         {
             key: 2,
-            title: 'REDUCED LANGUAGE BARRIERS',
+            title: 'Reduced language barriers',
             icon: <ZhihuOutlined />,
             children: (
                 <div>
@@ -29,11 +29,11 @@ const Features: React.FC<EntryBannerProps> = (props) => {
         },
         {
             key: 3,
-            title: 'LOW-TOUCH, LOW-COMMITMENTS',
-            icon: <ClockCircleOutlined />,
+            title: 'Low-touch, low commitments',
+            icon: <HeartOutlined />,
             children: (
                 <div>
-                    Low touch for as quick as 15 minutes a visit with no minimum commitment period.
+                    <b>As quick as 15 minutes</b> a visit to say hi with no minimum commitment period.
                 </div>
             )
         },
@@ -42,26 +42,20 @@ const Features: React.FC<EntryBannerProps> = (props) => {
     const orgItem: featuresItem[] = [
         {
             key: 4,
-            title: 'THE MORE THE MERRIER - Greater volunteer pool',
-            icon: <HeartOutlined />,
+            title: 'Greater volunteer pool',
+            icon: <UsergroupAddOutlined />,
             children: (
-                <ul>
-                    <li>
-                        <b>Reduced dependencies</b> on befriender organisations to allocate and schedule resources such as volunteer visitations and errand running
-                    </li>
-
-                    <li>
-                        <b>Alleviates manpower crunch</b> in befriender organisations
-                    </li>
-
-                    <li>
-                        <b>Higher frequencies</b> of visits to check in on the seniors
-                    </li>
-
-                    <li>
-                        <b>Easier detections</b> of critical cases
-                    </li>
-                </ul>
+                    <div><b>Alleviates manpower crunch</b> and <b>reduce dependencies</b> on befriender organisations to allocate and schedule volunteer visitations </div>
+            )
+        },
+        {
+            key: 5,
+            title: 'More frequent visits',
+            icon: <HistoryOutlined />,
+            children: (
+                <div>
+                    <b>Easier detections</b> of critical cases
+                </div>
             )
         }
     ]
