@@ -122,7 +122,7 @@ const CompleteVisit = () => {
       label: 'Medical attention'
     },
     {
-      key: 'escord',
+      key: 'escort',
       label: 'Medical escort'
     }
   ]
@@ -142,7 +142,7 @@ const CompleteVisit = () => {
 
       <div className={'confirmVisit'}>
         <div className={'thankYou'}>
-          <h2>Visit Completed</h2>
+          <h2 style={{marginTop: 0}}>Visit Completed</h2>
           <h3>
             Thank you for visiting, {userName?.split(" ")[0]}!
           </h3>
@@ -223,7 +223,7 @@ const CompleteVisit = () => {
         </div>
 
         <Button
-          className={'regularBtn'}
+          className={'joinButton'}
           onClick={() => navigateToRoute('/home', navigate)}>
           Submit
         </Button>
