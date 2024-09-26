@@ -164,8 +164,7 @@ const CompleteVisit = () => {
             scrollToFirstError
             onFinish={onFinish}
             name="completeVisit"
-            layout="horizontal"
-            labelCol={{ span: 8 }}
+            layout="vertical"
             wrapperCol={{ span: 14 }}
             className='formInput'
             colon={false}
