@@ -6,7 +6,6 @@
     min-height: 100vh;
     height: 100%;
     width: 100vw;
-    overflow-y: scroll;
   
     @media (min-width: 1000px) {
       flex-direction: row;

@@ -135,7 +135,7 @@ const Home = () => {
                         disableDefaultUI
                         gestureHandling={'greedy'}
                         mapId={'7c0e62f0200dd8aa'}
-                        defaultZoom={14}
+                        defaultZoom={15}
                         defaultCenter={{lat: 1.3198, lng: 103.8924}}
                     />
                 : <CustomMap

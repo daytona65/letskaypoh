@@ -108,6 +108,8 @@ export const SeniorCard: React.FC<Props> = (props) => {
     })
     const seniorAvatar = <Avatar style={{height: '30px', marginRight: '0.5rem'}} src={senior.gender.toLowerCase() == 'm' ? Grandpa : Granny}/>
 
+    const colorMarker = senior.daysLastVisited === "NEVER VISITED" || senior.daysLastVisited > 5 ? '#f9173d' : 
+                        senior.daysLastVisited > 3 ? '#e1a416' : '#43ab07'
     return (
         <div className={'card'} style={props.style}>
             <div className='visitInfo'>
@@ -130,10 +132,12 @@ export const SeniorCard: React.FC<Props> = (props) => {
 
                 <div className='visitRow'>
                     <CalendarOutlined style={{ marginRight: '0.5rem' }} />
-                    <span style={{ marginRight: '0.25rem' }}>
+                    <span style={{ marginRight: '0.25rem' }} >
                         Last Visited:
                     </span>
-                    {daysLastVisited}
+                    <span style={{color: colorMarker}}>
+                        {daysLastVisited}
+                    </span>
                 </div>
 
                 <div className='visitRow' style={{ marginBottom: '0.5rem' }}>

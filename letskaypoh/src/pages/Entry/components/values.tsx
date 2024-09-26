@@ -14,7 +14,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
             title: 'High flexibility and convenience',
             icon: <EnvironmentOutlined />,
             children: (
-                <div>Volunteer with nearby seniors at a time of your choice. </div> 
+                <div>Volunteer with nearby seniors at a <b>time of your choice.</b> </div> 
             )
         },
         {
@@ -23,7 +23,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
             icon: <ZhihuOutlined />,
             children: (
                 <div>
-                    Find seniors who speak the same languages as you.
+                    Find seniors who speak the <b>same languages</b> as you.
                 </div>
             )
         },

@@ -72,7 +72,7 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			disableDefaultUI
 			gestureHandling={'greedy'}
 			mapId={'7c0e62f0200dd8aa'}
-			defaultZoom={defaultZoom ?? 14}
+			defaultZoom={defaultZoom ?? 15}
 			defaultCenter={defaultCenter}
 			onClick={() => setCloseAllInfoWindows(true)}
 		>
