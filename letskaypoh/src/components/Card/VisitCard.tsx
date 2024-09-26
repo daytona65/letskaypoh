@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './styles.css'
-import { Avatar, Button, Popconfirm, Tag } from 'antd'
+import { Avatar, Button, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
@@ -8,6 +8,7 @@ import { CheckCircleTwoTone, ClockCircleOutlined, DownOutlined, EnvironmentOutli
 import { useNavigate } from 'react-router-dom'
 import Granny from '../../assets/logo.png'
 import Grandpa from '../../assets/grandpa.jpg'
+import CancelModal from '../CancelModal'
 
 interface Props {
     visit: VisitInterface
@@ -16,9 +17,23 @@ interface Props {
 
 export const VisitCard: React.FC<Props> = (props) => {
     const { visit } = props
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [isActionsExpanded, setIsActionsExpanded] = useState<boolean>(false)
+    const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false)
+
+    const onClickCancelButton = () => {
+        setIsCancelModalOpen(true)
+    }
+
+    const onCloseModal = () => {
+        setIsCancelModalOpen(false)
+    }
+
+    const onConfirmCancel = () => {
+        handleCancelVisit(visit)
+        onCloseModal()
+    }
 
     const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
@@ -35,8 +50,7 @@ export const VisitCard: React.FC<Props> = (props) => {
         fetchData();
     }, [visit.senior_id])
 
-    const seniorAvatar = senior && <Avatar style={{height: '30px', marginRight: '0.5rem'}} src={senior.gender.toLowerCase() == 'm' ? Grandpa : Granny}/>
-
+    const seniorAvatar = senior && <Avatar style={{ height: '30px', marginRight: '0.5rem' }} src={senior.gender.toLowerCase() == 'm' ? Grandpa : Granny} />
 
     const handleViewVisitDetails = () => {
         // add api to mark visit as completed
@@ -58,7 +72,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                 </div>
 
                 <div className='visitRow'>
-                    <ZhihuOutlined style={{ marginRight: '0.5rem' }}/>
+                    <ZhihuOutlined style={{ marginRight: '0.5rem' }} />
                     <span style={{ marginRight: '0.25rem' }}>
                         This senior speaks {' '}
                     </span>
@@ -66,15 +80,15 @@ export const VisitCard: React.FC<Props> = (props) => {
                 </div>
 
                 <div className='visitRow'>
-                    <ClockCircleOutlined style={{ marginRight: '0.5rem' }}/>
+                    <ClockCircleOutlined style={{ marginRight: '0.5rem' }} />
                     <span style={{ marginRight: '0.25rem' }}>
-                        Visit time: 
+                        Visit time:
                     </span>
                     {visit.time}
                 </div>
 
                 <div className='visitRow' style={{ marginBottom: '0.5rem' }}>
-                    <EnvironmentOutlined style={{ marginRight: '0.5rem' }}/>
+                    <EnvironmentOutlined style={{ marginRight: '0.5rem' }} />
                     <span>
                         Postal: {senior.postal_code}
                     </span>
@@ -84,45 +98,36 @@ export const VisitCard: React.FC<Props> = (props) => {
                     <>
                         <div className='visitRow'>
                             <a className='visitRow' onClick={() => setIsActionsExpanded(!isActionsExpanded)} >
-                                View Actions 
+                                View Actions
                                 {
-                                    !isActionsExpanded ?  <DownOutlined style={{fontSize: '10px', marginLeft: '0.25rem', marginTop: '0.05rem'}} /> :
-                                    <UpOutlined style={{fontSize: '10px', marginLeft: '0.25rem', marginTop: '0.05rem'}} />
+                                    !isActionsExpanded ? <DownOutlined style={{ fontSize: '10px', marginLeft: '0.25rem', marginTop: '0.05rem' }} /> :
+                                        <UpOutlined style={{ fontSize: '10px', marginLeft: '0.25rem', marginTop: '0.05rem' }} />
                                 }
                             </a>
                         </div>
-
-                        {
-                            isActionsExpanded &&
+                        {isActionsExpanded &&
                             <div >
                                 <Button className={'cancelBtn'} onClick={handleViewVisitDetails}>
                                     View Details
                                 </Button>
-                                {visit.status === VisitStatus.UPCOMING && 
-                                <>
-                                    <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
-                                        Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
-                                    </Button>
-                                    <Popconfirm 
-                                        title={'Are you sure you want to cancel this visit?'}
-                                        description={
-                                            <div className='column'>
-                                                The senior will be disappointed to see you cancel! 
-                                                <FrownTwoTone style={{fontSize: '50px', marginTop: '1rem'}} twoToneColor="#eb2f96" />
-                                            </div>
-                                        }
-                                        onConfirm={() => handleCancelVisit(visit)}
-                                    >
-                                        <Button className={'cancelBtn'}>
-                                            Cancel Visit <FrownTwoTone twoToneColor="#eb2f96"/>
+                                {visit.status === VisitStatus.UPCOMING &&
+                                    <>
+                                        <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
+                                            Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                                         </Button>
-                                    </Popconfirm>
-                                </>}
+                                        <Button className={'cancelBtn'} onClick={onClickCancelButton}>
+                                            Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
+                                        </Button>
+                                    </>}
                                 {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
                                 </Button>}
-                            </div>
-                        }
+                                <CancelModal
+                                    open={isCancelModalOpen}
+                                    handleClose={onCloseModal}
+                                    onClickConfirm={onConfirmCancel}
+                                />
+                            </div>}
                     </>
                 }
             </div>

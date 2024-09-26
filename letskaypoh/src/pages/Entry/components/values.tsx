@@ -113,7 +113,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
 
                 {orgItems}
 
-                <a onClick={props.onClickNextSection} style={{ marginTop: '1rem' }}> <ArrowDownOutlined /> Our Value Propositions </a>
+                <a onClick={props.onClickNextSection} style={{ marginTop: '1rem' }}> <ArrowDownOutlined /> Meet the Team </a>
             </div>
             <div className={cn('illustration', 'fullHeight')}>
                 <img

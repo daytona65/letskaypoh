@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './styles.css'
 import '../commonStyles.css'
 import '../../App.css'
-import { APIProvider } from '@vis.gl/react-google-maps'
+import { APIProvider, Map } from '@vis.gl/react-google-maps'
 import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
@@ -120,7 +120,16 @@ const Home = () => {
                     <PlaceAutocompleteClassic onPlaceSelect={setSelectedPlace} />
                 </div>
 
-                { loadingCurLoc ? <div>'Loading Map...'</div> : currentLocation && <CustomMap
+                { !currentLocation ? 
+                    <Map
+                        clickableIcons={false}
+                        disableDefaultUI
+                        gestureHandling={'greedy'}
+                        mapId={'7c0e62f0200dd8aa'}
+                        defaultZoom={14}
+                        defaultCenter={{lat: 1.3198, lng: 103.8924}}
+                    />
+                : <CustomMap
                     locations={filteredSeniors}
                     defaultCenter={currentLocation}
                     currentLocation={currentLocation}

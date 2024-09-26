@@ -1,4 +1,4 @@
-import { Avatar, Button, Divider, Popconfirm, Tooltip } from 'antd'
+import { Avatar, Button, Divider, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
@@ -9,6 +9,7 @@ import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, Envi
 import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import CustomMap from '../Home/components/Map/Map';
+import CancelModal from '../../components/CancelModal';
 
 export interface profileItem {
   key: React.Key
@@ -125,6 +126,23 @@ const VisitDetails = () => {
     )
   })
 
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState<boolean>(false)
+
+  const onClickCancelButton = () => {
+      setIsCancelModalOpen(true)
+  }
+
+  const onCloseModal = () => {
+      setIsCancelModalOpen(false)
+  }
+
+  const onConfirmCancel = () => {
+      if (visit) {
+        handleCancelVisit(visit)
+      }
+      onCloseModal()
+  }
+
   const googleDirectionsLink = (origin: google.maps.LatLngLiteral, destination: google.maps.LatLngLiteral) => `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${destination.lat},${destination.lng}`
 
   const visitorItems = visit && visit.visitor_ids.map((id) => {
@@ -200,20 +218,10 @@ const VisitDetails = () => {
                       <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
                         Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                       </Button>
-                      <Popconfirm
-                        title={'Are you sure you want to cancel your visit?'}
-                        description={
-                          <div className='column'>
-                            The senior will be disappointed to see you cancel! 
-                            <FrownTwoTone style={{fontSize: '50px', marginTop: '1rem'}} twoToneColor="#eb2f96" />
-                          </div>
-                        }
-                        onConfirm={() => handleCancelVisit(visit)}
-                      >
-                        <Button className={'cancelBtn'}>
-                          Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
-                        </Button>
-                      </Popconfirm>
+                      
+                      <Button className={'cancelBtn'} onClick={onClickCancelButton}>
+                        Cancel Visit <FrownTwoTone twoToneColor="#eb2f96"/>
+                      </Button>
                     </>}
                   {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
@@ -236,7 +244,11 @@ const VisitDetails = () => {
                 <Button style={{ marginTop: '1.5rem'}} onClick={() => navigateToRoute('/visits', navigate)}>
                   Back to Visits
                 </Button>
-
+                <CancelModal
+                    open={isCancelModalOpen}
+                    handleClose={onCloseModal}
+                    onClickConfirm={onConfirmCancel}
+                />
               </div>
             </div>
             : <div>Loading...</div>
