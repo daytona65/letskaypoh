@@ -97,6 +97,7 @@ const RegisterVisit: React.FC = () => {
                     layout="inline"
                     labelCol={{ span: 6 }}
                     className='formInput'
+                    colon={false}
                 >
                     <Form.Item
                         label="Date"
