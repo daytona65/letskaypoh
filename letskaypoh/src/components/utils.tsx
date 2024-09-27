@@ -84,6 +84,24 @@ export const handleCheckInVisit = (visit: VisitInterface, navigate: NavigateFunc
   message.success('Checked in!')
 }
 
+export const handleMissVisit = (visit: VisitInterface) => {
+  // add api to check in visit 
+  try {
+      updateVisit({
+          "visit_id": visit.visit_id,
+          "status": VisitStatus.MISSED 
+      }).then(() => {
+        window.location.reload()
+      })
+  } catch (error) {
+      console.error("Error updating visit status:", error);
+      message.error(`Error updating visit status: ${error}` )
+  }
+
+  message.success('Updated visit status!')
+}
+
+
 export const handleCancelVisit = (visit: VisitInterface) => {
   // api to mark visit as cancelled
   try {

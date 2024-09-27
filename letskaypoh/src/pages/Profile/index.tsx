@@ -45,7 +45,7 @@ const Profile: React.FC = () => {
 				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
 				setUser(userData);
                 const visitsData = await getUserVisitData(Number(localStorage.getItem('user_id')));
-				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED))
+				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED || visit.status === VisitStatus.MISSED))
             } catch (error) {
                 console.error("Error fetching visits data:", error);
             }

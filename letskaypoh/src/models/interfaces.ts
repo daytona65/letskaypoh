@@ -16,7 +16,8 @@ export enum VisitStatus {
 	ONGOING = "Ongoing",
 	COMPLETED = "Completed",
 	CANCELLED = "Cancelled", 
-	EXPIRED = "Expired"
+	EXPIRED = "Expired",
+	MISSED = "Missed"
 }
 
 type VisitColorMap = {[key in VisitStatus]: string}
@@ -26,7 +27,8 @@ export const visitToColorMapping: VisitColorMap = {
 	[VisitStatus.COMPLETED]: "green",
 	[VisitStatus.ONGOING]: "gold",
 	[VisitStatus.CANCELLED]: "volcano",
-	[VisitStatus.EXPIRED]: 'red'
+	[VisitStatus.EXPIRED]: 'red',
+	[VisitStatus.MISSED]: 'red'
 }
 
 export interface SeniorInterface {
