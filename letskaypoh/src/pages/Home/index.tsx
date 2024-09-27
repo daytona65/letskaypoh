@@ -51,18 +51,11 @@ const Home = () => {
                     return Promise.all(
                         response.map(async (senior) => {
                             const { days } = await getDaysLastVisted(String(senior.senior_id));
-                            let daysLastVisited;
-                            if (days === "NEVER VISITED") {
-                                daysLastVisited = days;
-                            } else {
-                                daysLastVisited = days;
-                            }
-                            const modifiedSenior = ({
+                            
+                            return ({
                                 ...senior,
-                                daysLastVisited: daysLastVisited
+                                daysLastVisited: days
                             })
-                            await updateSenior(modifiedSenior);
-                            return modifiedSenior;
                         })
                     )
                 });
@@ -72,7 +65,6 @@ const Home = () => {
                 console.error("Error fetching senior data:", error);
             }
         };
-
         fetchData();
     }, [])
 
@@ -113,6 +105,10 @@ const Home = () => {
             console.error("Geolocation is not available in your browser.");
         }
     }, []);
+
+    useEffect(() => {
+        seniors.map(async (senior) => { updateSenior({ "senior_id": senior.senior_id, "daysLastVisited": senior.daysLastVisited }) });
+    }, [seniors]);
 
     return (
         <div className={'container-home'}>

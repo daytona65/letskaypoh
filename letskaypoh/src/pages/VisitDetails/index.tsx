@@ -2,7 +2,7 @@ import { Avatar, Button, Divider, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './styles.css'
-import { getSeniorByIdData, getVisitByIdData } from '../../api';
+import { displayDaysLastVisited, getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
@@ -110,7 +110,7 @@ const VisitDetails = () => {
       key: 'lastVisited',
       label: 'Days since last visit',
       icon: <CalendarOutlined />,
-      children: <span>{senior.daysLastVisited}</span>
+      children: <span>{displayDaysLastVisited(senior.daysLastVisited)}</span>
     }
   ] : []
 

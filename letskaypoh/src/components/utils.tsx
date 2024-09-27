@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './styles.css'
 import { NavigateFunction } from 'react-router-dom'
 import { message } from 'antd'
-import { updateVisit } from '../api'
+import { updateSenior, updateVisit } from '../api'
 import { VisitInterface, VisitStatus } from '../models/interfaces'
 import dayjs from 'dayjs'
 
@@ -53,7 +53,7 @@ export const handleCompleteVisit = (visit: VisitInterface, navigate: NavigateFun
           "visit_id": visit.visit_id,
           "status": VisitStatus.COMPLETED 
       })
-      
+      updateSenior({ "senior_id": visit.senior_id, "daysLastVisited": 0 });
   } catch (error) {
       console.error("Error updating visit status:", error);
   }
