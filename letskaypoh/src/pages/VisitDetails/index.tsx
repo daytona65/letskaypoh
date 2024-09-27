@@ -245,6 +245,13 @@ const VisitDetails = () => {
                   {visitors}
                 </div>
 
+                <Divider />
+
+                <div className={'sectionHeader'}>
+                  <h3>Need help? </h3>
+                  Contact our support team at 91234567.
+                </div>
+
                 <Button style={{ marginTop: '1.5rem'}} onClick={() => navigateToRoute('/visits', navigate)}>
                   Back to Visits
                 </Button>
