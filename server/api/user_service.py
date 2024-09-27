@@ -76,6 +76,20 @@ def login_user():
             "user": user_data 
         }), 201
 
+def check_nric():
+    nric = str(request.args.get('nric'))
+    user = list(user_collection.find({"nric": nric}))
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
+
+def check_email():
+    email = str(request.args.get('email'))
+    user = list(user_collection.find({"email": email}))
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+    return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
+
 def check_mobile():
     mobile = str(request.args.get('mobile'))
     user = list(user_collection.find({"mobile": mobile}))

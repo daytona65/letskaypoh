@@ -6,7 +6,7 @@ import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { SupportedLanguages, UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
-import { registerUser } from '../../api'
+import { checkEmailExists, checkMobileExists, checkNricExists, registerUser } from '../../api'
 import BannerImg from '../../assets/banner.png'
 
 type FieldType = {
@@ -25,6 +25,8 @@ const Register = () => {
     const { Option } = Select;
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [emailExists, setEmailExists] = useState<boolean>(false);
+    const [mobileExists, setMobileExists] = useState<boolean>(false);
 
     const navigate = useNavigate(); 
 
@@ -38,6 +40,23 @@ const Register = () => {
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         setLoading(true)
+
+        try {
+            setEmailExists(await checkEmailExists(values.email));
+            setMobileExists(await checkMobileExists(values.mobile));
+
+            console.log(emailExists, mobileExists)
+        } catch (error) {
+            console.error("Error checking user mobile:", error);
+            setEmailExists(true);
+            setMobileExists(true);
+            setLoading(false);
+            return;
+        }
+
+        if (emailExists || mobileExists) {
+            return;
+        } 
 
         const newUserDetails: UserInterface = (
             {
@@ -124,6 +143,7 @@ const Register = () => {
                         rules={[{ required: true, message: 'Please input your email' }]}
                     >
                         <Input />
+                        {emailExists && <div style={{ color: 'red', marginTop: -10 }}><p>There is a user associated with this email address.</p></div>}
                     </Form.Item>
                     <Form.Item
                         label="Mobile No."
@@ -131,6 +151,7 @@ const Register = () => {
                         rules={[{ required: true, message: 'Please input your mobile number' }]}
                     >
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                        {mobileExists && <div style={{ color: 'red', marginTop: -10 }}><p>There is a user associated with this mobile number.</p></div>}
                     </Form.Item>
                     <Form.Item
                         label="Age"

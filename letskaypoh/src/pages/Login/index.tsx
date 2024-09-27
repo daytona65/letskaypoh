@@ -25,7 +25,7 @@ const Login = () => {
     const { Option } = Select;
 
     const [loading, setLoading] = useState<boolean>(false)
-    const [mobileError, setMobileError] = useState<boolean>(false);
+    const [mobileExists, setMobileExists] = useState<boolean>(true);
 
     const navigate = useNavigate(); 
 
@@ -41,12 +41,15 @@ const Login = () => {
         setLoading(true);
 
         try {
-            await checkMobileExists(values.mobile);
-            setMobileError(false);
+            setMobileExists(await checkMobileExists(values.mobile));
         } catch (error) {
             console.error("Error checking user mobile:", error);
-            setMobileError(true);
+            setMobileExists(false);
             setLoading(false);
+            return;
+        }
+
+        if (mobileExists) {
             return;
         }
 
@@ -93,8 +96,8 @@ const Login = () => {
                         ]}
                     >
                         <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                        {!mobileExists && <div style={{ color: 'red', marginTop: -10 }}><p>No user exists with this mobile number.</p></div>}
                     </Form.Item>
-                   {mobileError && <div style={{ color: 'red', marginTop: -10 }}><p>Mobile number does not exist.</p></div>}
                     <Button htmlType='submit' className='joinButton' style={{width: '280px'}}>
                         Login
                     </Button>

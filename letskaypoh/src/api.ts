@@ -26,13 +26,33 @@ export const loginUser = async (mobile: string) => {
     }
 };
 
-export const checkMobileExists = async (mobile: string) => {
+export const checkNricExists = async (nric: string): Promise<boolean> => {
     try {
-        const response = await api.get(`/mobile?mobile=${mobile}`);
-        return response.data;
+        await api.get(`/nric?nric=${nric}`);
+        return true;
     } catch (error) {
-        console.error('api: Error checking mobile:', error);
-        throw error;
+        console.error('api: Non-existent NRIC:', error);
+        return false;
+    }
+};
+
+export const checkEmailExists = async (email: string): Promise<boolean> => {
+    try {
+        await api.get(`/email?email=${email}`);
+        return true;
+    } catch (error) {
+        console.error('api: Non-existent email:', error);
+        return false;
+    }
+};
+
+export const checkMobileExists = async (mobile: string): Promise<boolean> => {
+    try {
+        await api.get(`/mobile?mobile=${mobile}`);
+        return true;
+    } catch (error) {
+        console.error('api: Non-existent mobile:', error);
+        return false;
     }
 };
 
