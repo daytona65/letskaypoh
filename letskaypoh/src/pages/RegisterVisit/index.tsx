@@ -126,7 +126,7 @@ const RegisterVisit: React.FC = () => {
                         <h3>Important Notes <InfoCircleTwoTone style={{fontSize: 14}}/></h3>
                         To ensure the well being of our seniors, please read the following terms of usage:
                         <ul>
-                            <li>The senior's unit number will be shown on the <a onClick={() => navigateToRoute('/visits', navigate)}>Upcoming Visits</a> tab 1 hour before the stipulated visit timeslot.</li>
+                            <li>The senior's unit number will be shown on the <a style={{ cursor: 'pointer' }} onClick={() => navigateToRoute('/visits', navigate)}>Upcoming Visits</a> tab 1 hour before the stipulated visit timeslot.</li>
                             <li>During your visit, do NOT enter the senior's house at any point of time</li>
                             <li>Remember to mark your visit as completed and complete the post-visit survey after your visit. </li>
                             <li>If you missed your visit, please indicate that you have missed it</li>

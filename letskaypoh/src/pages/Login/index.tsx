@@ -101,7 +101,7 @@ const Login = () => {
 
                     <p style={{marginBottom: '3rem'}}>
                         Don't have an account? {' '}
-                        <a onClick={() => navigateToRoute('/register', navigate)}>Register</a>
+                        <a style={{ cursor: 'pointer' }} onClick={() => navigateToRoute('/register', navigate)}>Register</a>
                     </p>
                 </Form>
             </div>

@@ -44,7 +44,7 @@ const About: React.FC<EntryBannerProps> = (props) => {
                     Let’s be a kind Kaypoh today!
                 </h4>
 
-                <a onClick={props.onClickNextSection} style={{ marginTop: '1rem' }}> <ArrowDownOutlined /> See how it works </a>
+                <a style={{ cursor: 'pointer', marginTop: '1rem' }} onClick={props.onClickNextSection}> <ArrowDownOutlined /> See how it works </a>
             </div>
             <div className={cn('illustration', 'fullHeight')}>
                 <img

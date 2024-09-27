@@ -34,7 +34,7 @@ const LoginModal: React.FC<Props> = (props) => {
 
             <p>
                 Already have an account? {' '}
-                <a onClick={props.onClickLogin}>Log in</a>
+                <a style={{ cursor: 'pointer' }} onClick={props.onClickLogin}>Log in</a>
             </p>
         </div>
     </Modal>

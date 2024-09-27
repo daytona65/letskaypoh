@@ -30,7 +30,7 @@ const LandingBanner: React.FC<Props> = ({ onClickRegister, onClickAbout }) => {
                 <Button className={'joinButton'} onClick={onClickRegister}>
                     Join us as a Kaypoh!
                 </Button>
-                <a onClick={onClickAbout}><ArrowDownOutlined /> Read About Us</a>
+                <a style={{ cursor: 'pointer' }} onClick={onClickAbout}><ArrowDownOutlined /> Read About Us</a>
             </div>
             <div>
                 <img src={HomeScreenshot} className={'screenshot'} />
