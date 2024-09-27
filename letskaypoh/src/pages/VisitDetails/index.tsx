@@ -108,9 +108,9 @@ const VisitDetails = () => {
     },
     {
       key: 'lastVisited',
-      label: 'Last Visited Date',
+      label: 'Days since last visit',
       icon: <CalendarOutlined />,
-      children: <span>{senior.last_visited_date}</span>
+      children: <span>{senior.daysLastVisited}</span>
     }
   ] : []
 

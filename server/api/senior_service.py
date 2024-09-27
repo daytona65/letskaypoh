@@ -29,18 +29,9 @@ def get_senior():
 
 def create_new_senior():
     data = request.json
-    name = data.get("name")
-    gender = data.get("gender")
-    age = data.get("age")
-    languages = data.get("languages")
-    postal_code = data.get("postal_code")
-    address = data.get("address")
-    last_visited_date = data.get("last_visited_date")
-    lat = data.get("lat")
-    lon = data.get("lon")
     
-    if not data or not name or not gender or not age or not postal_code or not address or not languages or not last_visited_date or not lat or not lon or not isinstance(languages, list):
-        return Response(json.dumps({"error": "Request body error. All fields are required. Languages is a list."}), mimetype='application/json', status=400)
+    if not data:
+        return Response(json.dumps({"error": "No data"}), mimetype='application/json', status=400)
     
     try:
         senior_id = counter_collection.find_one_and_update(
@@ -50,16 +41,8 @@ def create_new_senior():
             upsert=True
         )["count"]
         new_senior = {
+            ...data,
                 "senior_id": senior_id,
-                "name": name,
-                "gender": gender,
-                "age": age,
-                "postal_code": postal_code,
-                "address": address,
-                "languages": languages,
-                "last_visited_date": last_visited_date,
-                "lat": lat,
-                "lon": lon
         }
         senior_collection.insert_one(new_senior)
     except Exception as e:
