@@ -1,9 +1,11 @@
 import { CalendarOutlined, SearchOutlined, UserOutlined } from '@ant-design/icons'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import './styles.css'
 import { navigateToRoute, useScrollDirection } from './utils'
 import { Avatar } from 'antd'
+import { getUserByIdData } from '../api'
+import { UserInterface } from '../models/interfaces'
 
 interface navItem {
     key: React.Key
@@ -17,7 +19,26 @@ interface Props {
 }
 
 export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
-    const navigate = useNavigate(); 
+    const token = localStorage.getItem('access_token');
+    const navigate = useNavigate();
+    if (!token) {
+        navigateToRoute('/', navigate)
+    }
+
+	const [user, setUser] = useState<UserInterface>();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
+				setUser(userData);
+            } catch (error) {
+                console.error("Error fetching visits data:", error);
+            }
+        };
+
+        fetchData();
+    }, [user])
 
     const scrollDirection = useScrollDirection();
 
@@ -79,13 +100,15 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         )
     })
 
+    const nameLoggedIn = user ? `, ${user.name.split(' ')[0]}!`: '!'
+
     return (
         <>
             <div className={'bottom-nav'}>
                 {bottomMenu}
             </div>
             <div className={`topAppNav ${scrollDirection === "down" ? "hide" : "show"}`}>
-                <h1>let's kaypoh!</h1>
+                <h1>let's kaypoh{nameLoggedIn}</h1>
                 <div className={'appNavRow'}>
                     {topMenu}
                 </div>
