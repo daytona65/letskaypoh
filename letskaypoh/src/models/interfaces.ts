@@ -39,7 +39,6 @@ export interface SeniorInterface {
 	languages: string[],
 	postal_code: number,
 	address: string,
-	last_visited_date: string,
 	daysLastVisited?: any,
 	story: string,
 	medical: string[],

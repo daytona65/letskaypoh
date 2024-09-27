@@ -82,7 +82,7 @@ const Features: React.FC<EntryBannerProps> = (props) => {
 
                 {featureItems}
 
-                <a onClick={props.onClickNextSection} style={{ marginTop: '3rem' }}> <ArrowDownOutlined /> So what differentiates us? </a>
+                <a style={{ cursor: 'pointer', marginTop: '3rem' }} onClick={props.onClickNextSection}> <ArrowDownOutlined /> So what differentiates us? </a>
             </div >
             <div className={cn( 'fullHeight')}>
 

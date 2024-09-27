@@ -17,9 +17,9 @@ const TopNav: React.FC<Props> = (props) => {
         <div className={`topNav ${scrollDirection === "down" ? "hide" : "show"}`}>
             <h1>let's kaypoh!</h1>
             <div className={'navRow'}>
-                <a onClick={props.onClickFeatures}>Features</a>
-                <a onClick={props.onClickAbout}>About Us</a>
-                <a onClick={props.onClickTeam}>Our Team</a>
+                <a style={{ cursor: 'pointer' }} onClick={props.onClickFeatures}>Features</a>
+                <a style={{ cursor: 'pointer' }} onClick={props.onClickAbout}>About Us</a>
+                <a style={{ cursor: 'pointer' }} onClick={props.onClickTeam}>Our Team</a>
                 <Button className={'joinButton'} onClick={props.onClickJoin}>Join Us</Button>
             </div>
         </div>

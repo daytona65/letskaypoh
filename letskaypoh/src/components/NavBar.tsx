@@ -47,7 +47,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         {
             key: 1,
             title: 'Explore',
-            icon: <SearchOutlined onClick={() => navigateToRoute('/home', navigate)}/>,
+            icon: <SearchOutlined style={{ cursor: 'pointer' }} onClick={() => navigateToRoute('/home', navigate)}/>,
             path: '/home'
         },
         {

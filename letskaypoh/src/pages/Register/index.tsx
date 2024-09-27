@@ -90,7 +90,7 @@ const Register = () => {
 
                 <p style={{marginTop: '2rem'}}>
                     Already have an account? {' '}
-                    <a onClick={() => navigateToRoute('/login', navigate)}>Log in</a>
+                    <a style={{ cursor: 'pointer' }} onClick={() => navigateToRoute('/login', navigate)}>Log in</a>
                 </p>
             </div>
 

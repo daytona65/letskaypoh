@@ -112,7 +112,7 @@ const Profile: React.FC = () => {
 			<div className={'section'}>
 				<div className={'row'}>
 					<h3>Profile</h3>
-					<a onClick={() => {
+					<a style={{ cursor: 'pointer' }} onClick={() => {
 						localStorage.clear();
 						navigateToRoute('/', navigate)
 					}}>  Sign Out <LogoutOutlined /></a> 
