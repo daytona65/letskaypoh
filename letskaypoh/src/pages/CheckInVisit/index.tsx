@@ -9,11 +9,14 @@ import { handleCheckInVisit, navigateToRoute } from '../../components/utils'
 import { VisitInterface } from '../../models/interfaces'
 import { getVisitByIdData } from '../../api'
 // import { QrReader } from 'react-qr-reader';
+import { Scanner } from '@yudiel/react-qr-scanner';
 
 const QrScanner: React.FC = () => {  
     return (
       <div className='qr'>
-       Mocking QR code scanning at senior's location
+        <Scanner onScan={(result) => console.log(result)} />
+
+       {/* Mocking QR code scanning at senior's location */}
       </div>
     );
   };
