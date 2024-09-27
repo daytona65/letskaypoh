@@ -23,13 +23,21 @@ export type MarkerProps = {
 	info: SeniorInterface;
 	position: Coordinates
 	hideDetails?: boolean
+	zIndex: number
 }
 
 const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, showDirections, hideDetails, currentLocation }) => {
 	const [closeAllInfoWindows, setCloseAllInfoWindows] = useState<boolean>(false);
 	const [selectedId, setSelectedId] = useState<number | null>(null);
 
-	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails }) => {
+	const data = locations
+		.sort((a, b) => b.lat - a.lat)
+		.map((snr, index) => ({snr, zIndex: index}))
+
+	const Z_INDEX_SELECTED = data.length;
+
+
+	const CustomMarker: React.FC<MarkerProps> = ({ info, position, hideDetails, zIndex }) => {
 		const [showInfoWindow, setShowInfoWindow] = useState<boolean>(false);
 
 		useEffect(() => {
@@ -38,10 +46,11 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			} else {
 			  setShowInfoWindow(false);
 			}
-		  }, [selectedId, closeAllInfoWindows, hideDetails, info.senior_id]);
+		  }, [hideDetails, info.senior_id]);
 		
 		return (
 			<AdvancedMarker
+				zIndex={zIndex}
 				position={position}
 				onClick={() => {
 					setCloseAllInfoWindows(false);
@@ -49,7 +58,6 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 					setShowInfoWindow(true);
 					
 				}}
-				style={{zIndex: 0}}
 			>
 				<div>
 					{(showInfoWindow) ?
@@ -83,14 +91,22 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			defaultCenter={defaultCenter}
 			onClick={() => setCloseAllInfoWindows(true)}
 		>
-			{locations?.map(marker => (
-				<CustomMarker
-					key={marker.senior_id}
-					info={marker}
-					position={{ lat: currentLocation.lat + marker.lat, lng: currentLocation.lng + marker.lon }}
+			{data?.map(marker => {
+				const sr = marker.snr
+				let zIdx = marker.zIndex
+
+				if (selectedId === sr.senior_id) {
+					zIdx = Z_INDEX_SELECTED
+				}
+
+				return <CustomMarker
+					zIndex={zIdx}
+					key={sr.senior_id}
+					info={sr}
+					position={{ lat: currentLocation.lat + sr.lat, lng: currentLocation.lng + sr.lon }}
 					hideDetails={hideDetails}
 				/>
-			))}
+			})}
 
 			<AdvancedMarker
 				position={currentLocation}
