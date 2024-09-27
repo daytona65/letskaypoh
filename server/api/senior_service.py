@@ -40,15 +40,13 @@ def create_new_senior():
             return_document=True,
             upsert=True
         )["count"]
-        new_senior = {
-            ...data,
-                "senior_id": senior_id,
-        }
+        new_senior = {**data, "senior_id": senior_id}
         senior_collection.insert_one(new_senior)
+        new_senior["_id"] = str(new_senior["_id"])
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
 
-    return jsonify({"message": "Senior created!", "new_senior": str(new_senior)}), 201
+    return jsonify({"message": "Senior created!", "new_senior": new_senior}), 201
 
 def days_last_visited():
     senior_id = int(request.args.get('id'))
