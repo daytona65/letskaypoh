@@ -61,12 +61,18 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 			>
 				<div>
 					{(showInfoWindow) ?
+					<div className='column'>
 						<SeniorCard 
 							senior={info} 
 							onClose={() => setShowInfoWindow(false)} 
 							showVisitBtn={true}
-							style={{zIndex: selectedId === info.senior_id ? 120398 : -500}}
-						/> :
+							style={{zIndex: selectedId === info.senior_id ? 120398 : -500, marginBottom: '0.5rem'}}
+						/>
+						<div  className={`seniorMarker selected`}>
+							{info.name}
+						</div>
+					</div>
+						:
 						<div 
 							className={`seniorMarker ${
 								info.daysLastVisited === "NEVER VISITED" || info.daysLastVisited > 7 ? 'red' : 

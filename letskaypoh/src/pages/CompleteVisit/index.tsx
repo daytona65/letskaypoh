@@ -198,11 +198,15 @@ const CompleteVisit = () => {
 
             <Divider />
 
-            <h3 className={'formSection'}>Services needed</h3>
+            <h3 className={'formSection'}>Any services the senior requested for?</h3>
 
             {serviceForm}
 
-            <Form.Item style={{ marginTop: '2rem' }} label="Others" name="living" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+            <Form.Item style={{ marginTop: '2rem' }} label="Other services not listed above" name="others" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
+              <TextArea />
+            </Form.Item>
+
+            <Form.Item style={{ marginTop: '2rem' }} label="Please elaborate on the services required" name="svcs" rules={[{ required: false, message: 'Please input any notes / remarks!' }]}>
               <TextArea />
             </Form.Item>
 
