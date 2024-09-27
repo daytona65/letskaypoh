@@ -94,7 +94,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         }
 
         return (
-            <a key={navItem.key} onClick={() => navigateToRoute(navItem.path, navigate)}>
+            <a key={navItem.key} style={{ cursor: 'pointer' }} onClick={() => navigateToRoute(navItem.path, navigate)}>
                 {navItem.title}
             </a>
         )
