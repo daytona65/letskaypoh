@@ -110,7 +110,13 @@ const RegisterVisit: React.FC = () => {
                         />
                     </Form.Item>
 
-                    <Form.Item name='visitTime' label="Timeslot"
+                    <Form.Item name='visitTime' label="Timeslot" required={true} rules={[{validator: () => {
+                        if (selectedTimeslot) {
+                            return Promise.resolve()
+                        }
+
+                        return Promise.reject(new Error('Please select a timeslot!'));
+                    }}]}
                     >{
                         timeslots.map((time) => (
                             <TimeSlotButton 
@@ -120,13 +126,15 @@ const RegisterVisit: React.FC = () => {
                                 isSelected={time === selectedTimeslot}
                             />
                         ))
-                    }</Form.Item> 
+                    }
+                    </Form.Item> 
 
                     <div className={'note'}>
                         <h3>Important Notes <InfoCircleTwoTone style={{fontSize: 14}}/></h3>
                         To ensure the well being of our seniors, please read the following terms of usage:
                         <ul>
                             <li>A social worker will accompany you for your first visit.</li>
+                            <li>You do not have to visit for the entire duration of the timeslot. </li>
                             <li>During your visit, <b>do NOT</b> enter the senior's house at any point of time.</li>
                             <li><b>What you can do:</b> say hi, chat about interests, ask about their story.</li>
                             <li>Please show respect and refrain from speaking unkind words, do respect the senior's privacy.</li>
