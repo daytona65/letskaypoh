@@ -58,32 +58,6 @@ def create_new_visit():
 
     return jsonify({"message": "Visit created!", "new_visit": new_visit}), 201
 
-# def update_visitor():
-#     data = request.json
-#     visit_id = data.get('visit_id')
-#     visitor_id = data.get('visitor_id')
-#     action = data.get('action')
-#     if not visit_id or not visitor_id or not action or (action != "add" and action != "delete"):
-#         return jsonify({"error": "visit id, visitor_id and action fields are required. For actions, only 'add' and 'delete' are allowed."}), 400
-#     visit_id = int(visit_id)
-#     visitor_id = int(visitor_id)
-#     action = str(action)
-#     try:
-#         if (action == "add"):
-#             result = visit_collection.update_one(
-#                 {"visit_id": visit_id},       
-#                 {"$addToSet": {"visitor_ids": visitor_id}}  
-#             )
-#         elif (action == "delete"):
-#             result = visit_collection.update_one(
-#                 {"visit_id": visit_id},
-#                 {"$pull": {"visitor_ids": visitor_id}}
-#             )
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
-    
-#     return jsonify({"message": f"Visitor {visitor_id} {action} on visit {visit_id}"}), 201
-
 def update_visit():
     data = request.json
     visit_id = data.get('visit_id')

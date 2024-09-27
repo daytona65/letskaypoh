@@ -7,7 +7,7 @@ import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
 import { SeniorInterface, SupportedLanguages } from '../../models/interfaces'
-import { getAllSeniorsData, getDaysLastVisted } from '../../api'
+import { getAllSeniorsData, getDaysLastVisted, updateSenior } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { FilterOutlined, QuestionCircleTwoTone } from '@ant-design/icons'
@@ -57,13 +57,16 @@ const Home = () => {
                             } else {
                                 daysLastVisited = days;
                             }
-                            return ({
+                            const modifiedSenior = ({
                                 ...senior,
                                 daysLastVisited: daysLastVisited
                             })
+                            await updateSenior(modifiedSenior);
+                            return modifiedSenior;
                         })
                     )
                 });
+                
                 setSeniors(seniorsData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);

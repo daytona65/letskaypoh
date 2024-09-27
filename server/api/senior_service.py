@@ -47,6 +47,22 @@ def create_new_senior():
 
     return jsonify({"message": "Senior created!", "new_senior": new_senior}), 201
 
+def update_senior():
+    data = request.json
+    senior_id = data.get('senior_id')
+    if not data:
+        return jsonify({"error": "Data needed for PATCH senior"}), 400
+    senior_id = int(senior_id)
+    try:
+        result = senior_collection.update_one(
+            {"senior_id": senior_id},
+            {"$set": data}
+        )
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+    return jsonify({"message": f"Senior {senior_id} updated: {data}"}), 201
+
 def days_last_visited():
     senior_id = int(request.args.get('id'))
 

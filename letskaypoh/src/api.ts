@@ -76,6 +76,17 @@ export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterfa
     }
 };
 
+type PartialSenior = Partial<SeniorInterface>;
+export const updateSenior = async (seniorData: PartialSenior) => {
+    try {
+        const response = await api.patch('/update_senior', seniorData);
+        return response.data;
+    } catch (error) {
+        console.error('Error updating senior:', error);
+        throw error;
+    }
+};
+
 export const getAllVisitsData = async () => {
     try {
         const response = await api.get('/visits');

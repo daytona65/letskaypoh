@@ -53,6 +53,10 @@ def senior():
 def create_senior():
     return create_new_senior()
 
+@app.route("/update_senior", methods=["PATCH"])
+def update_senior_function():
+    return update_senior()
+
 @app.route("/visits", methods=["GET"])
 def visits():
     return get_all_visits()
@@ -74,7 +78,7 @@ def create_visit():
     return create_new_visit()
 
 @app.route("/update_visit", methods=["PATCH"])
-def update():
+def update_visit_function():
     return update_visit()
     
 @app.route("/days", methods=["GET"])
