@@ -4,7 +4,6 @@ from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
 from config import app, db, jwt
-from models import User, Senior, Visit
 import json
 
 config = dotenv_values(".env")

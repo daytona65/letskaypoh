@@ -4,7 +4,6 @@ from pymongo import MongoClient, DESCENDING
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
 from config import app, db
-from models import User, Senior, Visit
 from api.date_service import *
 import json
 

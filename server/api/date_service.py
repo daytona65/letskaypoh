@@ -5,7 +5,6 @@ from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
 from config import app, db, bcrypt
-from models import User, Senior, Visit
 from datetime import datetime
 import pytz
 import json
