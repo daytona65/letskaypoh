@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import Granny from '../../assets/logo.png'
 import Grandpa from '../../assets/grandpa.jpg'
 import CancelModal from '../CancelModal'
+import dayjs from 'dayjs'
 
 interface Props {
     visit: VisitInterface
@@ -57,12 +58,20 @@ export const VisitCard: React.FC<Props> = (props) => {
         navigateToRoute(`/visit-details/${visit.visit_id}`, navigate)
     }
 
+    let curVisitStatus = visit.status
+
+    if (visit.status !== VisitStatus.CANCELLED && visit.status !== VisitStatus.COMPLETED) {
+        if (dayjs(visit.date) < dayjs().startOf('day')) {
+            curVisitStatus = VisitStatus.EXPIRED
+        }
+    }
+
     let visitDetails
     if (senior) {
         visitDetails = (
             <div className='visitInfo'>
                 <div className='visitHeader'>
-                    <Tag style={{ marginRight: 0, marginBottom: '0.5rem' }} color={visitToColorMapping[visit.status as VisitStatus]}>{visit.status}</Tag>
+                    <Tag style={{ marginRight: 0, marginBottom: '0.5rem' }} color={visitToColorMapping[curVisitStatus as VisitStatus]}>{curVisitStatus}</Tag>
                     <div className={'visitDate'}>
                         {visit.date}
                     </div>
@@ -94,7 +103,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                     </span>
                 </div>
 
-                {props.cancellable &&
+                {props.cancellable && (curVisitStatus !== VisitStatus.EXPIRED) && 
                     <>
                         <div className='visitRow'>
                             <a className='visitRow' onClick={() => setIsActionsExpanded(!isActionsExpanded)} >
@@ -110,7 +119,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                                 <Button className={'cancelBtn'} onClick={handleViewVisitDetails}>
                                     View Details
                                 </Button>
-                                {visit.status === VisitStatus.UPCOMING &&
+                                {curVisitStatus === VisitStatus.UPCOMING &&
                                     <>
                                         <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
                                             Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
@@ -119,7 +128,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                                             Cancel Visit <FrownTwoTone twoToneColor="#eb2f96" />
                                         </Button>
                                     </>}
-                                {visit.status === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
+                                {curVisitStatus === VisitStatus.ONGOING && <Button className={'cancelBtn'} onClick={() => handleCompleteVisit(visit, navigate)}>
                                     Mark as Completed <CheckCircleTwoTone twoToneColor="#52c41a" />
                                 </Button>}
                                 <CancelModal

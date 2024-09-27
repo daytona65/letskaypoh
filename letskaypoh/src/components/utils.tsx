@@ -4,6 +4,7 @@ import { NavigateFunction } from 'react-router-dom'
 import { message } from 'antd'
 import { updateVisit } from '../api'
 import { VisitInterface, VisitStatus } from '../models/interfaces'
+import dayjs from 'dayjs'
 
 export const separatedArray = (arr: (string | JSX.Element)[] | undefined, separator?: JSX.Element | string) => {
     if (!arr || arr.length === 0) return
@@ -61,6 +62,12 @@ export const handleCompleteVisit = (visit: VisitInterface, navigate: NavigateFun
 }
 
 export const handleCheckInVisit = (visit: VisitInterface) => {
+  if (dayjs(visit.date) > dayjs().endOf('day')) {
+    message.error('Unable to check in now, check in on your visit day!')
+
+    return
+  }
+
   // add api to check in visit 
   try {
       updateVisit({
