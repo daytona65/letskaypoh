@@ -24,10 +24,6 @@ def register():
 def login():
     return login_user()
 
-@app.route('/nric', methods=['GET'])
-def nric():
-    return check_nric()
-
 @app.route('/email', methods=['GET'])
 def email():
     return check_email()

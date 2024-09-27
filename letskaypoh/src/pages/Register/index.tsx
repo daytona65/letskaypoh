@@ -6,7 +6,7 @@ import { Button, Form, FormProps, Input, message, Radio, Select } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { SupportedLanguages, UserInterface } from '../../models/interfaces'
 import { navigateToRoute } from '../../components/utils'
-import { checkEmailExists, checkMobileExists, checkNricExists, registerUser } from '../../api'
+import { checkEmailExists, checkMobileExists, registerUser } from '../../api'
 import BannerImg from '../../assets/banner.png'
 
 type FieldType = {

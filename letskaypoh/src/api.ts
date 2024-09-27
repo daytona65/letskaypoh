@@ -26,16 +26,6 @@ export const loginUser = async (mobile: string) => {
     }
 };
 
-export const checkNricExists = async (nric: string): Promise<boolean> => {
-    try {
-        await api.get(`/nric?nric=${nric}`);
-        return true;
-    } catch (error) {
-        console.error('api: Non-existent NRIC:', error);
-        return false;
-    }
-};
-
 export const checkEmailExists = async (email: string): Promise<boolean> => {
     try {
         await api.get(`/email?email=${email}`);
