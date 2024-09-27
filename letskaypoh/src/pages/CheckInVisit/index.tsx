@@ -3,20 +3,17 @@ import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
 import { Button, } from 'antd'
-import { CheckCircleTwoTone } from '@ant-design/icons'
+import { CheckCircleOutlined } from '@ant-design/icons'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { handleCheckInVisit, navigateToRoute } from '../../components/utils'
 import { VisitInterface } from '../../models/interfaces'
 import { getVisitByIdData } from '../../api'
-// import { QrReader } from 'react-qr-reader';
 import { Scanner } from '@yudiel/react-qr-scanner';
 
 const QrScanner: React.FC = () => {  
     return (
       <div className='qr'>
         <Scanner onScan={(result) => console.log(result)} />
-
-       {/* Mocking QR code scanning at senior's location */}
       </div>
     );
   };
@@ -58,8 +55,8 @@ const CheckInVisit: React.FC = () => {
                 <QrScanner />
                
                 {visit &&
-                    <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit, navigate)}>
-                        Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
+                    <Button className={'joinButton'} onClick={() => handleCheckInVisit(visit, navigate)}>
+                        Check In <CheckCircleOutlined />
                     </Button>
                 }
             </div>
