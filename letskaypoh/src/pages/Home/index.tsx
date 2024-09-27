@@ -133,12 +133,12 @@ const Home = () => {
 
                                     <span className='legendRow'>
                                         <div className='legend yellow'/>
-                                        Last visited 3-5 days ago
+                                        Last visited 3-7 days ago
                                     </span>
 
                                     <span className='legendRow'>
                                         <div className='legend red'/>
-                                        Last visited {'>'} 5 days ago
+                                        Last visited {'>'} 7 days ago
                                     </span>
                                 </div>
                             }
