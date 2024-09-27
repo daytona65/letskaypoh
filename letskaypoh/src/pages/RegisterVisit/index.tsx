@@ -76,7 +76,7 @@ const RegisterVisit: React.FC = () => {
 
     const disabledDate: DatePickerProps['disabledDate'] = (current) => {
         // Can not select days before today
-        return current < dayjs().endOf('day');
+        return current < dayjs().subtract(1, 'day').endOf('day');
       };
 
     return (

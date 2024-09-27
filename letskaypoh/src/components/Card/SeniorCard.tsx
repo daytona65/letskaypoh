@@ -27,15 +27,25 @@ export const SeniorCard: React.FC<Props> = (props) => {
     const [isDetailExpanded, setIsDetailExpanded] = useState<boolean>(false)
     const [daysLastVisited, setDaysLastVisited] = useState<string>("");
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const days = senior.daysLastVisited
+                let daylabel 
+
+                if (days === 0) {
+                    daylabel = ' Today'
+                } else if (days === 1) {
+                    daylabel = ' Yesterday'
+                } else {
+                    daylabel = `${String(days)} days ago`
+                }
                 
                 if (days === "NEVER VISITED") {
                     setDaysLastVisited(days);
                 } else {
-                    setDaysLastVisited(String(days) + " days ago")
+                    setDaysLastVisited(daylabel)
                 }
 
             } catch (error) {
