@@ -64,7 +64,7 @@ const CustomMap: React.FC<Props> = ({ locations, defaultCenter, defaultZoom, sho
 					<div className='column'>
 						<SeniorCard 
 							senior={info} 
-							onClose={() => setShowInfoWindow(false)} 
+							onClose={() => setCloseAllInfoWindows(true)} 
 							showVisitBtn={true}
 							style={{zIndex: selectedId === info.senior_id ? 120398 : -500, marginBottom: '0.5rem'}}
 						/>
