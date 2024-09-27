@@ -10,8 +10,8 @@ import { SeniorInterface, SupportedLanguages } from '../../models/interfaces'
 import { getAllSeniorsData, getDaysLastVisted } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
-import { FilterOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import { FilterOutlined, QuestionCircleTwoTone } from '@ant-design/icons'
+import { Button, Popover } from 'antd'
 import FilterModal from '../../components/FilterModal'
 
 const Home = () => {
@@ -117,7 +117,36 @@ const Home = () => {
                 <div className='row' style={{ margin: 0 }}>
                     <div className={'header'} style={{ width: '100%', marginBottom: '0.5rem' }}>
                         <h1  style={{ marginTop: '1rem', fontSize: '32px' }}>let's kaypoh!</h1>
-                        <p>Show some love to our seniors nearby!</p>
+                        <p>Show some love to our seniors nearby! 
+                            <Popover title="Need help?"
+                            placement="bottomRight"
+                            content={
+                                <div style={{maxWidth: '230px'}}>
+                                    Click on a senior's bubble to view more details and visit them. 
+                                    <p>
+                                        The bubble colors indicate the urgency of visit required.
+                                    </p>
+                                    <span className='legendRow'>
+                                        <div className='legend green'/>
+                                        Last visited {'<'} 3 days ago
+                                    </span>
+
+                                    <span className='legendRow'>
+                                        <div className='legend yellow'/>
+                                        Last visited 3-5 days ago
+                                    </span>
+
+                                    <span className='legendRow'>
+                                        <div className='legend red'/>
+                                        Last visited {'>'} 5 days ago
+                                    </span>
+                                </div>
+                            }
+                            >
+                                <QuestionCircleTwoTone twoToneColor={'#8187f3'} style={{marginLeft: '0.25rem'}}/> 
+                            </Popover>
+                        </p>
+                        {/* <p>Click on a senior to find out more</p> */}
                     </div>
                     <Button className={'filterBtn'} onClick={onClickFilter}>
                         <FilterOutlined />
