@@ -3,7 +3,7 @@ import './styles.css'
 import { Avatar, Button, Tag } from 'antd'
 import { SeniorInterface, VisitInterface, VisitStatus, visitToColorMapping } from '../../models/interfaces'
 import { getSeniorByIdData } from '../../api'
-import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
+import { handleCancelVisit, handleCompleteVisit, navigateToRoute, separatedArray } from '../utils'
 import { CheckCircleTwoTone, ClockCircleOutlined, DownOutlined, EnvironmentOutlined, FrownTwoTone, UpOutlined, ZhihuOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import Granny from '../../assets/logo.png'
@@ -66,6 +66,10 @@ export const VisitCard: React.FC<Props> = (props) => {
         }
     }
 
+    const handleCheckInClick = () => {
+        navigateToRoute(`/check-in/${visit.visit_id}`, navigate)
+    }
+
     let visitDetails
     if (senior) {
         visitDetails = (
@@ -121,7 +125,7 @@ export const VisitCard: React.FC<Props> = (props) => {
                                 </Button>
                                 {curVisitStatus === VisitStatus.UPCOMING &&
                                     <>
-                                        <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
+                                        <Button className={'cancelBtn'} onClick={handleCheckInClick}>
                                             Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                                         </Button>
                                         <Button className={'cancelBtn'} onClick={onClickCancelButton}>

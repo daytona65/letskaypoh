@@ -19,6 +19,7 @@ import VisitConfirmed from './pages/VisitConfirmed/index.tsx';
 import VisitDetails from './pages/VisitDetails/index.tsx';
 import Login from './pages/Login/index.tsx';
 import { ConfigProvider } from 'antd';
+import CheckInVisit from './pages/CheckInVisit/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/visit-confirmed/:visitId",
         element: <VisitConfirmed />,
+      },
+      {
+        path: "/check-in/:visitId",
+        element: <CheckInVisit />,
       },
     ]
   },

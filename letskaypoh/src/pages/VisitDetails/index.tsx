@@ -6,7 +6,7 @@ import { getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
-import { handleCancelVisit, handleCheckInVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
+import { handleCancelVisit, handleCompleteVisit, navigateToRoute } from '../../components/utils';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import CustomMap from '../Home/components/Map/Map';
 import CancelModal from '../../components/CancelModal';
@@ -157,6 +157,10 @@ const VisitDetails = () => {
     </Tooltip>
   })
 
+  const handleCheckInClick = () => {
+    if (visit) navigateToRoute(`/check-in/${visit.visit_id}`, navigate)
+}
+
   const visitors = <Avatar.Group
     max={{
       count: 2,
@@ -215,7 +219,7 @@ const VisitDetails = () => {
                   }
                   {visit.status === VisitStatus.UPCOMING &&
                     <>
-                      <Button className={'cancelBtn'} onClick={() => handleCheckInVisit(visit)}>
+                      <Button className={'cancelBtn'} onClick={handleCheckInClick}>
                         Check In <CheckCircleTwoTone twoToneColor={'#faad14'} />
                       </Button>
                       

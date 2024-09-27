@@ -61,7 +61,7 @@ export const handleCompleteVisit = (visit: VisitInterface, navigate: NavigateFun
   navigateToRoute(`/visit-completed/${visit.visit_id}`, navigate)
 }
 
-export const handleCheckInVisit = (visit: VisitInterface) => {
+export const handleCheckInVisit = (visit: VisitInterface, navigate: NavigateFunction) => {
   if (dayjs(visit.date) > dayjs().endOf('day')) {
     message.error('Unable to check in now, check in on your visit day!')
 
@@ -74,7 +74,7 @@ export const handleCheckInVisit = (visit: VisitInterface) => {
           "visit_id": visit.visit_id,
           "status": VisitStatus.ONGOING 
       }).then(() => {
-        window.location.reload();
+        navigateToRoute(`/visits`, navigate)
       })
   } catch (error) {
       console.error("Error updating visit status:", error);
