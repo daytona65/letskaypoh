@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../../App.css'
 import './styles.css'
 import '../commonStyles.css'
@@ -26,7 +26,7 @@ const Login = () => {
 
     const [loading, setLoading] = useState<boolean>(false)
     const [mobileExists, setMobileExists] = useState<boolean>(true);
-
+    const [form] = Form.useForm();
     const navigate = useNavigate(); 
 
     const prefixSelector = (
@@ -37,6 +37,10 @@ const Login = () => {
         </Form.Item>
       );
 
+    useEffect(() => {
+        setMobileExists(true);
+    },[loading]);
+    
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         setLoading(true);
 
@@ -46,10 +50,12 @@ const Login = () => {
             console.error("Error checking user mobile:", error);
             setMobileExists(false);
             setLoading(false);
+            form.resetFields();
             return;
         }
 
         if (!mobileExists) {
+            form.resetFields();
             return;
         }
 
@@ -64,9 +70,10 @@ const Login = () => {
             navigateToRoute('/home', navigate);
         } catch (error) {
             console.error("Error logging in:", error);
-            navigateToRoute('/', navigate);
+            form.resetFields();
         }
         setLoading(false);
+        
     };
 
     return (
@@ -87,6 +94,7 @@ const Login = () => {
                     name="login"
                     layout="horizontal"
                     className='formInput'
+                    form={form}
                 >
                     <Form.Item
                         label="Mobile No."
