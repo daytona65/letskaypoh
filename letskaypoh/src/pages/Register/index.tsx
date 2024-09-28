@@ -27,6 +27,7 @@ const Register = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const [emailExists, setEmailExists] = useState<boolean>(false);
     const [mobileExists, setMobileExists] = useState<boolean>(false);
+    const [form] = Form.useForm();
 
     const navigate = useNavigate(); 
 
@@ -40,20 +41,20 @@ const Register = () => {
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
         setLoading(true)
+        if (values.email !== "" && values.mobile !== "") {
+            try {
+                setEmailExists(await checkEmailExists(values.email));
+                setMobileExists(await checkMobileExists(values.mobile));
 
-        try {
-            setEmailExists(await checkEmailExists(values.email));
-            setMobileExists(await checkMobileExists(values.mobile));
-
-            console.log(emailExists, mobileExists)
-        } catch (error) {
-            console.error("Error checking user mobile:", error);
-            setEmailExists(true);
-            setMobileExists(true);
-            setLoading(false);
-            return;
+                console.log(emailExists, mobileExists)
+            } catch (error) {
+                console.error("Error checking user mobile:", error);
+                setEmailExists(true);
+                setMobileExists(true);
+                setLoading(false);
+                return;
+            }
         }
-
         if (emailExists || mobileExists) {
             return;
         } 
@@ -115,6 +116,7 @@ const Register = () => {
 
             <div className={'form'}>
                 <Form
+                    form={form}
                     scrollToFirstError
                     onFinish={onFinish}
                     initialValues={{
