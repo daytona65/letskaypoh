@@ -38,7 +38,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
         };
 
         fetchData();
-    }, [user])
+    }, [])
 
     const scrollDirection = useScrollDirection();
 

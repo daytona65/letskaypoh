@@ -49,7 +49,7 @@ const Login = () => {
             return;
         }
 
-        if (mobileExists) {
+        if (!mobileExists) {
             return;
         }
 

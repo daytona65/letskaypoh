@@ -52,7 +52,7 @@ const Profile: React.FC = () => {
         };
 
         fetchData();
-    }, [user])
+    }, [])
 
 	const visitCards = pastVisits.map((visit) => {
 		return <VisitCard key={visit.visit_id} visit={visit}/>
