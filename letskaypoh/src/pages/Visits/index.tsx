@@ -27,7 +27,7 @@ const Visits = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitsData = await getUserVisitData(Number(user_id));
+        const visitsData = await getUserVisitData(Number(user_id), token!);
 
         setUpcomingVisits(visitsData
           .filter((visit: VisitInterface) => visit.status === VisitStatus.UPCOMING)

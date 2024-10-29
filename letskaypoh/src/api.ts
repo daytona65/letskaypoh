@@ -46,9 +46,13 @@ export const checkMobileExists = async (mobile: string): Promise<boolean> => {
     }
 };
 
-export const getAllUsersData = async () => {
+export const getAllUsersData = async (token: string) => {
     try {
-        const response = await api.get(`/users`);
+        const response = await api.get(`/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -56,9 +60,13 @@ export const getAllUsersData = async () => {
     }
 };
 
-export const getUserByIdData = async (userId: string) => {
+export const getUserByIdData = async (userId: string, token: string) => {
     try {
-        const response = await api.get(`/user?id=${userId}` );
+        const response = await api.get(`/user?id=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -66,9 +74,13 @@ export const getUserByIdData = async (userId: string) => {
     }
 };
 
-export const getAllSeniorsData = async () => {
+export const getAllSeniorsData = async (token: string) => {
     try {
-        const response = await api.get('/seniors');
+        const response = await api.get('/seniors', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching seniors:', error);
@@ -76,9 +88,13 @@ export const getAllSeniorsData = async () => {
     }
 };
 
-export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterface> => {
+export const getSeniorByIdData = async (seniorId: number, token:string): Promise<SeniorInterface> => {
     try {
-        const response = await api.get(`/senior?id=${seniorId}`);
+        const response = await api.get(`/senior?id=${seniorId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error(`Error fetching senior with ID ${seniorId}:`, error);
@@ -87,9 +103,13 @@ export const getSeniorByIdData = async (seniorId: number): Promise<SeniorInterfa
 };
 
 type PartialSenior = Partial<SeniorInterface>;
-export const updateSenior = async (seniorData: PartialSenior) => {
+export const updateSenior = async (seniorData: PartialSenior, token: string) => {
     try {
-        const response = await api.patch('/update_senior', seniorData);
+        const response = await api.patch('/update_senior', seniorData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error updating senior:', error);
@@ -97,9 +117,13 @@ export const updateSenior = async (seniorData: PartialSenior) => {
     }
 };
 
-export const getAllVisitsData = async () => {
+export const getAllVisitsData = async (token: string) => {
     try {
-        const response = await api.get('/visits');
+        const response = await api.get('/visits', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error fetching visits:', error);
@@ -107,9 +131,13 @@ export const getAllVisitsData = async () => {
     }
 };
 
-export const getVisitByIdData = async (visitId: number) => {
+export const getVisitByIdData = async (visitId: number, token: string) => {
     try {
-        const response = await api.get(`/visit?id=${visitId}` );
+        const response = await api.get(`/visit?id=${visitId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error(`Error fetching visit with ID ${visitId}:`, error);
@@ -117,9 +145,13 @@ export const getVisitByIdData = async (visitId: number) => {
     }
 };
 
-export const getUserVisitData = async (user_id: number) => {
+export const getUserVisitData = async (user_id: number, token: string) => {
     try {
-        const response = await api.get(`/user_visits?id=${user_id}` );
+        const response = await api.get(`/user_visits?id=${user_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error(`Error fetching visits for user ${user_id}:`, error);
@@ -127,9 +159,13 @@ export const getUserVisitData = async (user_id: number) => {
     }
 };
 
-export const getLatestVisitId = async () => {
+export const getLatestVisitId = async (token: string) => {
     try {
-        const response = await api.get('/visit_id');
+        const response = await api.get('/visit_id', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error generating visit ID:', error);
@@ -137,9 +173,13 @@ export const getLatestVisitId = async () => {
     }
 };
 
-export const createVisit = async (visitData: VisitInterface) => {
+export const createVisit = async (visitData: VisitInterface, token: string) => {
     try {
-        const response = await api.post('/create_visit', visitData);
+        const response = await api.post('/create_visit', visitData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error creating visit:', error);
@@ -148,9 +188,13 @@ export const createVisit = async (visitData: VisitInterface) => {
 };
 
 type PartialVisit = Partial<VisitInterface>;
-export const updateVisit = async (visitData: PartialVisit) => {
+export const updateVisit = async (visitData: PartialVisit, token: string) => {
     try {
-        const response = await api.patch('/update_visit', visitData);
+        const response = await api.patch('/update_visit', visitData, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error updating visit:', error);
@@ -158,9 +202,13 @@ export const updateVisit = async (visitData: PartialVisit) => {
     }
 };
 
-export const getDaysLastVisted = async (senior_id: string) => {
+export const getDaysLastVisted = async (senior_id: string, token: string) => {
     try {
-        const response = await api.get(`/days?id=${senior_id}`);
+        const response = await api.get(`/days?id=${senior_id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         console.error('Error getting days:', error);

@@ -47,13 +47,13 @@ export const navigateToRoute = (path: string, navigate: NavigateFunction) => {
 }
 
 export const handleCompleteVisit = (visit: VisitInterface, navigate: NavigateFunction) => {
-  // api to mark visit as completed
+  const token = localStorage.getItem("access_token");
   try {
       updateVisit({
           "visit_id": visit.visit_id,
           "status": VisitStatus.COMPLETED 
-      })
-      updateSenior({ "senior_id": visit.senior_id, "daysLastVisited": 0 });
+      }, token!)
+      updateSenior({ "senior_id": visit.senior_id, "daysLastVisited": 0 }, token!);
   } catch (error) {
       console.error("Error updating visit status:", error);
   }
@@ -62,6 +62,7 @@ export const handleCompleteVisit = (visit: VisitInterface, navigate: NavigateFun
 }
 
 export const handleCheckInVisit = (visit: VisitInterface, navigate: NavigateFunction) => {
+  const token = localStorage.getItem("access_token");
   if (dayjs(visit.date) > dayjs().endOf('day')) {
     message.error('Unable to check in now, check in on your visit day!')
 
@@ -73,7 +74,7 @@ export const handleCheckInVisit = (visit: VisitInterface, navigate: NavigateFunc
       updateVisit({
           "visit_id": visit.visit_id,
           "status": VisitStatus.ONGOING 
-      }).then(() => {
+      }, token!).then(() => {
         navigateToRoute(`/visits`, navigate)
       })
   } catch (error) {
@@ -86,11 +87,12 @@ export const handleCheckInVisit = (visit: VisitInterface, navigate: NavigateFunc
 
 export const handleMissVisit = (visit: VisitInterface) => {
   // add api to check in visit 
+  const token = localStorage.getItem("access_token");
   try {
       updateVisit({
           "visit_id": visit.visit_id,
           "status": VisitStatus.MISSED 
-      }).then(() => {
+      }, token!).then(() => {
         window.location.reload()
       })
   } catch (error) {
@@ -104,11 +106,12 @@ export const handleMissVisit = (visit: VisitInterface) => {
 
 export const handleCancelVisit = (visit: VisitInterface) => {
   // api to mark visit as cancelled
+  const token = localStorage.getItem("access_token");
   try {
       updateVisit({
           "visit_id": visit.visit_id,
           "status": VisitStatus.CANCELLED
-      })
+      }, token!)
       
   } catch (error) {
       console.error("Error updating visit status:", error);

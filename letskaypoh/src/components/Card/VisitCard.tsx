@@ -17,6 +17,7 @@ interface Props {
 }
 
 export const VisitCard: React.FC<Props> = (props) => {
+    const token = localStorage.getItem("access_token");
     const { visit } = props
     const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ export const VisitCard: React.FC<Props> = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorData = await getSeniorByIdData(visit.senior_id);
+                const seniorData = await getSeniorByIdData(visit.senior_id, token!);
                 setSenior(seniorData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);

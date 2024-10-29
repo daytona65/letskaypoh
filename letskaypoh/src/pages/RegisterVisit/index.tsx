@@ -57,8 +57,8 @@ const RegisterVisit: React.FC = () => {
         
         const postData = async () => {
             try {
-                await createVisit(visitDetails);
-                const visitId = await getLatestVisitId();
+                await createVisit(visitDetails, token!);
+                const visitId = await getLatestVisitId(token!);
 
                 setLoading(false)
                 console.log('loading', loading)

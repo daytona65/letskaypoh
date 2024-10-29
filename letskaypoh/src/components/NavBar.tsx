@@ -30,7 +30,7 @@ export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
+				const userData = await getUserByIdData(localStorage.getItem('user_id')!, token!)
 				setUser(userData);
             } catch (error) {
                 console.error("Error fetching visits data:", error);

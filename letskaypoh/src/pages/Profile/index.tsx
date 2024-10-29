@@ -42,9 +42,9 @@ const Profile: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-				const userData = await getUserByIdData(localStorage.getItem('user_id')!)
+				const userData = await getUserByIdData(localStorage.getItem('user_id')!, token!)
 				setUser(userData);
-                const visitsData = await getUserVisitData(Number(localStorage.getItem('user_id')));
+                const visitsData = await getUserVisitData(Number(localStorage.getItem('user_id')), token!);
 				setPastVisits(visitsData.filter((visit: VisitInterface) => visit.status === VisitStatus.CANCELLED || visit.status === VisitStatus.COMPLETED || visit.status === VisitStatus.MISSED))
             } catch (error) {
                 console.error("Error fetching visits data:", error);

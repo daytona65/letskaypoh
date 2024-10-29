@@ -20,6 +20,7 @@ const Home = () => {
     if (!token) {
         navigateToRoute('/', navigate)
     }
+
     const [selectedPlace, setSelectedPlace] =
         useState<google.maps.places.PlaceResult | null>(null);
 
@@ -47,10 +48,10 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const seniorsData = await getAllSeniorsData().then((response: SeniorInterface[]) => {
+                const seniorsData = await getAllSeniorsData(token!).then((response: SeniorInterface[]) => {
                     return Promise.all(
                         response.map(async (senior) => {
-                            const { days } = await getDaysLastVisted(String(senior.senior_id));
+                            const { days } = await getDaysLastVisted(String(senior.senior_id), token!);
                             
                             return ({
                                 ...senior,
@@ -107,7 +108,7 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        seniors.map(async (senior) => { updateSenior({ "senior_id": senior.senior_id, "daysLastVisited": senior.daysLastVisited }) });
+        seniors.map(async (senior) => { updateSenior({ "senior_id": senior.senior_id, "daysLastVisited": senior.daysLastVisited }, token!) });
     }, [seniors]);
 
     return (

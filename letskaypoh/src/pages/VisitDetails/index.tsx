@@ -60,7 +60,7 @@ const VisitDetails = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitData = await getVisitByIdData(visitId);
+        const visitData = await getVisitByIdData(visitId, token!);
         setVisit(visitData);
       } catch (error) {
         console.error("Error fetching visit data:", error);
@@ -76,7 +76,7 @@ const VisitDetails = () => {
     if (visit) {
       const fetchData = async () => {
         try {
-          const seniorData = await getSeniorByIdData(visit.senior_id);
+          const seniorData = await getSeniorByIdData(visit.senior_id, token!);
           setSenior(seniorData);
         } catch (error) {
           console.error("Error fetching senior data:", error);

@@ -1,4 +1,10 @@
 from flask import Response, request, jsonify
+from flask import Flask
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import dotenv_values
@@ -42,14 +48,17 @@ def users():
     return get_all_users()
 
 @app.route("/user", methods=["GET"])
+@jwt_required()
 def user():
     return get_user()
 
 @app.route("/seniors", methods=["GET"])
+@jwt_required()
 def seniors():
     return get_all_seniors()
 
 @app.route("/senior", methods=["GET"])
+@jwt_required()
 def senior():
     return get_senior()
 
@@ -58,37 +67,43 @@ def create_senior():
     return create_new_senior()
 
 @app.route("/update_senior", methods=["PATCH"])
+@jwt_required()
 def update_senior_function():
     return update_senior()
 
 @app.route("/visits", methods=["GET"])
+@jwt_required()
 def visits():
     return get_all_visits()
 
 @app.route("/visit", methods=["GET"])
+@jwt_required()
 def visit():
     return get_visit()
 
 @app.route("/user_visits", methods=["GET"])
+@jwt_required()
 def user_visits():
     return get_user_visits()
 
 @app.route("/visit_id", methods=["GET"])
+@jwt_required()
 def visit_id():
     return latest_visit_id()
 
 @app.route("/create_visit", methods=["POST"])
+@jwt_required()
 def create_visit():
     return create_new_visit()
 
 @app.route("/update_visit", methods=["PATCH"])
+@jwt_required()
 def update_visit_function():
     return update_visit()
     
 @app.route("/days", methods=["GET"])
 def days():
     return days_last_visited()
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

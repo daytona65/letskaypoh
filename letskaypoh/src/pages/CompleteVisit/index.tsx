@@ -39,8 +39,8 @@ const CompleteVisit = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const visitData = await getVisitByIdData(visitId);
-        const seniorData = await getAllSeniorsData();
+        const visitData = await getVisitByIdData(visitId, token!);
+        const seniorData = await getAllSeniorsData(token!);
         setVisit(visitData);
         setSenior(seniorData);
       } catch (error) {

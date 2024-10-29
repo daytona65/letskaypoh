@@ -27,7 +27,7 @@ const VisitConfirmed: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const visitData = await getVisitByIdData(visitId);
+                const visitData = await getVisitByIdData(visitId, token!);
                 setVisit(visitData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);

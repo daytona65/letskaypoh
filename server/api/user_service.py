@@ -1,6 +1,13 @@
 from flask import Response, request, jsonify
-from flask_cors import CORS
+from flask import Flask
+from flask import jsonify
+from flask import request
+
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import dotenv_values
 from bson import json_util, ObjectId
@@ -37,16 +44,12 @@ def register_user():
             return_document=True,
             upsert=True
         )["count"]
-  
-        new_user = {**data, "user_id": user_id} #, "password": hashed_password}
+        access_token = create_access_token(identity={"user_id": user_id})
+        new_user = {**data, "user_id": user_id, "token": access_token} #, "password": hashed_password}
         user_collection.insert_one(new_user)
         new_user["_id"] = str(new_user["_id"])
     except Exception as e:
         return Response(json.dumps({"message": str(e)}), mimetype="application/json", status=500)
-    try:
-        access_token = create_access_token(identity={"user_id": user_id})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
     return jsonify({"message": "User registered successfully!", "access_token": access_token, "user": new_user}), 201
 
 def login_user():
@@ -55,7 +58,7 @@ def login_user():
 
     if not data or not mobile:
         return Response(json.dumps({"error": "Mobile number missing"}), mimetype='application/json', status=400)
-
+    
     try:
         user = list(user_collection.find(
             {"mobile": str(mobile)}
@@ -67,6 +70,13 @@ def login_user():
         if user:
             user_id = user_data['user_id']
         access_token = create_access_token(identity={"user_id": user_id})
+        update_token = {
+            "token": access_token
+        }
+        result = user_collection.update_one(
+            {"user_id": user_id},
+            {"$set": update_token}
+        )
     except Exception as e:
         return jsonify({"Error with access token": str(e)}), 500
 
@@ -100,3 +110,11 @@ def get_user():
     if user is None:
         return jsonify({"error": "User not found"}), 404
     return Response(json.dumps(user[0], default=json_util.default), mimetype="application/json")
+
+# def create_jwt(user_id, secret_key):
+#     payload = {
+#         'sub': user_id,
+#         'iat': datetime.datetime.utcnow(),
+#         'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+#     }
+#     return jwt.encode(payload, secret_key, algorithm='HS256')
