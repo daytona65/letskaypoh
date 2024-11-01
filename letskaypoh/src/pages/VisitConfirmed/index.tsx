@@ -5,14 +5,14 @@ import './styles.css'
 import { VisitInterface } from '../../models/interfaces'
 import Check from '../../assets/check.webp'
 import { Alert, Button } from 'antd'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { VisitCard } from '../../components/Card/VisitCard'
 import { getVisitByIdData } from '../../api'
 import cn from 'classnames'
 
 const VisitConfirmed: React.FC = () => {
-    const visitId = Number(useLocation().pathname.split("/")[2]);
+    const { visitId } = useParams();
 
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ const VisitConfirmed: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const visitData = await getVisitByIdData(visitId, token!);
+                const visitData = await getVisitByIdData(Number(visitId), token!);
                 setVisit(visitData);
             } catch (error) {
                 console.error("Error fetching senior data:", error);
@@ -35,7 +35,7 @@ const VisitConfirmed: React.FC = () => {
         };
 
         fetchData();
-    }, [visitId])
+    }, [token, visitId])
 
     return (
         <div className={'container'}>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Check from '../../assets/check.webp'
 import { Alert, Button, Checkbox, Divider, Form, FormProps, Rate } from 'antd';
 import { SeniorInterface, VisitInterface } from '../../models/interfaces';
@@ -16,7 +16,7 @@ type FieldType = {
 
 //check in not in use 
 const CompleteVisit = () => {
-  const visitId = Number(useLocation().pathname.split("/")[2]);
+  const { visitId } = useParams();
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
   if (!token) {
@@ -39,7 +39,7 @@ const CompleteVisit = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const visitData = await getVisitByIdData(visitId, token!);
+        const visitData = await getVisitByIdData(Number(visitId), token!);
         const seniorData = await getAllSeniorsData(token!);
         setVisit(visitData);
         setSenior(seniorData);
@@ -49,7 +49,7 @@ const CompleteVisit = () => {
     };
 
     fetchData();
-  }, [visitId])
+  }, [token, visitId])
 
   // add api to store form values
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {

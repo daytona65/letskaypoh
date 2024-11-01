@@ -4,7 +4,7 @@ import '../../App.css'
 import './styles.css'
 import { Button, Popover, } from 'antd'
 import { CheckCircleOutlined, InfoCircleTwoTone } from '@ant-design/icons'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { handleCheckInVisit, navigateToRoute } from '../../components/utils'
 import { VisitInterface } from '../../models/interfaces'
 import { getVisitByIdData } from '../../api'
@@ -25,14 +25,14 @@ const CheckInVisit: React.FC = () => {
     if (!token) {
         navigateToRoute('/', navigate)
     }
-    const visitId = Number(useLocation().pathname.split("/")[2]);
+    const { visitId } = useParams();
 
     const [visit, setVisit] = useState<VisitInterface>();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const visitData = await getVisitByIdData(visitId, token!);
+                const visitData = await getVisitByIdData(Number(visitId), token!);
                 setVisit(visitData);
             } catch (error) {
                 console.error("Error fetching visit data:", error);

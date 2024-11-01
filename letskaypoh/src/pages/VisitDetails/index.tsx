@@ -1,6 +1,6 @@
 import { Avatar, Button, Divider, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './styles.css'
 import { getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
@@ -24,7 +24,7 @@ const VisitDetails = () => {
   if (!token) {
     navigateToRoute('/', navigate)
   }
-  const visitId = Number(useLocation().pathname.split("/")[2]);
+  const { visitId } = useParams();
 
 	// const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })
 
@@ -60,7 +60,7 @@ const VisitDetails = () => {
     setLoading(true)
     const fetchData = async () => {
       try {
-        const visitData = await getVisitByIdData(visitId, token!);
+        const visitData = await getVisitByIdData(Number(visitId), token!);
         setVisit(visitData);
       } catch (error) {
         console.error("Error fetching visit data:", error);
@@ -68,7 +68,7 @@ const VisitDetails = () => {
     };
     fetchData();
     setLoading(false)
-  }, [visitId])
+  }, [visitId, token])
 
   const [senior, setSenior] = useState<SeniorInterface | null>(null);
 
