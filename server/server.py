@@ -13,6 +13,9 @@ from config import app, db, bcrypt
 from api.user_service import *
 from api.senior_service import *
 from api.visit_service import *
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 import json
 
 config = dotenv_values(".env")
@@ -104,6 +107,28 @@ def update_visit_function():
 @app.route("/days", methods=["GET"])
 def days():
     return days_last_visited()
+
+@app.route("/verify", methods=["GET"])
+def verify():
+    message = Mail(
+        from_email='letskaypoh@gmail.com',
+        to_emails='josephine.hemingway@gmail.com',
+        subject='via api Sending with Twilio SendGrid is Fun',
+        html_content='<strong>and easy to do anywhere, even with Python</strong>')
+    
+    try:
+        sg = SendGridAPIClient(os.getenv('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+        return jsonify({ "success": response.body }), 200
+
+    except Exception as e:
+        print(e)
+        return jsonify("error"), 401
+
+     
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
