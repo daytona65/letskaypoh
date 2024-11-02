@@ -17,6 +17,13 @@ interface TimeslotButtonProps {
     isSelected: boolean
 }
 
+enum timeslots {
+    SLOT1 = "8AM-11AM", 
+    SLOT2 = "11AM-2PM", 
+    SLOT3 = "2PM-5PM", 
+    SLOT4 = "5PM-8PM"
+}
+
 export const TimeSlotButton: React.FC<TimeslotButtonProps> = (props) => {
     return <Button className='timeslotBtn'
         type={props.isSelected ? 'primary' : 'default'}
@@ -39,8 +46,6 @@ const RegisterVisit: React.FC = () => {
     } 
 
     const [selectedTimeslot, setSelectedTimeslot] = useState<string>()
-
-    const timeslots = ["8AM-11AM", "11AM-2PM", "2PM-5PM", "5PM-8PM"]
 
     const handleConfirmVisit: FormProps['onFinish'] = (fieldValues) => {
         const dateValue = fieldValues['visitDate']
@@ -118,7 +123,7 @@ const RegisterVisit: React.FC = () => {
                         return Promise.reject(new Error('Please select a timeslot!'));
                     }}]}
                     >{
-                        timeslots.map((time) => (
+                        Object.values(timeslots).map((time) => (
                             <TimeSlotButton 
                                 key={time}
                                 time={time} 
