@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import './styles.css'
 import { navigateToRoute, useScrollDirection } from './utils'
 import { Avatar } from 'antd'
-import { getUserByIdData } from '../api'
+import { getUserByIdData, checkTokenValid } from '../api'
 import { UserInterface } from '../models/interfaces'
 
 interface navItem {
@@ -21,16 +21,32 @@ interface Props {
 export const NavBar: React.FC<Props> = ({isLoggedIn}) => {
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    }
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
+
+        validateToken();
+    }, [navigate, token]);
 
 	const [user, setUser] = useState<UserInterface>();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-				const userData = await getUserByIdData(localStorage.getItem('user_id')!, token!)
+				const userData = await getUserByIdData(localStorage.getItem('user_id')!, token!)                
 				setUser(userData);
             } catch (error) {
                 console.error("Error fetching visits data:", error);

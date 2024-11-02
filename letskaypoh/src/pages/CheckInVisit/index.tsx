@@ -7,7 +7,7 @@ import { CheckCircleOutlined, InfoCircleTwoTone } from '@ant-design/icons'
 import { useNavigate, useParams } from 'react-router-dom'
 import { handleCheckInVisit, navigateToRoute } from '../../components/utils'
 import { VisitInterface } from '../../models/interfaces'
-import { getVisitByIdData } from '../../api'
+import { checkTokenValid, getVisitByIdData } from '../../api'
 import { Scanner } from '@yudiel/react-qr-scanner';
 
 const QrScanner: React.FC = () => {
@@ -22,9 +22,25 @@ const CheckInVisit: React.FC = () => {
 
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    }
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
+
+        validateToken();
+    }, [navigate, token]);
     const { visitId } = useParams();
 
     const [visit, setVisit] = useState<VisitInterface>();

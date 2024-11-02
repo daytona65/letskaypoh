@@ -2,7 +2,7 @@ import { Avatar, Button, Divider, Tooltip } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import './styles.css'
-import { getSeniorByIdData, getVisitByIdData } from '../../api';
+import { checkTokenValid, getSeniorByIdData, getVisitByIdData } from '../../api';
 import { SeniorInterface, VisitInterface, VisitStatus } from '../../models/interfaces';
 import { VisitCard } from '../../components/Card/VisitCard';
 import { HeartOutlined, DislikeOutlined, MessageOutlined, CalendarOutlined, EnvironmentTwoTone, FrownTwoTone, CheckCircleTwoTone } from '@ant-design/icons';
@@ -21,9 +21,25 @@ export interface profileItem {
 const VisitDetails = () => {
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
-  if (!token) {
-    navigateToRoute('/', navigate)
-  }
+  useEffect(() => {
+    const validateToken = async () => {
+        if (!token) {
+            navigateToRoute('/', navigate);
+        } else {
+            try {
+                const isValid = await checkTokenValid(token);
+                if (!isValid) {
+                    navigateToRoute('/', navigate);
+                }
+            } catch (error) {
+                console.error("Error validating token:", error);
+                navigateToRoute('/', navigate);
+            }
+        }
+    };
+
+    validateToken();
+  }, [navigate, token]);
   const { visitId } = useParams();
 
 	// const [currentLocation, setCurrentLocation] = useState<Coordinates>({lat: 1.287953, lng: 103.851784 })

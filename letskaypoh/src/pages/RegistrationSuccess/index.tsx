@@ -3,13 +3,31 @@ import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';
 import { navigateToRoute } from '../../components/utils';
 import BannerImg from '../../assets/banner.png'
+import { checkTokenValid } from '../../api';
+import { useEffect } from 'react';
 
 const RegistrationSuccess = () => {
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    }
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
+
+        validateToken();
+    }, [navigate, token]);
 
     const onClickGetStarted = () => {
         navigateToRoute('/home', navigate)

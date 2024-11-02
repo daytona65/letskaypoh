@@ -53,6 +53,7 @@ export const getAllUsersData = async (token: string) => {
                 Authorization: `Bearer ${token}`
             }
         });
+        // localStorage.setItem('access_token', response.data.)
         return response.data;
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -227,3 +228,17 @@ export const displayDaysLastVisited = (days: number | string) => {
         return `${String(days)} days ago`;
     }
 };
+
+export const checkTokenValid = async (token: string) => {
+    try {
+        const response = await api.get(`/token`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Token expired', error);
+        throw error;
+    }
+}

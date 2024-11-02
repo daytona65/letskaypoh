@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../commonStyles.css'
 import '../../App.css'
 import './styles.css'
@@ -8,7 +8,7 @@ import { InfoCircleTwoTone } from '@ant-design/icons'
 import { VisitInterface, VisitStatus } from '../../models/interfaces'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
-import { createVisit, getLatestVisitId } from '../../api'
+import { checkTokenValid, createVisit, getLatestVisitId } from '../../api'
 import dayjs from 'dayjs'
 
 interface TimeslotButtonProps {
@@ -41,9 +41,25 @@ const RegisterVisit: React.FC = () => {
 
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    } 
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
+
+        validateToken();
+    }, [navigate, token]);
 
     const [selectedTimeslot, setSelectedTimeslot] = useState<string>()
 

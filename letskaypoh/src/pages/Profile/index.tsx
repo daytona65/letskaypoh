@@ -5,7 +5,7 @@ import { navigateToRoute, separatedArray } from '../../components/utils'
 import './styles.css'
 import { Button, Divider, Image } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { getUserByIdData, getUserVisitData } from '../../api'
+import { checkTokenValid, getUserByIdData, getUserVisitData } from '../../api'
 import { VisitCard } from '../../components/Card/VisitCard'
 
 interface profileItem {
@@ -18,22 +18,25 @@ interface profileItem {
 const Profile: React.FC = () => {
 	const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    }
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
 
-	// const user: UserInterface = useMemo(() => ({
-	// 	user_id: 1,
-	// 	nric: localStorage.getItem('nric')!,
-	// 	name: localStorage.getItem('name')!,
-	// 	email: localStorage.getItem('email')!,
-	// 	mobile: localStorage.getItem('mobile')!,
-	// 	gender: localStorage.getItem('gender')!,
-	// 	age: Number(localStorage.getItem('age'))!,
-	// 	languages: JSON.parse(localStorage.getItem('languages')!),
-	// 	postal_code: Number(localStorage.getItem('postalCode'))!,
-	// 	address: localStorage.getItem('address')!,
-	// }), [])
+        validateToken();
+    }, [navigate, token]);
 
 	// api endpoint - get user
 	const [user, setUser] = useState<UserInterface>();

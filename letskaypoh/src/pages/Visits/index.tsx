@@ -4,15 +4,32 @@ import { useNavigate } from 'react-router-dom';
 import './styles.css'
 import { navigateToRoute } from '../../components/utils';
 import { VisitCard } from '../../components/Card/VisitCard';
-import { getUserVisitData } from '../../api';
+import { checkTokenValid, getUserVisitData } from '../../api';
 import { VisitInterface, VisitStatus } from '../../models/interfaces';
 
 const Visits = () => {
   const token = localStorage.getItem('access_token');
   const navigate = useNavigate();
-  if (!token) {
-      navigateToRoute('/', navigate)
-  }
+  useEffect(() => {
+    const validateToken = async () => {
+        if (!token) {
+            navigateToRoute('/', navigate);
+        } else {
+            try {
+                const isValid = await checkTokenValid(token);
+                if (!isValid) {
+                    navigateToRoute('/', navigate);
+                }
+            } catch (error) {
+                console.error("Error validating token:", error);
+                navigateToRoute('/', navigate);
+            }
+        }
+    };
+
+    validateToken();
+  }, [navigate, token]);
+
   const user_id = localStorage.getItem('user_id')
 
   // add api endpoint - get upcoming visits

@@ -78,6 +78,9 @@
     top: 0;
     z-index: 999;
     transition: top 0.3s;
+    a {
+        cursor: pointer;
+    }
 }
 
 .topNav.hide {

@@ -7,7 +7,7 @@ import MapHandler from './components/map-handler'
 import { PlaceAutocompleteClassic } from './components/classicAutocomplete'
 import CustomMap, { Coordinates } from './components/Map/Map'
 import { SeniorInterface, SupportedLanguages } from '../../models/interfaces'
-import { getAllSeniorsData, getDaysLastVisted, updateSenior } from '../../api'
+import { checkTokenValid, getAllSeniorsData, getDaysLastVisted, updateSenior } from '../../api'
 import { useNavigate } from 'react-router-dom'
 import { navigateToRoute } from '../../components/utils'
 import { FilterOutlined, QuestionCircleTwoTone } from '@ant-design/icons'
@@ -17,9 +17,26 @@ import FilterModal from '../../components/FilterModal'
 const Home = () => {
     const token = localStorage.getItem('access_token');
     const navigate = useNavigate();
-    if (!token) {
-        navigateToRoute('/', navigate)
-    }
+
+    useEffect(() => {
+        const validateToken = async () => {
+            if (!token) {
+                navigateToRoute('/', navigate);
+            } else {
+                try {
+                    const isValid = await checkTokenValid(token);
+                    if (!isValid) {
+                        navigateToRoute('/', navigate);
+                    }
+                } catch (error) {
+                    console.error("Error validating token:", error);
+                    navigateToRoute('/', navigate);
+                }
+            }
+        };
+
+        validateToken();
+    }, [navigate, token]);
 
     const [selectedPlace, setSelectedPlace] =
         useState<google.maps.places.PlaceResult | null>(null);
